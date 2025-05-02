@@ -1,4 +1,4 @@
 public interface IResourceLoaderStrategy<T>
 {
-    T Load(string path);
+    public T Load(string path);
 }
