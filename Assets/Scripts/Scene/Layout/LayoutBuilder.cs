@@ -16,7 +16,8 @@ public class LayoutBuilder
         Dictionary<string, LayoutData> layoutDataMap,
         string layoutID)
     {
-        if (layouts.ContainsKey(layoutID)) {
+        if (layouts.ContainsKey(layoutID))
+        {
             return;
         }
         Dictionary<string, GameObject> layout = new();
