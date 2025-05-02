@@ -1,4 +1,4 @@
 public interface ISceneCommand
 {
-    void Execute(GameContext gameContext, SceneBuilder builder);
+    void Execute(GameContext gameContext, SceneDirector builder);
 }

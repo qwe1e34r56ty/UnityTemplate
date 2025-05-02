@@ -7,7 +7,7 @@ public class BuildLayoutCommand : ISceneCommand
     {
         this.layoutID = layoutID;
     }
-    public void Execute(GameContext gameContext, SceneBuilder builder)
+    public void Execute(GameContext gameContext, SceneDirector builder)
     {
         builder.layoutBuilder.BuildLayout(gameContext.layouts, gameContext.layoutDataMap, layoutID);
     }

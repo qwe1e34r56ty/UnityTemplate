@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public SaveManager saveManager;
     public ResourceManager resourceManager;
     public ElementBuilder elementFactory;
-    public SceneBuilder sceneBuilder;
+    public SceneDirector sceneBuilder;
     public Queue<ISceneCommand> sceneCommandQueue;
     public Dictionary<string, IScene> sceneMap;
     public Dictionary<string, string> sceneLayoutMap;
