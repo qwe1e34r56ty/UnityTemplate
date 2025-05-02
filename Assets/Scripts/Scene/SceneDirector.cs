@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SceneBuilder
+public class SceneDirector
 {
     public EntitySpawner entitySpawner;
     public LayoutBuilder layoutBuilder;
-    public SceneBuilder(ResourceManager resourceManager)
+    public SceneDirector(ResourceManager resourceManager)
     {
         layoutBuilder = new(resourceManager);
         entitySpawner = new(resourceManager);
