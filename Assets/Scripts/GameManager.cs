@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             initGameContext(gameContext);
 
             sceneCommandQueue = gameContext.GetSceneCommandQueue();
-            sceneCommandQueue.Enqueue(new BuildLayoutCommand("Main"));
+            sceneCommandQueue.Enqueue(new BuildLayoutCommand("Main", "Build MainLayout"));
 
             DontDestroyOnLoad(gameObject);
         }
