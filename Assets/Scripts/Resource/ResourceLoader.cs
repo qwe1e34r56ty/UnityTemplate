@@ -18,8 +18,9 @@ public class ResourceLoader
 
     public T Load<T>(string path)
     {
-        if(resourceLoadStrategy.TryGetValue(typeof(T), out var strategyValue))
+        if(resourceLoadStrategy.ContainsKey(typeof(T)))
         {
+            var strategyValue = typeof(T);
             if((strategyValue) is IResourceLoaderStrategy<T> strategy)
             {
                 return strategy.Load(path);
