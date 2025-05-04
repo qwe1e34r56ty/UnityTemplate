@@ -14,6 +14,8 @@ public class ResourceLoader
         resourceLoaderStrategies[typeof(string)] = new TextLoaderStrategy();
         resourceLoaderStrategies[typeof(LayoutData)] = new JsonLoaderStrategy<LayoutData>();
         resourceLoaderStrategies[typeof(LayoutPath[])] = new JsonArrayLoaderStrategy<LayoutPath>();
+        resourceLoaderStrategies[typeof(SceneLayoutBinding[])] = new JsonArrayLoaderStrategy<SceneLayoutBinding>();
+        resourceLoaderStrategies[typeof(SpriteData[])] = new JsonArrayLoaderStrategy<SpriteData>();
     }
 
     public T Load<T>(string path)
@@ -27,13 +29,13 @@ public class ResourceLoader
             }
             else
             {
-                Debug.LogError($"Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
+                Debug.LogError($"Resource Load Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
                 return default(T);
             }
         }
         else
         {
-            Debug.LogError($"Strategy not found : {typeof(T)}");
+            Debug.LogError($"Resource Load Strategy not found : {typeof(T)}");
             return default(T);
         }
     }
