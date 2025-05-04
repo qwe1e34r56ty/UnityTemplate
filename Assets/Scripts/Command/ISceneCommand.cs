@@ -1,4 +1,7 @@
+using UnityEngine;
+
 public interface ISceneCommand
 {
-    void Execute(GameContext gameContext, SceneDirector builder);
+    void Execute(GameContext gameContext, 
+        SceneDirector builder);
 }
