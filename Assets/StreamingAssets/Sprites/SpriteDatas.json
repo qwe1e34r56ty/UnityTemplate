@@ -1,0 +1,22 @@
+[
+    {
+        "id": "StartLayout/Background",
+        "path": "Sprites/StartLayout/background.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "StartLayout/Title",
+        "path": "Sprites/StartLayout/title.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "StartLayout/Start",
+        "path": "Sprites/StartLayout/start.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "StartLayout/StartHoverEnter",
+        "path": "Sprites/StartLayout/startHoverEnter.png",
+        "pixelPerUnit": 100
+    }
+]
