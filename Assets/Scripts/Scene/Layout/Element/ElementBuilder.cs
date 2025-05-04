@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Resources;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class ElementBuilder
 {
@@ -10,31 +11,37 @@ public class ElementBuilder
     {
         this.resourceManager = resourceManager;
     }
-    public void Build(Dictionary<string, GameObject> layout, ElementData elementData)
+    public GameObject ElementBuild(Dictionary<string, GameObject> layout,
+        Dictionary<string,Sprite> spriteMap,
+        ElementData elementData,
+        Vector3? offsetPosition = null,
+        Vector3? offsetRotation = null,
+        Vector3? offsetScale = null,
+        int? offsetSortingOrder = null)
     {
         if (layout.ContainsKey(elementData.id))
         {
-            return;
+            return null;
         }
         GameObject gameObject = new GameObject(elementData.id);
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        Texture2D texture = resourceManager.GetResource<Texture2D>(Path.Combine(Application.streamingAssetsPath, elementData.streamingAssetsSpritePath));
-        if (texture == null)
+        if(!spriteMap.TryGetValue(elementData.spriteID, out var sprite))
         {
-            Debug.LogError($"Texture File not found : {elementData.streamingAssetsSpritePath}");
+            Debug.LogWarning($"Sprite not found in spriteMap {elementData.spriteID}");
+            return null;
         }
-        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f, elementData.pixelPerUnit);
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sprite = sprite;
-            spriteRenderer.sortingOrder = elementData.sortingOrder;
-        }
-        gameObject.transform.position = new Vector3(elementData.x, elementData.y, 0f);
-        gameObject.transform.localScale = new Vector3(elementData.width, elementData.height, 1f);
+        spriteRenderer.sprite = sprite;
+        spriteRenderer.sortingOrder = elementData.sortingOrder;
+        gameObject.transform.position = new Vector3(elementData.x, elementData.y, 0f) + (offsetPosition ?? Vector3.zero);
+        gameObject.transform.localScale = Vector3.Scale(new Vector3(elementData.width, elementData.height, 1f), offsetScale ?? Vector3.one);
+        gameObject.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
+        spriteRenderer.sortingOrder += offsetSortingOrder ?? 0;
+
         layout.Add(elementData.id, gameObject);
+        return gameObject;
     }
 
-    public void Destroy(GameObject gameObject)
+    public void ElementDestroy(GameObject gameObject)
     {
         if (gameObject != null)
         {
