@@ -3,5 +3,6 @@ using UnityEngine;
 
 public interface ILayoutInjectorStrategy
 {
-    public void Inject(Dictionary<string, GameObject> layout);
+    public void Inject(GameContext gameContext,
+        Dictionary<string, GameObject> layout);
 }
