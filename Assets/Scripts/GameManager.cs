@@ -7,15 +7,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameContext gameContext;
+
+    public ResourceManager resourceManager;
+
     public SaveData saveData;
     public SaveManager saveManager;
-    public ResourceManager resourceManager;
-    public ElementBuilder elementFactory;
-    public SceneDirector sceneBuilder;
-    public Queue<ISceneCommand> sceneCommandQueue;
-    public Dictionary<string, IScene> sceneMap;
-    public Dictionary<string, string> sceneLayoutMap;
+
+    public GameContext gameContext;
+    public GameContextInitializer gameContextInitializer;
+
+    public SceneDirector sceneDirector;
+
+    public MouseInputDetector mouseInputDetector;
+    public MouseInputDispatcher mouseInputDispatcher;
+
+    public KeyboardInputDetector keyboardInputDetector;
+    public KeyboardInputDispatcher keyboardInputDispatcher;
 
     private void Awake()
     {
@@ -26,14 +33,19 @@ public class GameManager : MonoBehaviour
             saveData = saveManager.Load();
 
             resourceManager = new();
-            sceneBuilder = new(resourceManager);
+            sceneDirector = new(resourceManager);
 
             instance = this;
-            gameContext = new GameContext(saveData);
-            initGameContext(gameContext);
+            gameContext = new GameContext(saveData); // 순수 컨테이너
 
-            sceneCommandQueue = gameContext.GetSceneCommandQueue();
-            sceneCommandQueue.Enqueue(new BuildLayoutCommand("Main", "Build MainLayout"));
+            gameContextInitializer = new GameContextInitializer(resourceManager);
+            gameContextInitializer.InitGameContext(gameContext);
+
+            mouseInputDetector = new MouseInputDetector();
+            mouseInputDispatcher = new MouseInputDispatcher();
+
+            keyboardInputDetector = new KeyboardInputDetector();
+            keyboardInputDispatcher = new KeyboardInputDispatcher();
 
             DontDestroyOnLoad(gameObject);
         }
@@ -45,48 +57,18 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sceneBuilder.UpdateScene(gameContext);
+        gameContext.SceneCommandQueue.Enqueue(new ConvertSceneCommand(SceneID.Start, $"Convert to {SceneID.Start} Scene request"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (sceneCommandQueue.Count > 0)
-        {
-            //sceneBuilder.BuildScene(gameContext);
-        }
-    }
-    void SetScene()
-    {
+        mouseInputDetector.Detect(gameContext);
+        mouseInputDispatcher.Dispatch(gameContext);
+        keyboardInputDetector.Detect(gameContext);
+        keyboardInputDispatcher.Dispatch(gameContext);
+        sceneDirector.ExecuteSceneCommand(gameContext);
 
-    }
-
-    void initGameContext(GameContext gameContext)
-    {
-        gameContext.layoutPathMap = new();
-        initLayoutPathMap(gameContext.layoutPathMap);
-        gameContext.layoutDataMap = new();
-        initLayoutDataMap(gameContext.layoutDataMap, gameContext.layoutPathMap);
-    }
-
-    void initLayoutPathMap(Dictionary<string, string> layoutPathMap)
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayoutPath);
-        LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
-        foreach(LayoutPath layoutPath in layoutPathArr)
-        {
-            layoutPathMap[layoutPath.id] = layoutPath.path;
-        }
-    }
-    void initLayoutDataMap(Dictionary<string, LayoutData> layoutDataMap, Dictionary<string, string> layoutPathMap)
-    {
-        string path;
-        LayoutData layoutData;
-        foreach(var pair in layoutPathMap)
-        {
-            path = Path.Combine(Application.streamingAssetsPath, pair.Value);
-            layoutData = resourceManager.GetResource<LayoutData>(path);
-            layoutDataMap[pair.Key] = layoutData;
-        }
+        gameContext.ClearEventQueue();
     }
 }
