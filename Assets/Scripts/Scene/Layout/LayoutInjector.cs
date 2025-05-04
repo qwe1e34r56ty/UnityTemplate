@@ -5,23 +5,41 @@ using UnityEngine;
 
 public class LayoutInjector
 {
-    public Dictionary<string, ILayoutInjectorStrategy> layoutInjectorStrategies;
+    public Dictionary<string, ILayoutInjectorStrategy> layoutInjectorStrategies = new();
     public LayoutInjector()
     {
-        layoutInjectorStrategies[LayoutID.Main] = new MainLayoutInjectorStrategy();
+        layoutInjectorStrategies[LayoutID.Start] = new StartLayoutInjectorStrategy();
     }
 
-    public void Inject(Dictionary<string, GameObject> layout, string layoutID)
+    public void Inject(GameContext gameContext,
+        Dictionary<string, GameObject> layout,
+        string layoutID)
     {
         if (layoutInjectorStrategies.ContainsKey(layoutID))
         {
             var strategy = layoutInjectorStrategies[layoutID];
-            strategy.Inject(layout);
+            strategy.Inject(gameContext, layout);
         }
         else
         {
-            Debug.LogError($"Strategy not found : {layoutID}");
+            Debug.LogError($"Inject Strategy not found : {layoutID}");
         }
     }
-    
+
+    public void Eject(GameContext gameContext,
+        Dictionary<string, GameObject> layout,
+        string layoutID)
+    {
+        foreach(var pair in layout)
+        {
+            gameContext.onHoverEnterHandlers.Remove(pair.Value);
+            gameContext.onHoverExitHandlers.Remove(pair.Value);
+            gameContext.onLeftClickHandlers.Remove(pair.Value);
+
+            gameContext.onKeyDownHandlers.Remove(pair.Value);
+            gameContext.onKeyUpHandlers.Remove(pair.Value);
+            gameContext.onKeyHoldHandlers.Remove(pair.Value);
+        }
+    }
+
 }
