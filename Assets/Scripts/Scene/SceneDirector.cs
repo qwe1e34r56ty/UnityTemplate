@@ -6,26 +6,24 @@ public class SceneDirector
 {
     public EntitySpawner entitySpawner;
     public LayoutBuilder layoutBuilder;
+    public LayoutInjector layoutInjector;
+    public SceneConverter sceneConverter;
+    public ResourceManager resourceManager;
     public SceneDirector(ResourceManager resourceManager)
     {
-        layoutBuilder = new(resourceManager);
-        entitySpawner = new(resourceManager);
+        this.resourceManager = resourceManager;
+        entitySpawner = new(this.resourceManager);
+        layoutBuilder = new(this.resourceManager);
+        layoutInjector = new();
+        sceneConverter = new();
     }
-    public void UpdateScene(GameContext gameContext)
+    public void ExecuteSceneCommand(GameContext gameContext)
     {
-        Queue<ISceneCommand> sceneCommandQueue = gameContext.GetSceneCommandQueue();
+        Queue<ISceneCommand> sceneCommandQueue = gameContext.SceneCommandQueue;
         while(sceneCommandQueue.Count > 0)
         {
             var command = sceneCommandQueue.Dequeue();
             command.Execute(gameContext, this);
         }
-    }
-    public void DestroyScene(GameContext gameContext)
-    {
-        foreach (var layout in gameContext.layouts)
-        {
-            layoutBuilder.DestroyLayout(gameContext.layouts, layout.Key);
-        }
-        gameContext.layouts.Clear();
     }
 }
