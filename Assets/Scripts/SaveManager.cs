@@ -7,7 +7,8 @@ public class SaveManager
 
     private const string defaultFileName = "save.json";
 
-    public void Save(GameContext context, string saveFileName = defaultFileName)
+    public void Save(GameContext context,
+        string saveFileName = defaultFileName)
     {
         string path = Path.Combine(saveDirectory, saveFileName);
         SaveData data = new();
