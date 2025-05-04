@@ -1,6 +1,14 @@
 [
     {
-        "id": "Start",
-        "path": "Layouts/StartLayoutData.json"
+        "id": "StartScene",
+        "path": "Layouts/StartSceneLayoutData.json"
+    },
+    {
+        "id": "MainScene",
+        "path": "Layouts/MainSceneLayoutData.json"
+    },
+    {
+        "id": "EndScene",
+        "path": "Layouts/EndSceneLayoutData.json"
     }
 ]

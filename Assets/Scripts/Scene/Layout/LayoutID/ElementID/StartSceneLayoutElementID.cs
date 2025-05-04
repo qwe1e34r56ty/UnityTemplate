@@ -1,4 +1,4 @@
-public static class StartElementID
+public static class StartSceneLayoutElementID
 {
     public static string Background = "Background";
     public static string Title = "Title";

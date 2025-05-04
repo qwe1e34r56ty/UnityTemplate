@@ -8,7 +8,7 @@ public class LayoutInjector
     public Dictionary<string, ILayoutInjectorStrategy> layoutInjectorStrategies = new();
     public LayoutInjector()
     {
-        layoutInjectorStrategies[LayoutID.Start] = new StartLayoutInjectorStrategy();
+        layoutInjectorStrategies[LayoutID.StartScene] = new StartLayoutInjectorStrategy();
     }
 
     public void Inject(GameContext gameContext,

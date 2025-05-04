@@ -6,9 +6,9 @@ public class StartLayoutInjectorStrategy : ILayoutInjectorStrategy
     public void Inject(GameContext gameContext,
         Dictionary<string, GameObject> layout)
     {
-        if (layout.ContainsKey(StartElementID.Start))
+        if (layout.ContainsKey(StartSceneLayoutElementID.Start))
         {
-            GameObject start = layout[StartElementID.Start];
+            GameObject start = layout[StartSceneLayoutElementID.Start];
             SpriteRenderer spriteRenderer = start.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
@@ -21,11 +21,11 @@ public class StartLayoutInjectorStrategy : ILayoutInjectorStrategy
                 // ¿¹½Ã
                 gameContext.onHoverEnterHandlers[start] = () =>
                 {
-                    spriteRenderer.sprite = gameContext.spriteMap[StartLayoutSpriteID.StartHoverEnter];
+                    spriteRenderer.sprite = gameContext.spriteMap[StartSceneLayoutSpriteID.StartHoverEnter];
                 };
                 gameContext.onHoverExitHandlers[start] = () =>
                 {
-                    spriteRenderer.sprite = gameContext.spriteMap[StartLayoutSpriteID.Start];
+                    spriteRenderer.sprite = gameContext.spriteMap[StartSceneLayoutSpriteID.Start];
                 };
             }
             else

@@ -1,4 +1,4 @@
 public static class LayoutID
 {
-    public const string Start = "Start";
+    public const string StartScene = "StartScene";
 }

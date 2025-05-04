@@ -3,7 +3,7 @@
     "elementDataArr": [
         {
             "id": "Background",
-            "spriteID": "StartLayout/Background",
+            "spriteID": "StartSceneLayout/Background",
             "x": 0,
             "y": 0,
             "width": 18,
@@ -12,7 +12,7 @@
         },
         {
             "id": "Title",
-            "spriteID": "StartLayout/Title",
+            "spriteID": "StartSceneLayout/Title",
             "x": -0.5,
             "y": 2,
             "width": 2,
@@ -21,7 +21,7 @@
         },
         {
             "id": "Start",
-            "spriteID": "StartLayout/Start",
+            "spriteID": "StartSceneLayout/Start",
             "x": 4.5,
             "y": -2.5,
             "width": 2,

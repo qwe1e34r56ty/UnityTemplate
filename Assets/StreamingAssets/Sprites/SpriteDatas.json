@@ -1,22 +1,22 @@
 [
     {
-        "id": "StartLayout/Background",
-        "path": "Sprites/StartLayout/background.png",
+        "id": "StartSceneLayout/Background",
+        "path": "Sprites/StartSceneLayout/background.png",
         "pixelPerUnit": 100
     },
     {
-        "id": "StartLayout/Title",
-        "path": "Sprites/StartLayout/title.png",
+        "id": "StartSceneLayout/Title",
+        "path": "Sprites/StartSceneLayout/title.png",
         "pixelPerUnit": 100
     },
     {
-        "id": "StartLayout/Start",
-        "path": "Sprites/StartLayout/start.png",
+        "id": "StartSceneLayout/Start",
+        "path": "Sprites/StartSceneLayout/start.png",
         "pixelPerUnit": 100
     },
     {
-        "id": "StartLayout/StartHoverEnter",
-        "path": "Sprites/StartLayout/startHoverEnter.png",
+        "id": "StartSceneLayout/StartHoverEnter",
+        "path": "Sprites/StartSceneLayout/startHoverEnter.png",
         "pixelPerUnit": 100
     }
 ]
