@@ -55,8 +55,8 @@
         "pixelPerUnit": 100
     },
     {
-        "id": "Normalize",
-        "path": "Sprites/Normalize.png",
+        "id": "Normalization",
+        "path": "Sprites/faker.png",
         "pixelPerUnit": 100
     },
     {

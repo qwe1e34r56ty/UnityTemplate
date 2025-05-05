@@ -53,7 +53,7 @@
         },
         {
             "id": "Dororong2",
-            "spriteID": "Dororong",
+            "spriteID": "Normalization",
             "layerID": "Layout",
             "x": 1.5,
             "y": 2.0,
@@ -62,24 +62,14 @@
             "sortingOrder": 80
         },
         {
-            "id": "Dororong3",
-            "spriteID": "Normalize",
+            "id": "Normalization",
+            "spriteID": "Normalization",
             "layerID": "Layout",
-            "x": -1.5,
-            "y": 2.0,
-            "width": 0.5,
-            "height": 0.5,
-            "sortingOrder": 80
-        },
-        {
-            "id": "Reboot",
-            "spriteID": "Reboot",
-            "layerID": "Layout",
-            "x": 0,
-            "y": 0,
-            "width": 0.5,
-            "height": 0.5,
-            "sortingOrder": 90
+            "x": -5,
+            "y": -1.0,
+            "width": 1.5,
+            "height": 1.5,
+            "sortingOrder": 70
         }
     ]
 }
