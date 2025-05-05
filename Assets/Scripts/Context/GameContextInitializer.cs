@@ -77,7 +77,6 @@ public class GameContextInitializer
                 continue;
             }
             animationMap[animationData.id] = frames;
-            Debug.Log($"{frames.Length} Length Animations Loaded");
         }
     }
 
