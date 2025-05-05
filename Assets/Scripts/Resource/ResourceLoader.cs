@@ -16,6 +16,7 @@ public class ResourceLoader
         resourceLoaderStrategies[typeof(LayoutPath[])] = new JsonArrayLoaderStrategy<LayoutPath>();
         resourceLoaderStrategies[typeof(SceneLayoutBinding[])] = new JsonArrayLoaderStrategy<SceneLayoutBinding>();
         resourceLoaderStrategies[typeof(SpriteData[])] = new JsonArrayLoaderStrategy<SpriteData>();
+        resourceLoaderStrategies[typeof(string[])] = new JsonArrayLoaderStrategy<string>();
     }
 
     public T Load<T>(string path)
