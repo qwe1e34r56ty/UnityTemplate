@@ -4,9 +4,11 @@ using UnityEngine;
 public class GameContext
 {
     public SaveData? saveData = new();
-    public Queue<ISceneCommand> SceneCommandQueue = new();
+    public Queue<ISceneCommand> sceneCommandQueue = new();
     public Dictionary<string, Dictionary<string, GameObject>> layouts = new();
     public AScene currentScene = null;
+
+    public HashSet<string> layerIDSet = new();
 
     public Dictionary<string, Sprite> spriteMap = new();
 
@@ -20,10 +22,12 @@ public class GameContext
     public Dictionary<GameObject, Action> onHoverEnterHandlers = new();
     public Dictionary<GameObject, Action> onHoverExitHandlers = new();
     public Dictionary<GameObject, Action> onLeftClickHandlers = new();
+    public Dictionary<GameObject, Action> onRightClickHandlers = new();
 
     public Queue<GameObject> pendingHoverEnterEventQueue = new();
     public Queue<GameObject> pendingHoverExitEventQueue = new();
     public Queue<GameObject> pendingLeftClickEventQueue = new();
+    public Queue<GameObject> pendingRightClickEventQueue = new();
 
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyDownHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyHoldHandlers = new();
@@ -47,6 +51,7 @@ public class GameContext
         pendingHoverEnterEventQueue.Clear();
         pendingHoverExitEventQueue.Clear();
         pendingLeftClickEventQueue.Clear();
+        pendingRightClickEventQueue.Clear();
 
         pendingKeyDownEventQueue.Clear();
         pendingKeyHoldEventQueue.Clear();
