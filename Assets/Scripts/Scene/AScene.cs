@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
-public abstract class AScene
+public abstract class AScene : IUpdatable
 {
     public readonly string sceneID;
     public AScene(string sceneID)
@@ -22,7 +22,11 @@ public abstract class AScene
             sceneCommandQueue.Enqueue(new InjectLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout inject request"));
         }
     }
-    public abstract void Update();
+    public void Update(float deltaTime)
+    {
+
+    }
+
     public virtual void Destroy(GameContext gameContext)
     {
         if (!gameContext.sceneLayoutBindingMap.TryGetValue(sceneID, out var layoutIDs))
