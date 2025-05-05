@@ -22,7 +22,7 @@ public abstract class AScene : IUpdatable
             sceneCommandQueue.Enqueue(new InjectLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout inject request"));
         }
     }
-    public void Update(float deltaTime)
+    public virtual void Update(float deltaTime)
     {
 
     }

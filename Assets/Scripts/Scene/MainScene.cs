@@ -9,7 +9,7 @@ public class MainScene : AScene
     {
         base.Build(gameContext);
     }
-    public override void Update()
+    public override void Update(float deltaTime)
     {
 
     }
