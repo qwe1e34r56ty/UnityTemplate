@@ -3,7 +3,8 @@
     "elementDataArr": [
         {
             "id": "Background",
-            "spriteID": "StartSceneLayout/Background",
+            "spriteID": "Background",
+            "layerID": "Layout",
             "x": 0,
             "y": 0,
             "width": 18,
@@ -12,21 +13,73 @@
         },
         {
             "id": "Title",
-            "spriteID": "StartSceneLayout/Title",
+            "spriteID": "Title",
+            "layerID": "Layout",
             "x": -0.5,
             "y": 2,
             "width": 2,
             "height": 2,
-            "sortingOrder": 2
+            "sortingOrder": 50
         },
         {
             "id": "Start",
-            "spriteID": "StartSceneLayout/Start",
+            "spriteID": "StartButton",
+            "layerID": "Layout",
             "x": 4.5,
             "y": -2.5,
             "width": 2,
             "height": 2,
-            "sortingOrder": 4
+            "sortingOrder": 100
+        },
+        {
+            "id": "Dororong",
+            "spriteID": "Dororong",
+            "layerID": "Layout",
+            "x": 3.5,
+            "y": -4.0,
+            "width": 0.5,
+            "height": 0.5,
+            "sortingOrder": 80
+        },
+        {
+            "id": "Dororong1",
+            "spriteID": "Dororong",
+            "layerID": "Layout",
+            "x": -3.5,
+            "y": -2.0,
+            "width": 0.5,
+            "height": 0.5,
+            "sortingOrder": 80
+        },
+        {
+            "id": "Dororong2",
+            "spriteID": "Dororong",
+            "layerID": "Layout",
+            "x": 1.5,
+            "y": 2.0,
+            "width": 0.5,
+            "height": 0.5,
+            "sortingOrder": 80
+        },
+        {
+            "id": "Dororong3",
+            "spriteID": "Normalize",
+            "layerID": "Layout",
+            "x": -1.5,
+            "y": 2.0,
+            "width": 0.5,
+            "height": 0.5,
+            "sortingOrder": 80
+        },
+        {
+            "id": "Reboot",
+            "spriteID": "Reboot",
+            "layerID": "Layout",
+            "x": 0,
+            "y": 0,
+            "width": 0.5,
+            "height": 0.5,
+            "sortingOrder": 90
         }
     ]
 }

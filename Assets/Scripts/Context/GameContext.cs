@@ -19,6 +19,8 @@ public class GameContext
     public Dictionary<string, string[]> sceneLayoutBindingMap = new();
     public Dictionary<string, AScene> sceneMap = new();
 
+    public Dictionary<string, Sprite[]> animationMap = new();
+
     public Dictionary<GameObject, Action> onHoverEnterHandlers = new();
     public Dictionary<GameObject, Action> onHoverExitHandlers = new();
     public Dictionary<GameObject, Action> onLeftClickHandlers = new();
@@ -56,5 +58,24 @@ public class GameContext
         pendingKeyDownEventQueue.Clear();
         pendingKeyHoldEventQueue.Clear();
         pendingKeyUpEventQueue.Clear();
+    }
+
+    public void ClearHandlers()
+    {
+        onHoverEnterHandlers.Clear();
+        onHoverExitHandlers.Clear();
+        onLeftClickHandlers.Clear();
+        onRightClickHandlers.Clear();
+        onKeyDownHandlers.Clear();
+        onKeyHoldHandlers.Clear();
+        onKeyUpHandlers.Clear();
+    }
+
+    public void ClearBeforeLoadScene()
+    {
+        ClearHandlers();
+        ClearEventQueue();
+        layoutRootMap.Clear();
+        layouts.Clear();
     }
 }

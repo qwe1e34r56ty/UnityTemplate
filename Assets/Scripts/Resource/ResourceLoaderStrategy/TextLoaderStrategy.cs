@@ -3,7 +3,7 @@ using System.IO;
 
 public class TextLoaderStrategy : IResourceLoaderStrategy<string>
 {
-    public string Load(string path)
+    public string Load(string path, int pixelPerUnit = 100)
     {
         if (!File.Exists(path))
         {

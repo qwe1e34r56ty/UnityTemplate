@@ -15,5 +15,6 @@ public class SceneConverter
             currentScene.Destroy(gameContext);
         }
         nextScene.Build(gameContext);
+        gameContext.currentScene = nextScene;
     }
 }

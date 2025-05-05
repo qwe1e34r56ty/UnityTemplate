@@ -4,5 +4,17 @@
         "layoutID": [
             "StartScene"
         ]
+    },
+    {
+        "sceneID": "Main",
+        "layoutID": [
+            "MainScene"
+        ]
+    },
+    {
+        "sceneID": "End",
+        "layoutID": [
+            "EndScene"
+        ]
     }
 ]

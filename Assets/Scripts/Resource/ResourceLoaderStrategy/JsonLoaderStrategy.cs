@@ -3,7 +3,7 @@ using System.IO;
 
 public class JsonLoaderStrategy<T> : IResourceLoaderStrategy<T> where T : class
 {
-    public T Load(string path)
+    public T Load(string path, int pixelPerUnit = 100)
     {
         if (!File.Exists(path))
         {

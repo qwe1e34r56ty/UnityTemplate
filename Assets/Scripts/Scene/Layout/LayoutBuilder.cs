@@ -49,7 +49,7 @@ public class LayoutBuilder
     public void LayoutDestroy(Dictionary<string, Dictionary<string, GameObject>> layouts,
         Dictionary<string, GameObject> layoutRootMap,
         string layoutID)
-    {
+    { 
         if (layoutRootMap.TryGetValue(layoutID, out var layoutRoot))
         {
             GameObject.Destroy(layoutRoot);

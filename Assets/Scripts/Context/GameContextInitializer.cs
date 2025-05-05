@@ -27,7 +27,7 @@ public class GameContextInitializer
         LoadSpriteMap(gameContext.spriteMap);
 
         gameContext.layerIDSet = new();
-        LoadLayerIDArr(gameContext.layerIDSet);
+        LoadLayerIDSet(gameContext.layerIDSet);
         foreach(string layerID in gameContext.layerIDSet)
         {
             if(LayerMask.NameToLayer(layerID) == -1)
@@ -35,6 +35,9 @@ public class GameContextInitializer
                 Debug.LogError($"{layerID} Layer not found, please add Layer ");
             }
         }
+
+        gameContext.animationMap = new();
+        LoadAnimationMap(gameContext.animationMap);
 
         gameContext.sceneMap = new();
         RegisterScenes(gameContext.sceneMap);
@@ -56,7 +59,29 @@ public class GameContextInitializer
         return sceneMap[sceneID];
     }
 
-    void LoadLayerIDArr(HashSet<string> layerIDSet)
+    void LoadAnimationMap(Dictionary<string, Sprite[]> animationMap)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Animation);
+        AnimationData[] animationDataArr = resourceManager.GetResource<AnimationData[]>(path);
+        if (animationDataArr == null)
+        {
+            Debug.LogWarning("animationDataArr not found");
+            return;
+        }
+        foreach (AnimationData animationData in animationDataArr)
+        {
+            Sprite[] frames = resourceManager.GetResource<Sprite[]>(animationData.path, animationData.pixelPerUnit);
+            if(frames == null)
+            {
+                Debug.LogWarning($"frames not found : {animationData.path}");
+                continue;
+            }
+            animationMap[animationData.id] = frames;
+            Debug.Log($"{frames.Length} Length Animations Loaded");
+        }
+    }
+
+    void LoadLayerIDSet(HashSet<string> layerIDSet)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerID);
         string[] layerIDArr = resourceManager.GetResource<string[]>(path);
@@ -66,14 +91,14 @@ public class GameContextInitializer
         }
         if (layerIDSet == null)
         {
-            Debug.LogWarning("layerIDArr not found");
+            Debug.LogWarning("layerIDSet not found");
             return;
         }
     }
 
     void LoadSpriteMap(Dictionary<string, Sprite> spriteMap)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.SpriteData);
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Sprite);
         SpriteData[] spriteDataArr = resourceManager.GetResource<SpriteData[]>(path);
         if(spriteDataArr == null)
         {
@@ -87,7 +112,8 @@ public class GameContextInitializer
             texture2D = resourceManager.GetResource<Texture2D>(path);
             if(texture2D == null)
             {
-                return;
+                Debug.LogWarning($"Texture File not found : {path}");
+                continue;
             }
             spriteMap[spriteData.id] = Sprite.Create(texture2D,
             new Rect(0, 0, texture2D.width, texture2D.height),
@@ -136,7 +162,7 @@ public class GameContextInitializer
             layoutData = resourceManager.GetResource<LayoutData>(path);
             if (layoutData == null)
             {
-                Debug.LogWarning("LayoutData not found : {pair.Key}");
+                Debug.LogWarning($"LayoutData not found : {pair.Key}");
                 continue;
             }
             layoutDataMap[pair.Key] = layoutData;

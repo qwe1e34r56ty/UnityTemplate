@@ -3,7 +3,7 @@ using System.IO;
 
 public class TextureLoaderStrategy : IResourceLoaderStrategy<Texture2D>
 {
-    public Texture2D Load(string path)
+    public Texture2D Load(string path, int pixelPerUnit = 100)
     {
         if (!File.Exists(path))
         {
@@ -11,8 +11,8 @@ public class TextureLoaderStrategy : IResourceLoaderStrategy<Texture2D>
             return null;
         }          
         byte[] bytes = File.ReadAllBytes(path);
-        Texture2D texture = new Texture2D(2, 2);
-        texture.LoadImage(bytes);
-        return texture;
+        Texture2D texture2D = new Texture2D(2, 2);
+        texture2D.LoadImage(bytes);
+        return texture2D;
     }
 }

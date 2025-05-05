@@ -15,7 +15,7 @@ public abstract class AScene
             Debug.LogWarning($"Layout Binding not found for scene {sceneID}");
             return;
         }
-        Queue<ISceneCommand> sceneCommandQueue = gameContext.SceneCommandQueue;
+        Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
         foreach(string layoutID in layoutIDs)
         {
             sceneCommandQueue.Enqueue(new BuildLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout build request"));
@@ -30,9 +30,10 @@ public abstract class AScene
             Debug.LogWarning($"Layout Binding not found for scene {sceneID}");
             return;
         }
-        Queue<ISceneCommand> sceneCommandQueue = gameContext.SceneCommandQueue;
+        Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
         foreach (string layoutID in layoutIDs)
         {
+            sceneCommandQueue.Enqueue(new EjectLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout Eject request"));
             sceneCommandQueue.Enqueue(new DestroyLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout destroy request"));
         }
     }

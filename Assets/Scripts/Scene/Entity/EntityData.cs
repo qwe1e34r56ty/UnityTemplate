@@ -4,12 +4,11 @@ using System;
 [Serializable]
 public class EntityData
 {
-    public string id;
-    public string prefabPath;
-    public string streamingAssetsSpritePath;
-    public float x;
-    public float y;
+    public string typeId;
+    public string spriteID;
     public float width;
     public float height;
     public int sortingOrder;
+    public string[] attributeIDArr;
+    public string[] actionIDArr;
 }

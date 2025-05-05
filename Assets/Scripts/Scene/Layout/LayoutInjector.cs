@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class LayoutInjector
 {
-    public Dictionary<string, ILayoutInjectorStrategy> layoutInjectorStrategies = new();
+    public Dictionary<string, ALayoutInjectorStrategy> layoutInjectorStrategies = new();
     public LayoutInjector()
     {
-        layoutInjectorStrategies[LayoutID.StartScene] = new StartLayoutInjectorStrategy();
+        layoutInjectorStrategies[LayoutID.StartScene] = new StartSceneLayoutInjectorStrategy();
+        layoutInjectorStrategies[LayoutID.MainScene] = new MainSceneLayoutInjectorStrategy();
+        layoutInjectorStrategies[LayoutID.EndScene] = new EndSceneLayoutInjectorStrategy();
     }
 
     public void Inject(GameContext gameContext,

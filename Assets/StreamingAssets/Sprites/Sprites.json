@@ -1,0 +1,67 @@
+[
+    {
+        "id": "Background",
+        "path": "Sprites/Layout/Background.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "StartButton",
+        "path": "Sprites/Layout/StartButton.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "StartButtonHoverEnter",
+        "path": "Sprites/Layout/StartButtonHoverEnter.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "Title",
+        "path": "Sprites/Layout/Title.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "ToTitleButton",
+        "path": "Sprites/Layout/ToTitleButton.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "ToTitleButtonHoverEnter",
+        "path": "Sprites/Layout/ToTitleButtonHoverEnter.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "ToEndButton",
+        "path": "Sprites/Layout/ToEnd.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "ToEndButtonHoverEnter",
+        "path": "Sprites/Layout/ToEndHoverEnter.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "ToTitle",
+        "path": "Sprites/Layout/ToTitle.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "ToTitleHoverEnter",
+        "path": "Sprites/Layout/ToTitleHoverEnter.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "Dororong",
+        "path": "Sprites/Dororong.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "Normalize",
+        "path": "Sprites/Normalize.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "Reboot",
+        "path": "Sprites/Reboot.gif", 
+        "pixelPerUnit": 100
+    }
+]

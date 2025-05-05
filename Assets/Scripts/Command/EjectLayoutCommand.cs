@@ -12,9 +12,12 @@ public class EjectLayoutCommand : ISceneCommand
     public void Execute(GameContext gameContext,
         SceneDirector director)
     {
-        director.layoutInjector.Eject(gameContext,
-            gameContext.layouts[layoutID],
-            layoutID);
+        if (gameContext.layouts.TryGetValue(layoutID, out var layout))
+        {
+            director.layoutInjector.Eject(gameContext,
+                layout,
+                layoutID);
+        }
         if (message.Length > 0)
         {
             Debug.Log(message);

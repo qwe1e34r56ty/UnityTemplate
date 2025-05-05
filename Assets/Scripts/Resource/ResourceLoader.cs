@@ -17,16 +17,18 @@ public class ResourceLoader
         resourceLoaderStrategies[typeof(SceneLayoutBinding[])] = new JsonArrayLoaderStrategy<SceneLayoutBinding>();
         resourceLoaderStrategies[typeof(SpriteData[])] = new JsonArrayLoaderStrategy<SpriteData>();
         resourceLoaderStrategies[typeof(string[])] = new JsonArrayLoaderStrategy<string>();
+        resourceLoaderStrategies[typeof(AnimationData[])] = new JsonArrayLoaderStrategy<AnimationData>();
+        resourceLoaderStrategies[typeof(Sprite[])] = new AnimationLoaderStrategy();
     }
 
-    public T Load<T>(string path)
+    public T Load<T>(string path, int pixelPerUnit = 100)
     {
         if(resourceLoaderStrategies.ContainsKey(typeof(T)))
         {
             var strategy = resourceLoaderStrategies[typeof(T)];
             if (strategy is IResourceLoaderStrategy<T>)
             {
-                return ((IResourceLoaderStrategy<T>)strategy).Load(path);
+                return ((IResourceLoaderStrategy<T>)strategy).Load(path, pixelPerUnit);
             }
             else
             {
