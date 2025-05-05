@@ -7,23 +7,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    private static GameManager instance;
 
-    public ResourceManager resourceManager;
+    private ResourceManager resourceManager;
 
-    public SaveData saveData;
-    public SaveManager saveManager;
+    private SaveData saveData;
+    private SaveManager saveManager;
 
-    public GameContext gameContext;
-    public GameContextInitializer gameContextInitializer;
+    private GameContext gameContext;
+    private GameContextInitializer gameContextInitializer;
 
-    public SceneDirector sceneDirector;
+    private SceneDirector sceneDirector;
 
-    public MouseInputDetector mouseInputDetector;
-    public MouseInputDispatcher mouseInputDispatcher;
+    private MouseInputDetector mouseInputDetector;
+    private MouseInputDispatcher mouseInputDispatcher;
 
-    public KeyboardInputDetector keyboardInputDetector;
-    public KeyboardInputDispatcher keyboardInputDispatcher;
+    private KeyboardInputDetector keyboardInputDetector;
+    private KeyboardInputDispatcher keyboardInputDispatcher;
+
+    private TickDispatcher tickDispatcher;
 
     private void Awake()
     {
@@ -45,11 +47,13 @@ public class GameManager : MonoBehaviour
         gameContextInitializer = new GameContextInitializer(resourceManager);
         gameContextInitializer.InitGameContext(gameContext);
 
-        mouseInputDetector = new MouseInputDetector();
-        mouseInputDispatcher = new MouseInputDispatcher();
+        mouseInputDetector = new();
+        mouseInputDispatcher = new();
 
-        keyboardInputDetector = new KeyboardInputDetector();
-        keyboardInputDispatcher = new KeyboardInputDispatcher();
+        keyboardInputDetector = new();
+        keyboardInputDispatcher = new();
+
+        tickDispatcher = new();
 
         DontDestroyOnLoad(gameObject);
         gameContext.sceneCommandQueue.Enqueue(new ConvertSceneCommand(SceneID.Start, $"Convert to {SceneID.Start} Scene request"));
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
         keyboardInputDetector.Detect(gameContext);
         keyboardInputDispatcher.Dispatch(gameContext);
         sceneDirector.ExecuteSceneCommand(gameContext);
+        tickDispatcher.Dispatch(gameContext);
 
         gameContext.ClearEventQueue();
     }

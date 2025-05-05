@@ -35,7 +35,7 @@ public class GameContext
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyHoldHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyUpHandlers = new();
 
-    public Dictionary<GameObject, Action> updateHandlers = new();
+    public HashSet<IUpdatable> updateHandlers = new();
 
     public Queue<(GameObject, KeyCode)> pendingKeyDownEventQueue = new();
     public Queue<(GameObject, KeyCode)> pendingKeyHoldEventQueue = new();
