@@ -7,7 +7,7 @@ using static UnityEditor.PlayerSettings;
 
 public class ElementBuilder
 {
-    ResourceManager resourceManager;
+    private ResourceManager resourceManager;
     public ElementBuilder(ResourceManager resourceManager)
     {
         this.resourceManager = resourceManager;

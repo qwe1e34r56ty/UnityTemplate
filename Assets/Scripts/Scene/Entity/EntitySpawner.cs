@@ -6,7 +6,7 @@ using static UnityEditor.PlayerSettings;
 
 public class EntitySpawner
 {
-    ResourceManager resourceManager;
+    private ResourceManager resourceManager;
     public EntitySpawner(ResourceManager resourceManager)
     {
         this.resourceManager = resourceManager;

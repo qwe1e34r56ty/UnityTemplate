@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LayoutInjector
 {
-    public Dictionary<string, ALayoutInjectorStrategy> layoutInjectorStrategies = new();
+    private Dictionary<string, ALayoutInjectorStrategy> layoutInjectorStrategies = new();
     public LayoutInjector()
     {
         layoutInjectorStrategies[LayoutID.StartScene] = new StartSceneLayoutInjectorStrategy();
