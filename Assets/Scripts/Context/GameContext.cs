@@ -35,6 +35,8 @@ public class GameContext
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyHoldHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyUpHandlers = new();
 
+    public Dictionary<GameObject, Action> updateHandlers = new();
+
     public Queue<(GameObject, KeyCode)> pendingKeyDownEventQueue = new();
     public Queue<(GameObject, KeyCode)> pendingKeyHoldEventQueue = new();
     public Queue<(GameObject, KeyCode)> pendingKeyUpEventQueue = new();
@@ -69,6 +71,7 @@ public class GameContext
         onKeyDownHandlers.Clear();
         onKeyHoldHandlers.Clear();
         onKeyUpHandlers.Clear();
+        updateHandlers.Clear();
     }
 
     public void ClearBeforeLoadScene()
