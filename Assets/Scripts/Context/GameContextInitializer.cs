@@ -26,6 +26,16 @@ public class GameContextInitializer
         gameContext.spriteMap = new();
         LoadSpriteMap(gameContext.spriteMap);
 
+        gameContext.layerIDSet = new();
+        LoadLayerIDArr(gameContext.layerIDSet);
+        foreach(string layerID in gameContext.layerIDSet)
+        {
+            if(LayerMask.NameToLayer(layerID) == -1)
+            {
+                Debug.LogError($"{layerID} Layer not found, please add Layer ");
+            }
+        }
+
         gameContext.sceneMap = new();
         RegisterScenes(gameContext.sceneMap);
     }
@@ -33,6 +43,8 @@ public class GameContextInitializer
     void RegisterScenes(Dictionary<string, AScene> sceneMap)
     {
         RegisterScene<StartScene>(sceneMap, SceneID.Start);
+        RegisterScene<MainScene>(sceneMap, SceneID.Main);
+        RegisterScene<EndScene>(sceneMap, SceneID.End);
     }
 
     AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string sceneID) where T : AScene
@@ -42,6 +54,21 @@ public class GameContextInitializer
             sceneMap[sceneID] = (AScene)Activator.CreateInstance(typeof(T), sceneID);
         }
         return sceneMap[sceneID];
+    }
+
+    void LoadLayerIDArr(HashSet<string> layerIDSet)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerID);
+        string[] layerIDArr = resourceManager.GetResource<string[]>(path);
+        foreach(string layerID in layerIDArr)
+        {
+            layerIDSet.Add(layerID);
+        }
+        if (layerIDSet == null)
+        {
+            Debug.LogWarning("layerIDArr not found");
+            return;
+        }
     }
 
     void LoadSpriteMap(Dictionary<string, Sprite> spriteMap)
