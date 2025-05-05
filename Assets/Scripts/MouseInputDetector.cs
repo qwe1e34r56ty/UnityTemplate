@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MouseInputDetector
@@ -9,8 +10,21 @@ public class MouseInputDetector
     public void Detect(GameContext context)
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        GameObject current = hit.collider ? hit.collider.gameObject : null;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
+
+        if (hits.Length == 0)
+        {
+            if (lastHovered != null)
+            {
+                context.pendingHoverExitEventQueue.Enqueue(lastHovered);
+                lastHovered = null;
+            }
+            return;
+        }
+
+        RaycastHit2D topHit = hits.OrderByDescending(hit => hit.collider.GetComponent<SpriteRenderer>()?.sortingOrder ?? 0).First();
+
+        GameObject current = topHit.collider.gameObject;
         if (current != lastHovered)
         {
             if (lastHovered != null)
@@ -28,7 +42,11 @@ public class MouseInputDetector
             Input.GetMouseButtonDown(0))
         {
             context.pendingLeftClickEventQueue.Enqueue(current);
-            Debug.Log("left Click");
+        }
+        if (current != null &&
+            Input.GetMouseButtonDown(1))
+        {
+            context.pendingRightClickEventQueue.Enqueue(current);
         }
     }
 }
