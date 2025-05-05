@@ -25,5 +25,12 @@ public class MouseInputDispatcher
                 context.onLeftClickHandlers[gameObject].Invoke();
             }
         }
+        while (context.pendingRightClickEventQueue.TryDequeue(out var gameObject))
+        {
+            if (context.onRightClickHandlers.ContainsKey(gameObject))
+            {
+                context.onRightClickHandlers[gameObject].Invoke();
+            }
+        }
     }
 }
