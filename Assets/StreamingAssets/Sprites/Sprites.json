@@ -61,7 +61,22 @@
     },
     {
         "id": "Reboot",
-        "path": "Sprites/Reboot.gif", 
+        "path": "Sprites/Reboot.gif",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "Bonobono",
+        "path": "Sprites/Layout/Bonobono.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "TileFloor",
+        "path": "Sprites/Entity/TileFloor.png",
+        "pixelPerUnit": 100
+    },
+    {
+        "id": "WallFloor",
+        "path": "Sprites/Entity/WallFloor.png",
         "pixelPerUnit": 100
     }
 ]
