@@ -11,3 +11,12 @@ Layout 구조 구현이후 과제 제출 기한에 맞춰 최소한의 기능 �
 ---
 
 ## 구조 요약
+
+- 'LayoutBuilder': JSON 기반 UI 구성(LayoutRoot + Element 기반으로 Layout을 생성)
+- 
+- 'LayoutInjector': Scene 내 요소들에 핸들러 등록
+- 
+- 'AnimationPlayer': object내 spriteRenderer 이용해 애니메이션 재생
+- 
+- 'GameContext': 핸들러, 이벤트 큐 등 전체 문맥 관리
+
