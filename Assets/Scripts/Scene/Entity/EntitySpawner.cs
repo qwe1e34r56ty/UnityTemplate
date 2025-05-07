@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Resources;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class EntitySpawner
 {

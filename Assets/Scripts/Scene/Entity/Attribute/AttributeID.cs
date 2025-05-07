@@ -1,5 +1,3 @@
-using UnityEditorInternal;
-
 public static class AttributeID
 {
     public static string Moveable = "Moveable";
