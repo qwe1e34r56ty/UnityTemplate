@@ -30,46 +30,6 @@
             "width": 2,
             "height": 2,
             "sortingOrder": 100
-        },
-        {
-            "id": "Dororong",
-            "spriteID": "Dororong",
-            "layerID": "Layout",
-            "x": 3.5,
-            "y": -4.0,
-            "width": 0.5,
-            "height": 0.5,
-            "sortingOrder": 80
-        },
-        {
-            "id": "Dororong1",
-            "spriteID": "Dororong",
-            "layerID": "Layout",
-            "x": -3.5,
-            "y": -2.0,
-            "width": 0.5,
-            "height": 0.5,
-            "sortingOrder": 80
-        },
-        {
-            "id": "Dororong2",
-            "spriteID": "Normalization",
-            "layerID": "Layout",
-            "x": 1.5,
-            "y": 2.0,
-            "width": 0.5,
-            "height": 0.5,
-            "sortingOrder": 80
-        },
-        {
-            "id": "Normalization",
-            "spriteID": "Normalization",
-            "layerID": "Layout",
-            "x": -5,
-            "y": -1.0,
-            "width": 1.5,
-            "height": 1.5,
-            "sortingOrder": 70
         }
     ]
 }
