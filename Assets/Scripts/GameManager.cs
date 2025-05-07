@@ -35,13 +35,13 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+        instance = this;
         saveManager = new();
         saveData = saveManager.Load();
 
         resourceManager = new();
         sceneDirector = new(resourceManager);
 
-        instance = this;
         gameContext = new GameContext(saveData);
 
         gameContextInitializer = new GameContextInitializer(resourceManager);
