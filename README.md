@@ -24,6 +24,6 @@ PlaneGameSceneScript, PunchGameSceneScript는 각 미니게임 관련 스크립�
 ---
 
 ## 브랜치 설명
-'master': 과제 제출용 브랜치
-'ForSubmit': 과제 제출을 위한 기능 구현 
-'develop': 프레임워크 개발용
+-'master': 과제 제출용 브랜치
+-'ForSubmit': 과제 제출을 위한 기능 구현 
+-'develop': 프레임워크 개발용
