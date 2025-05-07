@@ -31,9 +31,10 @@ public class MainSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
             ElementInject(gameContext,
                 element,
                 RightClickAction: () =>
-                {   
-                    gameContext.ClearBeforeLoadScene();
-                    SceneManager.LoadScene("MainScene");
+                {
+                    Debug.Log("Right Click!!");
+                    //gameContext.ClearBeforeLoadScene();
+                    //SceneManager.LoadScene("MainScene");
                 });
         }
     }
