@@ -15,7 +15,7 @@ Layout 구조 구현이후 과제 제출 기한에 맞춰 최소한의 기능 �
 - 'AnimationPlayer': object내 spriteRenderer 이용해 애니메이션 재생
 - 'GameContext': 핸들러, 이벤트 큐 등 전체 문맥 관리
 - Element, 리소스, Layout 등의 외부 리소스와의 매칭을 위한 상수 ID 클래스들
-Entity 관련 구조는 설계 중
+- Entity 관련 구조는 설계 중
 
 현재 과제 기능을 위해 미니게임 2개 + 기존 개발 중이던 부분을 각 Scene으로 나눠 
 PlaneGameScene + PunchGameScene + SampleScene으로 만들고
