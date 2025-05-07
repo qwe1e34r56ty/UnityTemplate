@@ -12,7 +12,7 @@ public class StartSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
         }
         if (layout.TryGetValue(StartSceneLayoutElementID.Normalize, out var normalize))
         {
-            NormalizeInject(gameContext, normalize);
+            //NormalizeInject(gameContext, normalize);
         }
     }
 

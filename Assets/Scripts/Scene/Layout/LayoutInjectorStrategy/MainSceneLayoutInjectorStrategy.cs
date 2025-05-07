@@ -9,15 +9,15 @@ public class MainSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
     {
         if (layout.TryGetValue(MainSceneLayoutElementID.Background, out var background))
         {
-            ToBackgroundInject(gameContext, background);
+            //ToBackgroundInject(gameContext, background);
         }
         if (layout.TryGetValue(MainSceneLayoutElementID.ToTitle, out var toTitle))
         {
-            ToTitleInject(gameContext, toTitle);
+            //ToTitleInject(gameContext, toTitle);
         }
         if (layout.TryGetValue(MainSceneLayoutElementID.ToEnd, out var toEnd))
         {
-            ToEndInject(gameContext, toEnd);
+            //ToEndInject(gameContext, toEnd);
         }
     }
 
