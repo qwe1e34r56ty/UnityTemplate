@@ -13,8 +13,12 @@ public class SceneConverter
         if (currentScene != null)
         {
             currentScene.Destroy(gameContext);
-        }
+        }   
         nextScene.Build(gameContext);
         gameContext.currentScene = nextScene;
+        if (gameContext.camera != null)
+        {
+            gameContext.camera.transform.position = new Vector3(0f, 0f, -10f);
+        }
     }
 }
