@@ -26,18 +26,15 @@ public class BuildLayoutCommand : ISceneCommand
     public void Execute(GameContext gameContext, 
         SceneDirector director)
     {
-        director.layoutBuilder.LayoutBuild(gameContext.layouts, 
-            gameContext.layoutRootMap, 
-            gameContext.layoutDataMap, 
-            gameContext.spriteMap,
-            layoutID, 
-            position, 
-            rotation, 
+        director.layoutBuilder.LayoutBuild(gameContext,
+            layoutID,
+            position,
+            rotation,
             scale,
             sortingOrder);
         if (message.Length > 0)
         {
-            Debug.Log(message);
+            Logger.Log(message);
         }
     }
 }

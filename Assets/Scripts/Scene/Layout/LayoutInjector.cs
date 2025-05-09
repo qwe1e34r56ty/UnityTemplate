@@ -14,33 +14,37 @@ public class LayoutInjector
     }
 
     public void Inject(GameContext gameContext,
-        Dictionary<string, GameObject> layout,
         string layoutID)
     {
         if (layoutInjectorStrategies.ContainsKey(layoutID))
         {
-            var strategy = layoutInjectorStrategies[layoutID];
-            strategy.Inject(gameContext, layout);
+            if (gameContext.layouts.TryGetValue(layoutID, out var layout))
+            {
+                var strategy = layoutInjectorStrategies[layoutID];
+                strategy.Inject(gameContext, layout);
+            }
         }
         else
         {
-            Debug.LogError($"Inject Strategy not found : {layoutID}");
+            Logger.LogError($"Inject Strategy not found : {layoutID}");
         }
     }
 
     public void Eject(GameContext gameContext,
-        Dictionary<string, GameObject> layout,
         string layoutID)
     {
-        foreach(var pair in layout)
+        if (gameContext.layouts.TryGetValue(layoutID, out var layout))
         {
-            gameContext.onHoverEnterHandlers.Remove(pair.Value);
-            gameContext.onHoverExitHandlers.Remove(pair.Value);
-            gameContext.onLeftClickHandlers.Remove(pair.Value);
+            foreach (var pair in layout)
+            {
+                gameContext.onHoverEnterHandlers.Remove(pair.Value);
+                gameContext.onHoverExitHandlers.Remove(pair.Value);
+                gameContext.onLeftClickHandlers.Remove(pair.Value);
 
-            gameContext.onKeyDownHandlers.Remove(pair.Value);
-            gameContext.onKeyUpHandlers.Remove(pair.Value);
-            gameContext.onKeyHoldHandlers.Remove(pair.Value);
+                gameContext.onKeyDownHandlers.Remove(pair.Value);
+                gameContext.onKeyUpHandlers.Remove(pair.Value);
+                gameContext.onKeyHoldHandlers.Remove(pair.Value);
+            }
         }
     }
 

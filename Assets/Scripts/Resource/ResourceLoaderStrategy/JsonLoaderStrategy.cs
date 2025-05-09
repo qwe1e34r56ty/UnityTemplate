@@ -7,7 +7,7 @@ public class JsonLoaderStrategy<T> : IResourceLoaderStrategy<T> where T : class
     {
         if (!File.Exists(path))
         {
-            Debug.LogError($"JSON file not found: {path}");
+            Logger.LogError($"JSON file not found: {path}");
             return null;    
         }
         string json = File.ReadAllText(path);

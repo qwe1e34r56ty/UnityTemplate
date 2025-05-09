@@ -12,15 +12,11 @@ public class InjectLayoutCommand : ISceneCommand
     public void Execute(GameContext gameContext,
         SceneDirector director)
     {
-        if (gameContext.layouts.TryGetValue(layoutID, out var layout))
-        {
-            director.layoutInjector.Inject(gameContext,
-                layout,
-                layoutID);
-        }
+        director.layoutInjector.Inject(gameContext,
+            layoutID);
         if (message.Length > 0)
         {
-            Debug.Log(message);
+            Logger.Log(message);
         }
     }
 }

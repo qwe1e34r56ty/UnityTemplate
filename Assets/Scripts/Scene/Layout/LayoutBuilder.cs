@@ -13,17 +13,14 @@ public class LayoutBuilder
         this.resourceManager = resourceManager;
     }
 
-    public GameObject LayoutBuild(Dictionary<string, Dictionary<string, GameObject>> layouts,
-        Dictionary<string, GameObject> layoutRootMap,
-        Dictionary<string, LayoutData> layoutDataMap,
-        Dictionary<string, Sprite> spriteMap,
+    public GameObject LayoutBuild(GameContext gameContext,
         string layoutID, 
         Vector3? offsetPosition = null, 
         Vector3? offsetRotation = null, 
         Vector3? offsetScale = null,
         int? offsetSortingOrder = null)
     {
-        if (layouts.ContainsKey(layoutID))
+        if (gameContext.layouts.ContainsKey(layoutID))
         {
             return null;
         }
@@ -33,31 +30,31 @@ public class LayoutBuilder
         layoutRoot.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
 
         Dictionary<string, GameObject> layout = new();
-        foreach (ElementData elementData in layoutDataMap[layoutID].elementDataArr)
+        foreach (ElementData elementData in gameContext.layoutDataMap[layoutID].elementDataArr)
         {
-            GameObject element = elementBuilder.ElementBuild(layout, spriteMap, elementData, offsetSortingOrder: offsetSortingOrder);
+            GameObject element = elementBuilder.ElementBuild(gameContext, layoutID, elementData, offsetSortingOrder: offsetSortingOrder);
             if(element != null)
             {
                 element.transform.SetParent(layoutRoot.transform, false);
             }
         }
-        layouts[layoutID] = layout;
-        layoutRootMap[layoutID] = layoutRoot;
+        gameContext.layouts[layoutID] = layout;
+        gameContext.layoutRootMap[layoutID] = layoutRoot;
         return layoutRoot;
     }
 
-    public void LayoutDestroy(Dictionary<string, Dictionary<string, GameObject>> layouts,
-        Dictionary<string, GameObject> layoutRootMap,
+    public void LayoutDestroy(GameContext gameContext,
         string layoutID)
     { 
-        if (layoutRootMap.TryGetValue(layoutID, out var layoutRoot))
+
+        if (gameContext.layoutRootMap.TryGetValue(layoutID, out var layoutRoot))
         {
             GameObject.Destroy(layoutRoot);
-            layoutRootMap.Remove(layoutID);
+            gameContext.layoutRootMap.Remove(layoutID);
         }
-        if (layouts.ContainsKey(layoutID))
+        if (gameContext.layouts.ContainsKey(layoutID))
         {
-            layouts.Remove(layoutID);
+            gameContext.layouts.Remove(layoutID);
         }
     }
 }

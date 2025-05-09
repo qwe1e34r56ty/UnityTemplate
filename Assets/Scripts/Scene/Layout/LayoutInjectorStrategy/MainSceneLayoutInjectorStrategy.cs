@@ -32,7 +32,7 @@ public class MainSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
                 element,
                 RightClickAction: () =>
                 {
-                    Debug.Log("Right Click!!");
+                    Logger.Log("Right Click!!");
                     //gameContext.ClearBeforeLoadScene();
                     //SceneManager.LoadScene("MainScene");
                 });

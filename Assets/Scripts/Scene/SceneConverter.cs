@@ -7,7 +7,7 @@ public class SceneConverter
         AScene currentScene = gameContext.currentScene;
         if (!gameContext.sceneMap.TryGetValue(SceneID, out var nextScene))
         {
-            Debug.Log($"Next Scene not found : {SceneID}");
+            Logger.Log($"Next Scene not found : {SceneID}");
             return;
         }
         if (currentScene != null)

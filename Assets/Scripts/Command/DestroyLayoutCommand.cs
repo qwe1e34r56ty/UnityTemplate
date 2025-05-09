@@ -12,12 +12,11 @@ public class DestroyLayoutCommand : ISceneCommand
     public void Execute(GameContext gameContext, 
         SceneDirector director)
 	{
-        director.layoutBuilder.LayoutDestroy(gameContext.layouts, 
-            gameContext.layoutRootMap,
+        director.layoutBuilder.LayoutDestroy(gameContext,
             layoutID);
         if (message.Length > 0)
         {
-            Debug.Log(message);
+            Logger.Log(message);
         }
     }
 }

@@ -21,7 +21,7 @@ public class AnimationPlayer : IUpdatable
 
         if (frames == null)
         {
-            Debug.LogWarning("frames not found");
+            Logger.LogWarning("frames not found");
         }
         spriteRenderer.sprite = frames[0];
     }

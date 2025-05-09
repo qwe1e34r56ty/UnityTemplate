@@ -12,23 +12,27 @@ public class ElementBuilder
     {
         this.resourceManager = resourceManager;
     }
-    public GameObject ElementBuild(Dictionary<string, GameObject> layout,
-        Dictionary<string,Sprite> spriteMap,
+    public GameObject ElementBuild(GameContext gameContext,
+        string layoutID,
         ElementData elementData,
         Vector3? offsetPosition = null,
         Vector3? offsetRotation = null,
         Vector3? offsetScale = null,
         int? offsetSortingOrder = null)
     {
+        if(!gameContext.layouts.TryGetValue(layoutID, out var layout))
+        {
+            return null;
+        }
         if (layout.ContainsKey(elementData.id))
         {
             return null;
         }
         GameObject gameObject = new GameObject(elementData.id);
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        if(!spriteMap.TryGetValue(elementData.spriteID, out var sprite))
+        if(!gameContext.spriteMap.TryGetValue(elementData.spriteID, out var sprite))
         {
-            Debug.LogWarning($"Sprite not found in spriteMap {elementData.spriteID}");
+            Logger.LogWarning($"Sprite not found in spriteMap {elementData.spriteID}");
             return null;
         }
         spriteRenderer.sprite = sprite;

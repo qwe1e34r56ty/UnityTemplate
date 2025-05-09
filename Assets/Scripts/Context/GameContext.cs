@@ -9,6 +9,7 @@ public class GameContext
     public AScene currentScene = null;
 
     public HashSet<string> layerIDSet = new();
+    public HashSet<string> tagIDSet = new();
 
     public Dictionary<string, Sprite> spriteMap = new();
 

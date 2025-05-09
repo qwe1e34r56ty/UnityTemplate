@@ -15,7 +15,7 @@ public class ConvertSceneCommand : ISceneCommand
         director.sceneConverter.ConvertScene(gameContext, sceneID);
         if (message.Length > 0)
         {
-            Debug.Log(message);
+            Logger.Log(message);
         }
     }
 }

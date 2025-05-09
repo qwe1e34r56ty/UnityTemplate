@@ -32,11 +32,14 @@ public class GameContextInitializer
         {
             if(LayerMask.NameToLayer(layerID) == -1)
             {
-                Debug.LogError($"{layerID} Layer not found, please add Layer ");
+                Logger.LogError($"{layerID} Layer not found, please add Layer ");
             }
         }
 
-        gameContext.animationMap = new();
+        gameContext.tagIDSet = new();
+        LoadTagIDSet(gameContext.tagIDSet);
+
+       gameContext.animationMap = new();
         LoadAnimationMap(gameContext.animationMap);
 
         gameContext.sceneMap = new();
@@ -65,7 +68,7 @@ public class GameContextInitializer
         AnimationData[] animationDataArr = resourceManager.GetResource<AnimationData[]>(path);
         if (animationDataArr == null)
         {
-            Debug.LogWarning("animationDataArr not found");
+            Logger.LogWarning("animationDataArr not found");
             return;
         }
         foreach (AnimationData animationData in animationDataArr)
@@ -73,7 +76,7 @@ public class GameContextInitializer
             Sprite[] frames = resourceManager.GetResource<Sprite[]>(animationData.path, animationData.pixelPerUnit);
             if(frames == null)
             {
-                Debug.LogWarning($"frames not found : {animationData.path}");
+                Logger.LogWarning($"frames not found : {animationData.path}");
                 continue;
             }
             animationMap[animationData.id] = frames;
@@ -90,7 +93,23 @@ public class GameContextInitializer
         }
         if (layerIDSet == null)
         {
-            Debug.LogWarning("layerIDSet not found");
+            Logger.LogWarning("layerIDSet not found");
+            return;
+        }
+    }
+
+
+    void LoadTagIDSet(HashSet<string> tagIDSet)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.TagID);
+        string[] tagIDArr = resourceManager.GetResource<string[]>(path);
+        foreach (string tagID in tagIDArr)
+        {
+            tagIDSet.Add(tagID);
+        }
+        if (tagIDSet == null)
+        {
+            Logger.LogWarning("layerIDSet not found");
             return;
         }
     }
@@ -101,7 +120,7 @@ public class GameContextInitializer
         SpriteData[] spriteDataArr = resourceManager.GetResource<SpriteData[]>(path);
         if(spriteDataArr == null)
         {
-            Debug.LogWarning("SpritePathArr not found");
+            Logger.LogWarning("SpritePathArr not found");
             return;
         }
         Texture2D texture2D;
@@ -111,7 +130,7 @@ public class GameContextInitializer
             texture2D = resourceManager.GetResource<Texture2D>(path);
             if(texture2D == null)
             {
-                Debug.LogWarning($"Texture File not found : {path}");
+                Logger.LogWarning($"Texture File not found : {path}");
                 continue;
             }
             spriteMap[spriteData.id] = Sprite.Create(texture2D,
@@ -127,7 +146,7 @@ public class GameContextInitializer
         SceneLayoutBinding[] sceneLayoutBindingArr = resourceManager.GetResource<SceneLayoutBinding[]>(path);
         if (sceneLayoutBindingArr == null)
         {
-            Debug.LogWarning("SceneLayoutBindingArr not found");
+            Logger.LogWarning("SceneLayoutBindingArr not found");
             return;
         }
         foreach (SceneLayoutBinding sceneLayoutBinding in sceneLayoutBindingArr)
@@ -142,7 +161,7 @@ public class GameContextInitializer
         LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
         if (layoutPathArr == null)
         {
-            Debug.LogWarning("LayoutPathArr not found");
+            Logger.LogWarning("LayoutPathArr not found");
             return;
         }
         foreach (LayoutPath layoutPath in layoutPathArr)
@@ -161,7 +180,7 @@ public class GameContextInitializer
             layoutData = resourceManager.GetResource<LayoutData>(path);
             if (layoutData == null)
             {
-                Debug.LogWarning($"LayoutData not found : {pair.Key}");
+                Logger.LogWarning($"LayoutData not found : {pair.Key}");
                 continue;
             }
             layoutDataMap[pair.Key] = layoutData;

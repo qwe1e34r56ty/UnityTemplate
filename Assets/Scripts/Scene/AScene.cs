@@ -12,7 +12,7 @@ public abstract class AScene : IUpdatable
     public virtual void Build(GameContext gameContext)
     {
         if(!gameContext.sceneLayoutBindingMap.TryGetValue(sceneID, out var layoutIDs)){
-            Debug.LogWarning($"Layout Binding not found for scene {sceneID}");
+            Logger.LogWarning($"Layout Binding not found for scene {sceneID}");
             return;
         }
         Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
@@ -31,7 +31,7 @@ public abstract class AScene : IUpdatable
     {
         if (!gameContext.sceneLayoutBindingMap.TryGetValue(sceneID, out var layoutIDs))
         {
-            Debug.LogWarning($"Layout Binding not found for scene {sceneID}");
+            Logger.LogWarning($"Layout Binding not found for scene {sceneID}");
             return;
         }
         Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
