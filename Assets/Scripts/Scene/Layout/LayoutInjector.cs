@@ -26,7 +26,7 @@ public class LayoutInjector
         }
         else
         {
-            Logger.LogError($"Inject Strategy not found : {layoutID}");
+            Logger.LogError($"[LayoutInjector] Inject Strategy not found : {layoutID}");
         }
     }
 

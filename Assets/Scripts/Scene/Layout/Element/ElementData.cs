@@ -6,8 +6,8 @@ public class ElementData
 {
     public string id;
     public string spriteID;
-    public string layerID;
-    public string tagID;
+    public string layerName;
+    public string tagName;
     public float x;
     public float y;
     public float width;

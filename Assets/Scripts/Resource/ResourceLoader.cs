@@ -32,13 +32,13 @@ public class ResourceLoader
             }
             else
             {
-                Logger.LogError($"Resource Load Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
+                Logger.LogError($"[ResoureLoader] Resource Load Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
                 return default(T);
             }
         }
         else
         {
-            Logger.LogError($"Resource Load Strategy not found : {typeof(T)}");
+            Logger.LogError($"[ResoureLoader] Resource Load Strategy not found : {typeof(T)}");
             return default(T);
         }
     }

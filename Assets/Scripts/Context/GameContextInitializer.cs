@@ -26,20 +26,27 @@ public class GameContextInitializer
         gameContext.spriteMap = new();
         LoadSpriteMap(gameContext.spriteMap);
 
-        gameContext.layerIDSet = new();
-        LoadLayerIDSet(gameContext.layerIDSet);
-        foreach(string layerID in gameContext.layerIDSet)
+        gameContext.layerNameSet = new();
+        LoadLayerNameSet(gameContext.layerNameSet);
+        foreach(string layerName in gameContext.layerNameSet)
         {
-            if(LayerMask.NameToLayer(layerID) == -1)
+            if (!LayerUtility.IsValidLayerName(layerName))
             {
-                Logger.LogError($"{layerID} Layer not found, please add Layer ");
+                Logger.LogError($"[GameContextInitializer] {layerName} Layer not found, please add Layer ");
             }
         }
 
-        gameContext.tagIDSet = new();
-        LoadTagIDSet(gameContext.tagIDSet);
+        gameContext.tagNameSet = new();
+        LoadTagNameSet(gameContext.tagNameSet);
+        foreach (string tagName in gameContext.tagNameSet)
+        {
+            if (!TagUtility.IsValidTagName(tagName))
+            {
+                Logger.LogError($"[GameContextInitializer] {tagName} Tag not found, please add Tag ");
+            }
+        }
 
-       gameContext.animationMap = new();
+        gameContext.animationMap = new();
         LoadAnimationMap(gameContext.animationMap);
 
         gameContext.sceneMap = new();
@@ -83,33 +90,33 @@ public class GameContextInitializer
         }
     }
 
-    void LoadLayerIDSet(HashSet<string> layerIDSet)
+    void LoadLayerNameSet(HashSet<string> layerNameSet)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerID);
-        string[] layerIDArr = resourceManager.GetResource<string[]>(path);
-        foreach(string layerID in layerIDArr)
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerName);
+        string[] layerNameArr = resourceManager.GetResource<string[]>(path);
+        foreach(string layerName in layerNameArr)
         {
-            layerIDSet.Add(layerID);
+            layerNameSet.Add(layerName);
         }
-        if (layerIDSet == null)
+        if (layerNameSet == null)
         {
-            Logger.LogWarning("layerIDSet not found");
+            Logger.LogWarning("layerNameSet not found");
             return;
         }
     }
 
 
-    void LoadTagIDSet(HashSet<string> tagIDSet)
+    void LoadTagNameSet(HashSet<string> tagNameSet)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.TagID);
-        string[] tagIDArr = resourceManager.GetResource<string[]>(path);
-        foreach (string tagID in tagIDArr)
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.TagName);
+        string[] tagNameArr = resourceManager.GetResource<string[]>(path);
+        foreach (string tagName in tagNameArr)
         {
-            tagIDSet.Add(tagID);
+            tagNameSet.Add(tagName);
         }
-        if (tagIDSet == null)
+        if (tagNameSet == null)
         {
-            Logger.LogWarning("layerIDSet not found");
+            Logger.LogWarning("TagNameSet not found");
             return;
         }
     }

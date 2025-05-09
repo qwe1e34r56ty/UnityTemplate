@@ -4,8 +4,8 @@
         {
             "id": "Background",
             "spriteID": "Background",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 0,
             "y": 0,
             "width": 18,
@@ -15,8 +15,8 @@
         {
             "id": "Title",
             "spriteID": "Title",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": -0.5,
             "y": 2,
             "width": 2,
@@ -26,8 +26,8 @@
         {
             "id": "Start",
             "spriteID": "StartButton",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 4.5,
             "y": -2.5,
             "width": 2,
@@ -37,7 +37,8 @@
         {
             "id": "Dororong",
             "spriteID": "Dororong",
-            "layerID": "Layout",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 3.5,
             "y": -4.0,
             "width": 0.5,
@@ -47,7 +48,8 @@
         {
             "id": "Dororong1",
             "spriteID": "Dororong",
-            "layerID": "Layout",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": -3.5,
             "y": -2.0,
             "width": 0.5,
@@ -57,7 +59,8 @@
         {
             "id": "Dororong2",
             "spriteID": "Normalization",
-            "layerID": "Layout",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 1.5,
             "y": 2.0,
             "width": 0.5,
@@ -67,7 +70,8 @@
         {
             "id": "Normalization",
             "spriteID": "Normalization",
-            "layerID": "Layout",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": -5,
             "y": -1.0,
             "width": 1.5,

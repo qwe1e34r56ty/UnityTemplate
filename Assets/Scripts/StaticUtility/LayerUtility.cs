@@ -7,7 +7,7 @@ public static class LayerUtility
     {
         if (LayerMask.NameToLayer(layerName) == -1)
         {
-            Logger.LogError($"{layerName} Layer not found, please add Layer ");
+            Logger.LogError($"[LayerUtility] {layerName} Layer not found, please add Layer ");
             return false;
         }
         return true;

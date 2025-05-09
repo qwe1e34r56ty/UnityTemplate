@@ -28,8 +28,10 @@ public class LayoutBuilder
         layoutRoot.transform.position += offsetPosition ?? Vector3.zero;
         layoutRoot.transform.localScale = offsetScale ?? Vector3.one;
         layoutRoot.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
+        gameContext.layoutRootMap[layoutID] = layoutRoot;
 
         Dictionary<string, GameObject> layout = new();
+        gameContext.layouts[layoutID] = layout;
         foreach (ElementData elementData in gameContext.layoutDataMap[layoutID].elementDataArr)
         {
             GameObject element = elementBuilder.ElementBuild(gameContext, layoutID, elementData, offsetSortingOrder: offsetSortingOrder);
@@ -38,8 +40,6 @@ public class LayoutBuilder
                 element.transform.SetParent(layoutRoot.transform, false);
             }
         }
-        gameContext.layouts[layoutID] = layout;
-        gameContext.layoutRootMap[layoutID] = layoutRoot;
         return layoutRoot;
     }
 

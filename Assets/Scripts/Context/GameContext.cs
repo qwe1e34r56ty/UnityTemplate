@@ -8,8 +8,8 @@ public class GameContext
     public Dictionary<string, Dictionary<string, GameObject>> layouts = new();
     public AScene currentScene = null;
 
-    public HashSet<string> layerIDSet = new();
-    public HashSet<string> tagIDSet = new();
+    public HashSet<string> layerNameSet = new();
+    public HashSet<string> tagNameSet = new();
 
     public Dictionary<string, Sprite> spriteMap = new();
 

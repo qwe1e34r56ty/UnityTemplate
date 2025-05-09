@@ -4,8 +4,8 @@
         {
             "id": "Background",
             "spriteID": "Background",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 0,
             "y": 0,
             "width": 18,
@@ -15,8 +15,8 @@
         {
             "id": "ToTitle",
             "spriteID": "ToTitle",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": -0,
             "y": -2.0,
             "width": 2,

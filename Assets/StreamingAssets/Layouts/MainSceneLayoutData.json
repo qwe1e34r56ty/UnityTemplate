@@ -4,8 +4,8 @@
         {
             "id": "Background",
             "spriteID": "Bonobono",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 0,
             "y": 0,
             "width": 8,
@@ -15,8 +15,8 @@
         {
             "id": "ToTitle",
             "spriteID": "ToTitleButton",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": -7.5,
             "y": -4.0,
             "width": 0.6,
@@ -26,8 +26,8 @@
         {
             "id": "ToEnd",
             "spriteID": "ToEndButton",
-            "layerID": "Layout",
-            "tagID": "Untagged",
+            "layerName": "Layout",
+            "tagName": "Untagged",
             "x": 7.5,
             "y": -4.0,
             "width": 0.6,

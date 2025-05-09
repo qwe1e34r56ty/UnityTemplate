@@ -32,7 +32,7 @@ public class ElementBuilder
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         if(!gameContext.spriteMap.TryGetValue(elementData.spriteID, out var sprite))
         {
-            Logger.LogWarning($"Sprite not found in spriteMap {elementData.spriteID}");
+            Logger.LogWarning($"[ElementBuilder] Sprite not found in spriteMap {elementData.spriteID}");
             return null;
         }
         spriteRenderer.sprite = sprite;
@@ -40,6 +40,14 @@ public class ElementBuilder
         gameObject.transform.position = new Vector3(elementData.x, elementData.y, 0f) + (offsetPosition ?? Vector3.zero);
         gameObject.transform.localScale = Vector3.Scale(new Vector3(elementData.width, elementData.height, 1f), offsetScale ?? Vector3.one);
         gameObject.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
+        if (TagUtility.IsValidTagName(elementData.tagName))
+        {
+            gameObject.tag = elementData.tagName;
+        }
+        if (LayerUtility.IsValidLayerName(elementData.layerName))
+        {
+            gameObject.layer = LayerMask.NameToLayer(elementData.layerName);
+        }
         spriteRenderer.sortingOrder += offsetSortingOrder ?? 0;
 
         layout.Add(elementData.id, gameObject);
