@@ -21,7 +21,7 @@ public static class Logger
     public static void LogError(string log)
     {
 #if UNITY_EDITOR
-        Debug.LogError(log);
+        Logger.LogError(log);
 #endif
     }
 }
