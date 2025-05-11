@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class GameContext
     public SaveData? saveData = new();
     public Queue<ISceneCommand> sceneCommandQueue = new();
     public Dictionary<string, Dictionary<string, GameObject>> layouts = new();
-    public AScene currentScene = null;
+    public AScene? currentScene = null;
 
     public HashSet<string> layerNameSet = new();
     public HashSet<string> tagNameSet = new();

@@ -1,82 +1,82 @@
 [
     {
         "id": "Background",
-        "path": "Sprites/Layout/Background.png",
+        "path": "Sprite/Layout/Background.png",
         "pixelPerUnit": 100
     },
     {
         "id": "StartButton",
-        "path": "Sprites/Layout/StartButton.png",
+        "path": "Sprite/Layout/StartButton.png",
         "pixelPerUnit": 100
     },
     {
         "id": "StartButtonHoverEnter",
-        "path": "Sprites/Layout/StartButtonHoverEnter.png",
+        "path": "Sprite/Layout/StartButtonHoverEnter.png",
         "pixelPerUnit": 100
     },
     {
         "id": "Title",
-        "path": "Sprites/Layout/Title.png",
+        "path": "Sprite/Layout/Title.png",
         "pixelPerUnit": 100
     },
     {
         "id": "ToTitleButton",
-        "path": "Sprites/Layout/ToTitleButton.png",
+        "path": "Sprite/Layout/ToTitleButton.png",
         "pixelPerUnit": 100
     },
     {
         "id": "ToTitleButtonHoverEnter",
-        "path": "Sprites/Layout/ToTitleButtonHoverEnter.png",
+        "path": "Sprite/Layout/ToTitleButtonHoverEnter.png",
         "pixelPerUnit": 100
     },
     {
         "id": "ToEndButton",
-        "path": "Sprites/Layout/ToEnd.png",
+        "path": "Sprite/Layout/ToEnd.png",
         "pixelPerUnit": 100
     },
     {
         "id": "ToEndButtonHoverEnter",
-        "path": "Sprites/Layout/ToEndHoverEnter.png",
+        "path": "Sprite/Layout/ToEndHoverEnter.png",
         "pixelPerUnit": 100
     },
     {
         "id": "ToTitle",
-        "path": "Sprites/Layout/ToTitle.png",
+        "path": "Sprite/Layout/ToTitle.png",
         "pixelPerUnit": 100
     },
     {
         "id": "ToTitleHoverEnter",
-        "path": "Sprites/Layout/ToTitleHoverEnter.png",
+        "path": "Sprite/Layout/ToTitleHoverEnter.png",
         "pixelPerUnit": 100
     },
     {
         "id": "Dororong",
-        "path": "Sprites/Dororong.png",
+        "path": "Sprite/Layout/Dororong.png",
         "pixelPerUnit": 100
     },
     {
         "id": "Normalization",
-        "path": "Sprites/faker.png",
+        "path": "Sprite/Layout/faker.png",
         "pixelPerUnit": 100
     },
     {
         "id": "Reboot",
-        "path": "Sprites/Reboot.gif",
+        "path": "Sprite/Layout/Reboot.gif",
         "pixelPerUnit": 100
     },
     {
         "id": "Bonobono",
-        "path": "Sprites/Layout/Bonobono.png",
+        "path": "Sprite/Layout/Bonobono.png",
         "pixelPerUnit": 100
     },
     {
         "id": "TileFloor",
-        "path": "Sprites/Entity/TileFloor.png",
+        "path": "Sprite/Entity/TileFloor.png",
         "pixelPerUnit": 100
     },
     {
         "id": "WallFloor",
-        "path": "Sprites/Entity/WallFloor.png",
+        "path": "Sprite/Entity/WallFloor.png",
         "pixelPerUnit": 100
     }
 ]
