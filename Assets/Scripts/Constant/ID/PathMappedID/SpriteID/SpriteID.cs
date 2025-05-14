@@ -12,4 +12,5 @@ public static class SpriteID
     public static string StartButtonHoverEnter = "StartButtonHoverEnter";
     public static string ToTitle = "ToTitle";
     public static string ToTitleHoverEnter = "ToTitleHoverEnter";
+    public static string Knight = "Knight";
 }

@@ -1,5 +1,10 @@
 [
     {
+        "id": "Knight",
+        "path": "Sprite/Entity/Knight.png",
+        "pixelPerUnit": 100
+    },
+    {
         "id": "Background",
         "path": "Sprite/Layout/Background.png",
         "pixelPerUnit": 100

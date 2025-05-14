@@ -1,0 +1,29 @@
+{
+    "typeID": "Player",
+    "componentDataArr": [
+        {
+            "id": "Player",
+            "spriteID": "Sprite/Entity/Knight.png",
+            "pixelPerUnit": 100,
+            "sortingOrder": "200",
+            "tagID": "Player",
+            "layerID": "Player"
+        }
+    ],
+    "statArr": [
+        {
+            "key": "Hp",
+            "value": "100"
+        },
+        {
+            "key": "Speed",
+            "value": "2.5"
+        }
+    ],
+    "actionDataArr": [
+        {
+            "id": "ArrowControllable",
+            "priority": 5
+        }
+    ]
+}

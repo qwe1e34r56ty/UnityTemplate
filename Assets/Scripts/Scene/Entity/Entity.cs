@@ -7,26 +7,18 @@ public class Entity
 {
     public string typeID = "";
     public string name = "";
-    public GameObject gameObject { get; }
-    public Dictionary<string, IAttribute> attributes = new();
-    public List<AEntityAction> actions = new();
+    public GameObject[] components { get; }
+    public HashSet<string> attributes = new();
+    public Dictionary<string, AEntityAction> actions = new();
 
-    public Entity(string typeID, string name, GameObject gameObject)
+    public Entity(EntityData entityData, string name)
     {
-        this.typeID = typeID;
+        this.typeID = entityData.typeID;
         this.name = name;
-        this.gameObject = gameObject;
     }
 
     public void Act(GameContext context)
     {
-        foreach (var action in actions.OrderByDescending(a => a.priority))
-        {
-            if (action.CanExecute(this, context))
-            {
-                action.Execute(this, context);
-                break;
-            }
-        }
+
     }
 }

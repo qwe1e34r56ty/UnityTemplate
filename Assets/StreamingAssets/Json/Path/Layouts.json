@@ -1,14 +1,14 @@
 [
     {
         "id": "StartScene",
-        "path": "Json/Layout/StartSceneLayoutData.json"
+        "path": "Json/Layout/StartScene.json"
     },
     {
         "id": "MainScene",
-        "path": "Json/Layout/MainSceneLayoutData.json"
+        "path": "Json/Layout/MainScene.json"
     },
     {
         "id": "EndScene",
-        "path": "Json/Layout/EndSceneLayoutData.json"
+        "path": "Json/Layout/EndScene.json"
     }
 ]

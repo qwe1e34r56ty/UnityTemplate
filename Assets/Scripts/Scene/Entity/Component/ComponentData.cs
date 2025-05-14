@@ -5,6 +5,8 @@ public class ComponentData
 {
     public string id;
     public string spriteID;
-    public string layerID;
+    public int pixelPerUnit;
+    public int sortingOrder;
     public string tagID;
+    public string layerID;
 }

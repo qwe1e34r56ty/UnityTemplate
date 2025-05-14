@@ -14,6 +14,12 @@ public class GameContext
 
     public Dictionary<string, Sprite> spriteMap = new();
 
+    public Dictionary<string, string> animationPathMap = new();
+    public Dictionary<string, (Sprite[], AnimationData)> animationDataMap = new();
+
+    public Dictionary<string, string> entityPathMap = new();
+    public Dictionary<string, EntityData> entityDataMap = new();
+
     public Dictionary<string, GameObject> layoutRootMap = new();
     public Dictionary<string, string> layoutPathMap = new();
     public Dictionary<string, LayoutData> layoutDataMap = new();
