@@ -46,7 +46,7 @@ public class StartSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
         if (spriteRenderer != null)
         {
             AnimationPlayer animationPlayer = new();
-            animationPlayer.Play(element, gameContext.animationMap[AnimationID.Normalization], 0.1f, true);
+            animationPlayer.Play(element, gameContext.animationMap[AnimationID.Normalization]);
             gameContext.updateHandlers.Add(animationPlayer);
         }
     }

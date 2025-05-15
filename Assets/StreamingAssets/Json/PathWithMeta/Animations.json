@@ -2,6 +2,8 @@
     {
         "id" : "Normalization",
         "path": "Animation/Normalization2",
-        "pixelPerUnit": 100
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop" : true 
     }
 ]

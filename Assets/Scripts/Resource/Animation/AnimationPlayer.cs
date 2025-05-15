@@ -10,12 +10,14 @@ public class AnimationPlayer : IUpdatable
     private int currentFrame = 0;
     private float timer = 0f;
 
-    public void Play(GameObject target, Sprite[] frames, float frameDuration, bool loop)
+    public void Play(GameObject target, (Sprite[], AnimationData) animationData)
     {
+        Sprite[] frames = animationData.Item1;
+        AnimationData metaData = animationData.Item2;
         this.spriteRenderer = target.GetComponent<SpriteRenderer>();
         this.frames = frames;
-        this.frameDuration = frameDuration;
-        this.loop = loop;
+        this.frameDuration = metaData.frameDuration;
+        this.loop = metaData.loop;
         this.currentFrame = 0;
         this.timer = 0f;
 

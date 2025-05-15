@@ -27,7 +27,7 @@ public class GameContext
     public Dictionary<string, string[]> sceneLayoutBindingMap = new();
     public Dictionary<string, AScene> sceneMap = new();
 
-    public Dictionary<string, Sprite[]> animationMap = new();
+    public Dictionary<string, (Sprite[], AnimationData)> animationMap = new();
 
     public Dictionary<GameObject, Action> onHoverEnterHandlers = new();
     public Dictionary<GameObject, Action> onHoverExitHandlers = new();

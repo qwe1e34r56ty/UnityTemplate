@@ -68,7 +68,7 @@ public class GameContextInitializer
         return sceneMap[sceneID];
     }
 
-    void LoadAnimationMap(Dictionary<string, Sprite[]> animationMap)
+    void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationData)> animationMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Animation);
         AnimationData[] animationDataArr = resourceManager.GetResource<AnimationData[]>(path);
@@ -85,7 +85,7 @@ public class GameContextInitializer
                 Logger.LogWarning($"frames not found : {animationData.path}");
                 continue;
             }
-            animationMap[animationData.id] = frames;
+            animationMap[animationData.id] = (frames, animationData);
         }
     }
 
