@@ -19,6 +19,8 @@ public class ResourceLoader
         resourceLoaderStrategies[typeof(string[])] = new JsonArrayLoaderStrategy<string>();
         resourceLoaderStrategies[typeof(AnimationData[])] = new JsonArrayLoaderStrategy<AnimationData>();
         resourceLoaderStrategies[typeof(Sprite[])] = new AnimationLoaderStrategy();
+        resourceLoaderStrategies[typeof(EntityPath[])] = new JsonArrayLoaderStrategy<EntityPath>();
+        resourceLoaderStrategies[typeof(EntityData)] = new JsonLoaderStrategy<EntityData>();
     }
 
     public T Load<T>(string path, int pixelPerUnit = 100)

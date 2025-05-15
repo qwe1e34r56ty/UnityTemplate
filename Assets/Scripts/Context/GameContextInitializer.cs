@@ -16,16 +16,6 @@ public class GameContextInitializer
         gameContext.sceneLayoutBindingMap = new();
         LoadSceneLayoutBindingMap(gameContext.sceneLayoutBindingMap);
 
-        gameContext.layoutPathMap = new();
-        LoadLayoutPathMap(gameContext.layoutPathMap);
-
-        gameContext.layoutDataMap = new();
-        LoadLayoutDataMap(gameContext.layoutDataMap,
-            gameContext.layoutPathMap);
-
-        gameContext.spriteMap = new();
-        LoadSpriteMap(gameContext.spriteMap);
-
         gameContext.layerNameSet = new();
         LoadLayerNameSet(gameContext.layerNameSet);
         foreach(string layerName in gameContext.layerNameSet)
@@ -46,8 +36,17 @@ public class GameContextInitializer
             }
         }
 
+        gameContext.layoutMap = new();
+        LoadLayoutMap(gameContext.layoutMap);
+
         gameContext.animationMap = new();
         LoadAnimationMap(gameContext.animationMap);
+
+        gameContext.spriteMap = new();
+        LoadSpriteMap(gameContext.spriteMap);
+
+        gameContext.entityMap = new();
+        LoadEntityMap(gameContext.entityMap);
 
         gameContext.sceneMap = new();
         RegisterScenes(gameContext.sceneMap);
@@ -127,7 +126,7 @@ public class GameContextInitializer
         SpriteData[] spriteDataArr = resourceManager.GetResource<SpriteData[]>(path);
         if(spriteDataArr == null)
         {
-            Logger.LogWarning("SpritePathArr not found");
+            Logger.LogWarning("SpriteDataArr not found");
             return;
         }
         Texture2D texture2D;
@@ -162,35 +161,45 @@ public class GameContextInitializer
         }
     }
 
-    void LoadLayoutPathMap(Dictionary<string, string> layoutPathMap)
+    void LoadLayoutMap(Dictionary<string, LayoutData> layoutMap)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayoutPath);
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Layout);
         LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
         if (layoutPathArr == null)
         {
             Logger.LogWarning("LayoutPathArr not found");
             return;
         }
+        LayoutData layoutData;
         foreach (LayoutPath layoutPath in layoutPathArr)
         {
-            layoutPathMap[layoutPath.id] = layoutPath.path;
-        }
-    }
-    void LoadLayoutDataMap(Dictionary<string, LayoutData> layoutDataMap,
-        Dictionary<string, string> layoutPathMap)
-    {
-        string path;
-        LayoutData layoutData;
-        foreach (var pair in layoutPathMap)
-        {
-            path = Path.Combine(Application.streamingAssetsPath, pair.Value);
+            path = Path.Combine(Application.streamingAssetsPath, layoutPath.path);
             layoutData = resourceManager.GetResource<LayoutData>(path);
             if (layoutData == null)
             {
-                Logger.LogWarning($"LayoutData not found : {pair.Key}");
+                Logger.LogWarning($"LayoutData not found : {layoutData.id}");
                 continue;
             }
-            layoutDataMap[pair.Key] = layoutData;
+            layoutMap[layoutData.id] = layoutData;
+        }
+    }
+
+    void LoadEntityMap(Dictionary<string, EntityData> entityMap)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Entity);
+        EntityPath[] entityPathArr = resourceManager.GetResource<EntityPath[]>(path);
+        EntityData entityData;
+        foreach (EntityPath entityPath in entityPathArr)
+        {
+            path = Path.Combine(Application.streamingAssetsPath, entityPath.path);
+            entityData = resourceManager.GetResource<EntityData>(path);
+            if (entityData == null)
+            {
+                Logger.LogWarning($"EntityData not found : {entityPath.id}");
+                continue;
+            }
+            entityMap[entityPath.id] = entityData;
+            Logger.Log(entityData.statArr[0].value.ToString());
         }
     }
 }

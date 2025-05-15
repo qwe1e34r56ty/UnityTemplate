@@ -32,7 +32,7 @@ public class LayoutBuilder
 
         Dictionary<string, GameObject> layout = new();
         gameContext.layouts[layoutID] = layout;
-        foreach (ElementData elementData in gameContext.layoutDataMap[layoutID].elementDataArr)
+        foreach (ElementData elementData in gameContext.layoutMap[layoutID].elementDataArr)
         {
             GameObject element = elementBuilder.ElementBuild(gameContext, layoutID, elementData, offsetSortingOrder: offsetSortingOrder);
             if(element != null)

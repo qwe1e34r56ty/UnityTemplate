@@ -18,11 +18,11 @@ public class GameContext
     public Dictionary<string, (Sprite[], AnimationData)> animationDataMap = new();
 
     public Dictionary<string, string> entityPathMap = new();
-    public Dictionary<string, EntityData> entityDataMap = new();
+    public Dictionary<string, EntityData> entityMap = new();
 
     public Dictionary<string, GameObject> layoutRootMap = new();
     public Dictionary<string, string> layoutPathMap = new();
-    public Dictionary<string, LayoutData> layoutDataMap = new();
+    public Dictionary<string, LayoutData> layoutMap = new();
 
     public Dictionary<string, string[]> sceneLayoutBindingMap = new();
     public Dictionary<string, AScene> sceneMap = new();
