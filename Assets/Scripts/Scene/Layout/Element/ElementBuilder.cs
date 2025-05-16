@@ -65,7 +65,7 @@ public class ElementBuilder
     {
         if (gameContext.layouts.TryGetValue(layoutID, out var layout))
         {
-            if (layout.TryGetValue(elementID, out var element))
+            if (layout.TryGetValue(elementID, out var element)) 
             {
                 layout.Remove(elementID);
                 if (gameContext.animationPlayerMap.TryGetValue(element, out var animationPlayer))
