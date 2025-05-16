@@ -25,13 +25,13 @@ public class LayoutBuilder
             return null;
         }
         GameObject layoutRoot = new GameObject(layoutID);
-        layoutRoot.transform.position += offsetPosition ?? Vector3.zero;
+        layoutRoot.transform.position = offsetPosition ?? Vector3.zero;
         layoutRoot.transform.localScale = offsetScale ?? Vector3.one;
         layoutRoot.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
         gameContext.layoutRootMap[layoutID] = layoutRoot;
 
         Dictionary<string, GameObject> layout = new();
-        gameContext.layouts[layoutID] = layout;
+        gameContext.layouts.Add(layoutID, layout);
         foreach (ElementData elementData in gameContext.layoutMap[layoutID].elementDataArr)
         {
             GameObject element = elementBuilder.ElementBuild(gameContext, layoutID, elementData, offsetSortingOrder: offsetSortingOrder);
@@ -45,16 +45,19 @@ public class LayoutBuilder
 
     public void LayoutDestroy(GameContext gameContext,
         string layoutID)
-    { 
-
+    {
+        if (gameContext.layouts.ContainsKey(layoutID))
+        {
+            foreach (var gameObject in gameContext.layouts[layoutID])
+            {
+                elementBuilder.ElementDestroy(gameContext, gameObject.Value);
+            }
+            gameContext.layouts.Remove(layoutID);
+        }
         if (gameContext.layoutRootMap.TryGetValue(layoutID, out var layoutRoot))
         {
             GameObject.Destroy(layoutRoot);
             gameContext.layoutRootMap.Remove(layoutID);
-        }
-        if (gameContext.layouts.ContainsKey(layoutID))
-        {
-            gameContext.layouts.Remove(layoutID);
         }
     }
 }

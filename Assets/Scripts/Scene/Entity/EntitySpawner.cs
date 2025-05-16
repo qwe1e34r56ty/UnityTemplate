@@ -25,9 +25,9 @@ public class EntitySpawner
         }
         GameObject gameObject = new GameObject(elementData.id);
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        if (!spriteMap.TryGetValue(elementData.spriteID, out var sprite))
+        if (!spriteMap.TryGetValue(elementData.animationID, out var sprite))
         {
-            Logger.LogWarning($"[EntitySpawner] Sprite not found in spriteMap {elementData.spriteID}");
+            Logger.LogWarning($"[EntitySpawner] animation not found in animationMap {elementData.animationID}");
             return null;
         }
         spriteRenderer.sprite = sprite;

@@ -3,35 +3,20 @@
     "elementDataArr": [
         {
             "id": "Background",
-            "spriteID": "Bonobono",
+            "animationID": "Bonobono",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": 0,
             "y": 0,
-            "width": 8,
-            "height": 8,
             "sortingOrder": 0
         },
         {
             "id": "ToTitle",
-            "spriteID": "ToTitleButton",
+            "animationID": "ToTitleButton",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": -7.5,
             "y": -4.0,
-            "width": 0.6,
-            "height": 0.6,
-            "sortingOrder": 100
-        },
-        {
-            "id": "ToEnd",
-            "spriteID": "ToEndButton",
-            "layerName": "Layout",
-            "tagName": "Untagged",
-            "x": 7.5,
-            "y": -4.0,
-            "width": 0.6,
-            "height": 0.6,
             "sortingOrder": 100
         }
     ]

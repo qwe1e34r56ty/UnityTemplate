@@ -18,8 +18,7 @@ public class StartSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
 
     public void StartInject(GameContext gameContext, GameObject element)
     {
-        SpriteRenderer spriteRenderer = element.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
+        if (gameContext.animationPlayerMap.TryGetValue(element, out var animationPlayer))
         {
             var polygonCollider = element.AddComponent<PolygonCollider2D>();
             polygonCollider.isTrigger = true;
@@ -31,23 +30,20 @@ public class StartSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
                 },
                 HoverEnterAction: () =>
                 {
-                    spriteRenderer.sprite = gameContext.spriteMap[SpriteID.StartButtonHoverEnter];
+                    animationPlayer.Play(element, gameContext.animationMap[AnimationID.StartButtonHoverEnter]);
                 },
                 HoverExitAction: () =>
                 {
-                    spriteRenderer.sprite = gameContext.spriteMap[SpriteID.StartButton];
+                    animationPlayer.Play(element, gameContext.animationMap[AnimationID.StartButton]);
                 });
             
         }
     }
     public void NormalizeInject(GameContext gameContext, GameObject element)
     {
-        SpriteRenderer spriteRenderer = element.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
+        if (gameContext.animationPlayerMap.TryGetValue(element, out var animationPlayer))
         {
-            AnimationPlayer animationPlayer = new();
             animationPlayer.Play(element, gameContext.animationMap[AnimationID.Normalization]);
-            gameContext.updateHandlers.Add(animationPlayer);
         }
     }
 }

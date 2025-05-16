@@ -5,7 +5,7 @@ using System;
 public class ElementData
 {
     public string id;
-    public string spriteID;
+    public string animationID;
     public string layerName;
     public string tagName;
     public float x;

@@ -41,6 +41,7 @@ public class GameContextInitializer
 
         gameContext.animationMap = new();
         LoadAnimationMap(gameContext.animationMap);
+        gameContext.animationPlayerMap = new();
 
         gameContext.spriteMap = new();
         LoadSpriteMap(gameContext.spriteMap);
@@ -52,14 +53,13 @@ public class GameContextInitializer
         RegisterScenes(gameContext.sceneMap);
     }
 
-    void RegisterScenes(Dictionary<string, AScene> sceneMap)
+    private void RegisterScenes(Dictionary<string, AScene> sceneMap)
     {
         RegisterScene<StartScene>(sceneMap, SceneID.Start);
         RegisterScene<MainScene>(sceneMap, SceneID.Main);
-        RegisterScene<EndScene>(sceneMap, SceneID.End);
     }
 
-    AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string sceneID) where T : AScene
+    private AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string sceneID) where T : AScene
     {
         if (!sceneMap.ContainsKey(sceneID))
         {
@@ -68,7 +68,7 @@ public class GameContextInitializer
         return sceneMap[sceneID];
     }
 
-    void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationData)> animationMap)
+    private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationData)> animationMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Animation);
         AnimationData[] animationDataArr = resourceManager.GetResource<AnimationData[]>(path);
@@ -89,7 +89,7 @@ public class GameContextInitializer
         }
     }
 
-    void LoadLayerNameSet(HashSet<string> layerNameSet)
+    private void LoadLayerNameSet(HashSet<string> layerNameSet)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerName);
         string[] layerNameArr = resourceManager.GetResource<string[]>(path);
@@ -104,8 +104,7 @@ public class GameContextInitializer
         }
     }
 
-
-    void LoadTagNameSet(HashSet<string> tagNameSet)
+    private void LoadTagNameSet(HashSet<string> tagNameSet)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.TagName);
         string[] tagNameArr = resourceManager.GetResource<string[]>(path);
@@ -120,7 +119,7 @@ public class GameContextInitializer
         }
     }
 
-    void LoadSpriteMap(Dictionary<string, Sprite> spriteMap)
+    private void LoadSpriteMap(Dictionary<string, (Sprite, SpriteData)> spriteMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Sprite);
         SpriteData[] spriteDataArr = resourceManager.GetResource<SpriteData[]>(path);
@@ -139,14 +138,15 @@ public class GameContextInitializer
                 Logger.LogWarning($"Texture File not found : {path}");
                 continue;
             }
-            spriteMap[spriteData.id] = Sprite.Create(texture2D,
+            spriteMap[spriteData.id] = (Sprite.Create(texture2D,
             new Rect(0, 0, texture2D.width, texture2D.height),
             Vector2.one * 0.5f,
-            spriteData.pixelPerUnit);
+            spriteData.pixelPerUnit), 
+            spriteData);
         }
     }
 
-    void LoadSceneLayoutBindingMap(Dictionary<string, string[]> sceneLayoutBindingMap)
+    private void LoadSceneLayoutBindingMap(Dictionary<string, string[]> sceneLayoutBindingMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.SceneLayoutBinding);
         SceneLayoutBinding[] sceneLayoutBindingArr = resourceManager.GetResource<SceneLayoutBinding[]>(path);
@@ -161,7 +161,7 @@ public class GameContextInitializer
         }
     }
 
-    void LoadLayoutMap(Dictionary<string, LayoutData> layoutMap)
+    private void LoadLayoutMap(Dictionary<string, LayoutData> layoutMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Layout);
         LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
@@ -184,10 +184,15 @@ public class GameContextInitializer
         }
     }
 
-    void LoadEntityMap(Dictionary<string, EntityData> entityMap)
+    private void LoadEntityMap(Dictionary<string, EntityData> entityMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Entity);
         EntityPath[] entityPathArr = resourceManager.GetResource<EntityPath[]>(path);
+        if (entityPathArr == null)
+        {
+            Logger.LogWarning("EntityPathArr not found");
+            return;
+        }
         EntityData entityData;
         foreach (EntityPath entityPath in entityPathArr)
         {
@@ -202,4 +207,4 @@ public class GameContextInitializer
             Logger.Log(entityData.statArr[0].value.ToString());
         }
     }
-}
+}   

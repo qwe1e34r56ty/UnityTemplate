@@ -15,10 +15,6 @@ public class MainSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
         {
             ToTitleInject(gameContext, toTitle);
         }
-        if (layout.TryGetValue(MainSceneLayoutElementID.ToEnd, out var toEnd))
-        {
-            ToEndInject(gameContext, toEnd);
-        }
     }
 
     public void ToBackgroundInject(GameContext gameContext, GameObject element)
@@ -33,19 +29,15 @@ public class MainSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
                 RightClickAction: () =>
                 {
                     Logger.Log("Right Click!!");
-                    //gameContext.ClearBeforeLoadScene();
-                    //SceneManager.LoadScene("MainScene");
                 });
         }
     }
 
     public void ToTitleInject(GameContext gameContext, GameObject element)
     {
-        SpriteRenderer spriteRenderer = element.GetComponent<SpriteRenderer>();
-        var collider = element.AddComponent<PolygonCollider2D>();
-        collider.isTrigger = true;
-        if (spriteRenderer != null)
-        {
+        if(gameContext.animationPlayerMap.TryGetValue(element, out var animationPlayer)) {
+            var collider = element.AddComponent<PolygonCollider2D>();
+            collider.isTrigger = true;
             ElementInject(gameContext,
                 element,
                 LeftClickAction: () =>
@@ -56,35 +48,11 @@ public class MainSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
                 },
                 HoverEnterAction: () =>
                 {
-                    spriteRenderer.sprite = gameContext.spriteMap[SpriteID.ToTitleButtonHoverEnter];
+                    animationPlayer.Play(element, gameContext.animationMap[AnimationID.ToTitleButtonHoverEnter]);
                 },
                 HoverExitAction: () =>
                 {
-                    spriteRenderer.sprite = gameContext.spriteMap[SpriteID.ToTitleButton];
-                });
-        }
-    }
-
-    public void ToEndInject(GameContext gameContext, GameObject element)
-    {
-        SpriteRenderer spriteRenderer = element.GetComponent<SpriteRenderer>();
-        var collider = element.AddComponent<BoxCollider2D>();
-        collider.isTrigger = true;
-        if (spriteRenderer != null)
-        {
-            ElementInject(gameContext,
-                element,
-                LeftClickAction: () =>
-                {
-                    gameContext.sceneCommandQueue.Enqueue(new ConvertSceneCommand(SceneID.End, $"Convert to Scene {SceneID.End} request"));
-                },
-                HoverEnterAction: () =>
-                {
-                    spriteRenderer.sprite = gameContext.spriteMap[SpriteID.ToEndButtonHoverEnter];
-                },
-                HoverExitAction: () =>
-                {
-                    spriteRenderer.sprite = gameContext.spriteMap[SpriteID.ToEndButton];
+                    animationPlayer.Play(element, gameContext.animationMap[AnimationID.ToTitleButton]);
                 });
         }
     }

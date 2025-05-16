@@ -3,79 +3,65 @@
     "elementDataArr": [
         {
             "id": "Background",
-            "spriteID": "Background",
+            "animationID": "Background",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": 0,
             "y": 0,
-            "width": 18,
-            "height": 10,
             "sortingOrder": 0
         },
         {
             "id": "Title",
-            "spriteID": "Title",
+            "animationID": "Title",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": -0.5,
             "y": 2,
-            "width": 2,
-            "height": 2,
             "sortingOrder": 50
         },
         {
             "id": "Start",
-            "spriteID": "StartButton",
+            "animationID": "StartButton",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": 4.5,
             "y": -2.5,
-            "width": 2,
-            "height": 2,
             "sortingOrder": 100
         },
         {
             "id": "Dororong",
-            "spriteID": "Dororong",
+            "animationID": "Dororong",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": 3.5,
             "y": -4.0,
-            "width": 0.5,
-            "height": 0.5,
             "sortingOrder": 80
         },
         {
             "id": "Dororong1",
-            "spriteID": "Dororong",
+            "animationID": "Dororong",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": -3.5,
             "y": -2.0,
-            "width": 0.5,
-            "height": 0.5,
             "sortingOrder": 80
         },
         {
             "id": "Dororong2",
-            "spriteID": "Normalization",
+            "animationID": "Faker",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": 1.5,
             "y": 2.0,
-            "width": 0.5,
-            "height": 0.5,
             "sortingOrder": 80
         },
         {
             "id": "Normalization",
-            "spriteID": "Normalization",
+            "animationID": "Faker",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": -5,
             "y": -1.0,
-            "width": 1.5,
-            "height": 1.5,
             "sortingOrder": 70
         }
     ]

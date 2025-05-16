@@ -10,7 +10,6 @@ public class LayoutInjector
     {
         layoutInjectorStrategies[LayoutID.StartScene] = new StartSceneLayoutInjectorStrategy();
         layoutInjectorStrategies[LayoutID.MainScene] = new MainSceneLayoutInjectorStrategy();
-        layoutInjectorStrategies[LayoutID.EndScene] = new EndSceneLayoutInjectorStrategy();
     }
 
     public void Inject(GameContext gameContext,

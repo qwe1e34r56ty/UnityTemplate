@@ -12,10 +12,11 @@ public class GameContext
     public HashSet<string> layerNameSet = new();
     public HashSet<string> tagNameSet = new();
 
-    public Dictionary<string, Sprite> spriteMap = new();
+    public Dictionary<string, (Sprite, SpriteData)> spriteMap = new();
 
     public Dictionary<string, string> animationPathMap = new();
     public Dictionary<string, (Sprite[], AnimationData)> animationDataMap = new();
+    public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
 
     public Dictionary<string, string> entityPathMap = new();
     public Dictionary<string, EntityData> entityMap = new();

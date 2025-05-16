@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Resources;
+using System.Xml.Linq;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEditor.PlayerSettings;
@@ -30,16 +31,22 @@ public class ElementBuilder
         }
         GameObject gameObject = new GameObject(elementData.id);
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        if(!gameContext.spriteMap.TryGetValue(elementData.spriteID, out var sprite))
+        if(!gameContext.animationMap.TryGetValue(elementData.animationID, out var animation))
         {
-            Logger.LogWarning($"[ElementBuilder] Sprite not found in spriteMap {elementData.spriteID}");
+            Logger.LogWarning($"[ElementBuilder] Animation not found in animationMap {elementData.animationID}");
             return null;
         }
-        spriteRenderer.sprite = sprite;
-        spriteRenderer.sortingOrder = elementData.sortingOrder;
+
+        spriteRenderer.sortingOrder = elementData.sortingOrder + (offsetSortingOrder ?? 0);
         gameObject.transform.position = new Vector3(elementData.x, elementData.y, 0f) + (offsetPosition ?? Vector3.zero);
-        gameObject.transform.localScale = Vector3.Scale(new Vector3(elementData.width, elementData.height, 1f), offsetScale ?? Vector3.one);
+        gameObject.transform.localScale = offsetScale ?? Vector3.one;
         gameObject.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
+
+        AnimationPlayer animationPlayer = new();
+        gameContext.animationPlayerMap.Add(gameObject, animationPlayer);
+        animationPlayer.Play(gameObject, animation);
+        gameContext.updateHandlers.Add(animationPlayer);
+
         if (TagUtility.IsValidTagName(elementData.tagName))
         {
             gameObject.tag = elementData.tagName;
@@ -54,10 +61,11 @@ public class ElementBuilder
         return gameObject;
     }
 
-    public void ElementDestroy(GameObject gameObject)
+    public void ElementDestroy(GameContext gameContext, GameObject gameObject)
     {
         if (gameObject != null)
         {
+            gameContext.animationPlayerMap.Remove(gameObject);
             GameObject.Destroy(gameObject);
         }
     }

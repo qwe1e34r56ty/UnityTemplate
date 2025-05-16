@@ -6,9 +6,5 @@
     {
         "id": "MainScene",
         "path": "Json/Layout/MainScene.json"
-    },
-    {
-        "id": "EndScene",
-        "path": "Json/Layout/EndScene.json"
     }
 ]
