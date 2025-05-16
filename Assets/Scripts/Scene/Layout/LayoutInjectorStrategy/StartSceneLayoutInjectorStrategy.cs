@@ -10,10 +10,10 @@ public class StartSceneLayoutInjectorStrategy : ALayoutInjectorStrategy
         {
             StartInject(gameContext, start);
         }
-        if (layout.TryGetValue(StartSceneLayoutElementID.Normalize, out var normalize))
+        /*if (layout.TryGetValue(StartSceneLayoutElementID.Normalize, out var normalize))
         {
             NormalizeInject(gameContext, normalize);
-        }
+        }*/
     }
 
     public void StartInject(GameContext gameContext, GameObject element)

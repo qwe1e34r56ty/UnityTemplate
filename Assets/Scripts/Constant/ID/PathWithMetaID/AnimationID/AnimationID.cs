@@ -12,4 +12,6 @@ public static class AnimationID
     public static string Title = "Title";
     public static string ToTitleButton = "ToTitleButton";
     public static string ToTitleButtonHoverEnter = "ToTitleButtonHoverEnter";
+    public static string Nomalization = "Normalization";
+    public static string Nomalization2 = "Normalization2";
 }

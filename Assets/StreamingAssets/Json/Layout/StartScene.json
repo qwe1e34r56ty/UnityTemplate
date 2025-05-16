@@ -48,7 +48,7 @@
         },
         {
             "id": "Dororong2",
-            "animationID": "Faker",
+            "animationID": "Normalization2",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": 1.5,
@@ -57,7 +57,7 @@
         },
         {
             "id": "Normalization",
-            "animationID": "Faker",
+            "animationID": "Normalization",
             "layerName": "Layout",
             "tagName": "Untagged",
             "x": -5,

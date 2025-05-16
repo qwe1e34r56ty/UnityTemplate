@@ -1,7 +1,14 @@
 [
     {
         "id": "Normalization",
-        "path": "Animation/Normalization2",
+        "path": "Animation/Normalization_498_282",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.05,
+        "loop": true
+    },
+    {
+        "id": "Normalization2",
+        "path": "Animation/Normalization_746_420",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
