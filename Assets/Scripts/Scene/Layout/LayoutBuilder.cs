@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class LayoutBuilder
         layoutRoot.transform.position = offsetPosition ?? Vector3.zero;
         layoutRoot.transform.localScale = offsetScale ?? Vector3.one;
         layoutRoot.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
-        gameContext.layoutRootMap[layoutID] = layoutRoot;
+        gameContext.layoutRootMap.Add(layoutID, layoutRoot);
 
         Dictionary<string, GameObject> layout = new();
         gameContext.layouts.Add(layoutID, layout);
@@ -48,16 +49,12 @@ public class LayoutBuilder
     {
         if (gameContext.layouts.ContainsKey(layoutID))
         {
-            foreach (var gameObject in gameContext.layouts[layoutID])
+            foreach (var pair in gameContext.layouts[layoutID].ToList())
             {
-                elementBuilder.ElementDestroy(gameContext, gameObject.Value);
+                elementBuilder.ElementDestroy(gameContext, layoutID, pair.Key);
             }
             gameContext.layouts.Remove(layoutID);
         }
-        if (gameContext.layoutRootMap.TryGetValue(layoutID, out var layoutRoot))
-        {
-            GameObject.Destroy(layoutRoot);
-            gameContext.layoutRootMap.Remove(layoutID);
-        }
+        gameContext.layoutRootMap.Remove(layoutID);
     }
 }

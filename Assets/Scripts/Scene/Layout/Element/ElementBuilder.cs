@@ -61,12 +61,20 @@ public class ElementBuilder
         return gameObject;
     }
 
-    public void ElementDestroy(GameContext gameContext, GameObject gameObject)
+    public void ElementDestroy(GameContext gameContext, string layoutID, string elementID)
     {
-        if (gameObject != null)
+        if (gameContext.layouts.TryGetValue(layoutID, out var layout))
         {
-            gameContext.animationPlayerMap.Remove(gameObject);
-            GameObject.Destroy(gameObject);
+            if (layout.TryGetValue(elementID, out var element))
+            {
+                layout.Remove(elementID);
+                if (gameContext.animationPlayerMap.TryGetValue(element, out var animationPlayer))
+                {
+                    gameContext.updateHandlers.Remove(animationPlayer);
+                    gameContext.animationPlayerMap.Remove(element);
+                }
+                GameObject.Destroy(element);
+            }
         }
     }
 }
