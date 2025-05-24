@@ -43,9 +43,6 @@ public class GameContextInitializer
         LoadAnimationMap(gameContext.animationMap);
         gameContext.animationPlayerMap = new();
 
-        gameContext.spriteMap = new();
-        LoadSpriteMap(gameContext.spriteMap);
-
         gameContext.entityDataMap = new();
         LoadEntityMap(gameContext.entityDataMap);
 
@@ -116,33 +113,6 @@ public class GameContextInitializer
         {
             Logger.LogWarning("TagNameSet not found");
             return;
-        }
-    }
-
-    private void LoadSpriteMap(Dictionary<string, (Sprite, SpriteData)> spriteMap)
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Sprite);
-        SpriteData[] spriteDataArr = resourceManager.GetResource<SpriteData[]>(path);
-        if(spriteDataArr == null)
-        {
-            Logger.LogWarning("SpriteDataArr not found");
-            return;
-        }
-        Texture2D texture2D;
-        foreach (SpriteData spriteData in spriteDataArr)
-        {
-            path = Path.Combine(Application.streamingAssetsPath, spriteData.path);
-            texture2D = resourceManager.GetResource<Texture2D>(path);
-            if(texture2D == null)
-            {
-                Logger.LogWarning($"Texture File not found : {path}");
-                continue;
-            }
-            spriteMap[spriteData.id] = (Sprite.Create(texture2D,
-            new Rect(0, 0, texture2D.width, texture2D.height),
-            Vector2.one * 0.5f,
-            spriteData.pixelPerUnit), 
-            spriteData);
         }
     }
 
