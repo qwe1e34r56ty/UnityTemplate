@@ -5,34 +5,25 @@ using UnityEngine;
 public class GameContext
 {
     public SaveData? saveData = new();
+    public AScene? currentScene = null;
     public Queue<ISceneCommand> sceneCommandQueue = new();
     public Dictionary<string, Dictionary<string, GameObject>> layoutElementMap = new();
     public Dictionary<string, GameObject> layoutRootMap = new();
-    public AScene? currentScene = null;
+    public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
 
     public HashSet<string> layerNameSet = new();
     public HashSet<string> tagNameSet = new();
-
-    public Dictionary<string, (Sprite, SpriteData)> spriteMap = new();
-
     public Dictionary<string, string> animationPathMap = new();
-    public Dictionary<string, (Sprite[], AnimationData)> animationDataMap = new();
-    public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
-
+    public Dictionary<string, (Sprite[], AnimationData)> animationMap = new();
     public Dictionary<string, string> entityPathMap = new();
     public Dictionary<string, EntityData> entityDataMap = new();
-
     public Dictionary<string, string> layoutPathMap = new();
     public Dictionary<string, LayoutData> layoutDataMap = new();
-
     public Dictionary<string, string[]> sceneLayoutBindingMap = new();
     public Dictionary<string, AScene> sceneMap = new();
 
-    public Dictionary<string, (Sprite[], AnimationData)> animationMap = new();
-
-
+    // Handler
     public HashSet<IUpdatable> updateHandlers = new();
-
     public Dictionary<GameObject, Action> onHoverEnterHandlers = new();
     public Dictionary<GameObject, Action> onHoverExitHandlers = new();
     public Dictionary<GameObject, Action> onLeftClickHandlers = new();
@@ -41,7 +32,6 @@ public class GameContext
     public Queue<GameObject> pendingHoverExitEventQueue = new();
     public Queue<GameObject> pendingLeftClickEventQueue = new();
     public Queue<GameObject> pendingRightClickEventQueue = new();
-
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyDownHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyHoldHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyUpHandlers = new();
