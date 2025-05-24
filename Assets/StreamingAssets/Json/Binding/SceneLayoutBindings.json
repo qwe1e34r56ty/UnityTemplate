@@ -10,11 +10,5 @@
         "layoutID": [
             "MainScene"
         ]
-    },
-    {
-        "sceneID": "End",
-        "layoutID": [
-            "EndScene"
-        ]
     }
 ]
