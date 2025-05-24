@@ -6,7 +6,8 @@ public class GameContext
 {
     public SaveData? saveData = new();
     public Queue<ISceneCommand> sceneCommandQueue = new();
-    public Dictionary<string, Dictionary<string, GameObject>> layouts = new();
+    public Dictionary<string, Dictionary<string, GameObject>> layoutElementMap = new();
+    public Dictionary<string, GameObject> layoutRootMap = new();
     public AScene? currentScene = null;
 
     public HashSet<string> layerNameSet = new();
@@ -19,22 +20,23 @@ public class GameContext
     public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
 
     public Dictionary<string, string> entityPathMap = new();
-    public Dictionary<string, EntityData> entityMap = new();
+    public Dictionary<string, EntityData> entityDataMap = new();
 
-    public Dictionary<string, GameObject> layoutRootMap = new();
     public Dictionary<string, string> layoutPathMap = new();
-    public Dictionary<string, LayoutData> layoutMap = new();
+    public Dictionary<string, LayoutData> layoutDataMap = new();
 
     public Dictionary<string, string[]> sceneLayoutBindingMap = new();
     public Dictionary<string, AScene> sceneMap = new();
 
     public Dictionary<string, (Sprite[], AnimationData)> animationMap = new();
 
+
+    public HashSet<IUpdatable> updateHandlers = new();
+
     public Dictionary<GameObject, Action> onHoverEnterHandlers = new();
     public Dictionary<GameObject, Action> onHoverExitHandlers = new();
     public Dictionary<GameObject, Action> onLeftClickHandlers = new();
     public Dictionary<GameObject, Action> onRightClickHandlers = new();
-
     public Queue<GameObject> pendingHoverEnterEventQueue = new();
     public Queue<GameObject> pendingHoverExitEventQueue = new();
     public Queue<GameObject> pendingLeftClickEventQueue = new();
@@ -43,9 +45,6 @@ public class GameContext
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyDownHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyHoldHandlers = new();
     public Dictionary<GameObject, Dictionary<KeyCode, Action>> onKeyUpHandlers = new();
-
-    public HashSet<IUpdatable> updateHandlers = new();
-
     public Queue<(GameObject, KeyCode)> pendingKeyDownEventQueue = new();
     public Queue<(GameObject, KeyCode)> pendingKeyHoldEventQueue = new();
     public Queue<(GameObject, KeyCode)> pendingKeyUpEventQueue = new();
@@ -88,6 +87,6 @@ public class GameContext
         ClearHandlers();
         ClearEventQueue();
         layoutRootMap.Clear();
-        layouts.Clear();
+        layoutElementMap.Clear();
     }
 }

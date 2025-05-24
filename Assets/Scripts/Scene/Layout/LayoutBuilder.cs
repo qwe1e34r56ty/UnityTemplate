@@ -21,7 +21,7 @@ public class LayoutBuilder
         Vector3? offsetScale = null,
         int? offsetSortingOrder = null)
     {
-        if (gameContext.layouts.ContainsKey(layoutID))
+        if (gameContext.layoutElementMap.ContainsKey(layoutID))
         {
             return null;
         }
@@ -32,8 +32,8 @@ public class LayoutBuilder
         gameContext.layoutRootMap.Add(layoutID, layoutRoot);
 
         Dictionary<string, GameObject> layout = new();
-        gameContext.layouts.Add(layoutID, layout);
-        foreach (ElementData elementData in gameContext.layoutMap[layoutID].elementDataArr)
+        gameContext.layoutElementMap.Add(layoutID, layout);
+        foreach (ElementData elementData in gameContext.layoutDataMap[layoutID].elementDataArr)
         {
             GameObject element = elementBuilder.ElementBuild(gameContext, layoutID, elementData, offsetSortingOrder: offsetSortingOrder);
             if(element != null)
@@ -47,13 +47,13 @@ public class LayoutBuilder
     public void LayoutDestroy(GameContext gameContext,
         string layoutID)
     {
-        if (gameContext.layouts.ContainsKey(layoutID))
+        if (gameContext.layoutElementMap.ContainsKey(layoutID))
         {
-            foreach (var pair in gameContext.layouts[layoutID].ToList())
+            foreach (var pair in gameContext.layoutElementMap[layoutID].ToList())
             {
                 elementBuilder.ElementDestroy(gameContext, layoutID, pair.Key);
             }
-            gameContext.layouts.Remove(layoutID);
+            gameContext.layoutElementMap.Remove(layoutID);
         }
         gameContext.layoutRootMap.Remove(layoutID);
     }

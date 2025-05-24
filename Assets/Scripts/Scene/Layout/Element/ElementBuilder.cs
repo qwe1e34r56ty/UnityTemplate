@@ -21,7 +21,7 @@ public class ElementBuilder
         Vector3? offsetScale = null,
         int? offsetSortingOrder = null)
     {
-        if(!gameContext.layouts.TryGetValue(layoutID, out var layout))
+        if(!gameContext.layoutElementMap.TryGetValue(layoutID, out var layout))
         {
             return null;
         }
@@ -63,7 +63,7 @@ public class ElementBuilder
 
     public void ElementDestroy(GameContext gameContext, string layoutID, string elementID)
     {
-        if (gameContext.layouts.TryGetValue(layoutID, out var layout))
+        if (gameContext.layoutElementMap.TryGetValue(layoutID, out var layout))
         {
             if (layout.TryGetValue(elementID, out var element)) 
             {

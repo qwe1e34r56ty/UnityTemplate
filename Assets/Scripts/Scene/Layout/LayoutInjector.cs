@@ -17,7 +17,7 @@ public class LayoutInjector
     {
         if (layoutInjectorStrategies.ContainsKey(layoutID))
         {
-            if (gameContext.layouts.TryGetValue(layoutID, out var layout))
+            if (gameContext.layoutElementMap.TryGetValue(layoutID, out var layout))
             {
                 var strategy = layoutInjectorStrategies[layoutID];
                 strategy.Inject(gameContext, layout);
@@ -32,7 +32,7 @@ public class LayoutInjector
     public void Eject(GameContext gameContext,
         string layoutID)
     {
-        if (gameContext.layouts.TryGetValue(layoutID, out var layout))
+        if (gameContext.layoutElementMap.TryGetValue(layoutID, out var layout))
         {
             foreach (var pair in layout)
             {

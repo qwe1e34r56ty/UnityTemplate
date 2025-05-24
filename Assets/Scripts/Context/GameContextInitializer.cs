@@ -36,8 +36,8 @@ public class GameContextInitializer
             }
         }
 
-        gameContext.layoutMap = new();
-        LoadLayoutMap(gameContext.layoutMap);
+        gameContext.layoutDataMap = new();
+        LoadLayoutMap(gameContext.layoutDataMap);
 
         gameContext.animationMap = new();
         LoadAnimationMap(gameContext.animationMap);
@@ -46,8 +46,8 @@ public class GameContextInitializer
         gameContext.spriteMap = new();
         LoadSpriteMap(gameContext.spriteMap);
 
-        gameContext.entityMap = new();
-        LoadEntityMap(gameContext.entityMap);
+        gameContext.entityDataMap = new();
+        LoadEntityMap(gameContext.entityDataMap);
 
         gameContext.sceneMap = new();
         RegisterScenes(gameContext.sceneMap);
@@ -161,7 +161,7 @@ public class GameContextInitializer
         }
     }
 
-    private void LoadLayoutMap(Dictionary<string, LayoutData> layoutMap)
+    private void LoadLayoutMap(Dictionary<string, LayoutData> layoutDataMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Layout);
         LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
@@ -180,11 +180,11 @@ public class GameContextInitializer
                 Logger.LogWarning($"LayoutData not found : {layoutData.id}");
                 continue;
             }
-            layoutMap[layoutData.id] = layoutData;
+            layoutDataMap[layoutData.id] = layoutData;
         }
     }
 
-    private void LoadEntityMap(Dictionary<string, EntityData> entityMap)
+    private void LoadEntityMap(Dictionary<string, EntityData> entityDataMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Entity);
         EntityPath[] entityPathArr = resourceManager.GetResource<EntityPath[]>(path);
@@ -203,7 +203,7 @@ public class GameContextInitializer
                 Logger.LogWarning($"EntityData not found : {entityPath.id}");
                 continue;
             }
-            entityMap[entityPath.id] = entityData;
+            entityDataMap[entityPath.id] = entityData;
             Logger.Log(entityData.statArr[0].value.ToString());
         }
     }
