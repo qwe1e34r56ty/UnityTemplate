@@ -1,24 +1,13 @@
 using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine;
-using System.Linq;
 
-public class Entity
+public class Entity : EntityBase
 {
-    public string typeID = "";
-    public string name = "";
-    public GameObject[] components { get; }
-    public HashSet<string> attributes = new();
-    public Dictionary<string, AEntityAction> actions = new();
-
-    public Entity(EntityData entityData, string name)
+    public readonly string typeID;
+    public Dictionary<string, GameObject> components;
+    private SortedList<int, List<IAction>> sortedActionList;
+    public Entity(GameContext gameContext, EntityData entityData, Vector3 offsetPosition, Vector3 offsetRotationEuler, Vector3 offsetScale, int offsetSortOrder) : base(entityData)
     {
-        this.typeID = entityData.typeID;
-        this.name = name;
-    }
-
-    public void Act(GameContext context)
-    {
-
+       
     }
 }

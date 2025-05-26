@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         if (scene.name == "SampleScene" && gameContext.currentScene != null)
         {
             gameContext.sceneCommandQueue.Enqueue(
-                new ConvertSceneCommand(gameContext.currentScene.sceneID, $"Returned to {gameContext.currentScene.sceneID}"));
+                new ConvertSceneCommand(gameContext.currentScene.id, $"Returned to {gameContext.currentScene.id}"));
         }
     }
 }

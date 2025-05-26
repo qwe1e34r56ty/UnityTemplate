@@ -4,17 +4,13 @@ using UnityEngine.UI;
 
 public class SceneDirector
 {
-    public EntitySpawner entitySpawner;
-    public LayoutBuilder layoutBuilder;
-    public LayoutInjector layoutInjector;
+    public EntityBuilder entityBuilder;
     public SceneConverter sceneConverter;
     public ResourceManager resourceManager;
     public SceneDirector(ResourceManager resourceManager)
     {
         this.resourceManager = resourceManager;
-        entitySpawner = new(this.resourceManager);
-        layoutBuilder = new(this.resourceManager);
-        layoutInjector = new();
+        entityBuilder = new(this.resourceManager);
         sceneConverter = new();
     }
     public void ExecuteSceneCommand(GameContext gameContext)

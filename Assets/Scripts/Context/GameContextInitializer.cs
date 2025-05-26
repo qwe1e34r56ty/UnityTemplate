@@ -13,8 +13,8 @@ public class GameContextInitializer
     }
     public void InitGameContext(GameContext gameContext)
     {
-        gameContext.sceneLayoutBindingMap = new();
-        LoadSceneLayoutBindingMap(gameContext.sceneLayoutBindingMap);
+        gameContext.sceneDataMap = new();
+        LoadSceneMap(gameContext.sceneDataMap);
 
         gameContext.layerNameSet = new();
         LoadLayerNameSet(gameContext.layerNameSet);
@@ -36,15 +36,12 @@ public class GameContextInitializer
             }
         }
 
-        gameContext.layoutDataMap = new();
-        LoadLayoutMap(gameContext.layoutDataMap);
-
-        gameContext.animationMap = new();
-        LoadAnimationMap(gameContext.animationMap);
-        gameContext.animationPlayerMap = new();
-
         gameContext.entityDataMap = new();
         LoadEntityMap(gameContext.entityDataMap);
+
+        gameContext.animationDataMap = new();
+        LoadAnimationMap(gameContext.animationDataMap);
+        gameContext.animationPlayerMap = new();
 
         gameContext.sceneMap = new();
         RegisterScenes(gameContext.sceneMap);
@@ -56,25 +53,25 @@ public class GameContextInitializer
         RegisterScene<MainScene>(sceneMap, SceneID.Main);
     }
 
-    private AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string sceneID) where T : AScene
+    private AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string id) where T : AScene
     {
-        if (!sceneMap.ContainsKey(sceneID))
+        if (!sceneMap.ContainsKey(id))
         {
-            sceneMap[sceneID] = (AScene)Activator.CreateInstance(typeof(T), sceneID);
+            sceneMap[id] = (AScene)Activator.CreateInstance(typeof(T), id);
         }
-        return sceneMap[sceneID];
+        return sceneMap[id];
     }
 
-    private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationData)> animationMap)
+    private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationPath)> animationDataMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Animation);
-        AnimationData[] animationDataArr = resourceManager.GetResource<AnimationData[]>(path);
+        AnimationPath[] animationDataArr = resourceManager.GetResource<AnimationPath[]>(path);
         if (animationDataArr == null)
         {
             Logger.LogWarning("animationDataArr not found");
             return;
         }
-        foreach (AnimationData animationData in animationDataArr)
+        foreach (AnimationPath animationData in animationDataArr)
         {
             Sprite[] frames = resourceManager.GetResource<Sprite[]>(animationData.path, animationData.pixelPerUnit);
             if(frames == null)
@@ -82,7 +79,7 @@ public class GameContextInitializer
                 Logger.LogWarning($"frames not found : {animationData.path}");
                 continue;
             }
-            animationMap[animationData.id] = (frames, animationData);
+            animationDataMap[animationData.id] = (frames, animationData);
         }
     }
 
@@ -116,41 +113,26 @@ public class GameContextInitializer
         }
     }
 
-    private void LoadSceneLayoutBindingMap(Dictionary<string, string[]> sceneLayoutBindingMap)
+    private void LoadSceneMap(Dictionary<string, SceneData> sceneDataMap)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.SceneLayoutBinding);
-        SceneLayoutBinding[] sceneLayoutBindingArr = resourceManager.GetResource<SceneLayoutBinding[]>(path);
-        if (sceneLayoutBindingArr == null)
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Scene);
+        ScenePath[] scenePathArr = resourceManager.GetResource<ScenePath[]>(path);
+        if(scenePathArr == null)
         {
-            Logger.LogWarning("SceneLayoutBindingArr not found");
+            Logger.LogWarning("ScenePathArr not found");
             return;
         }
-        foreach (SceneLayoutBinding sceneLayoutBinding in sceneLayoutBindingArr)
+        SceneData sceneData;
+        foreach (ScenePath scenePath in scenePathArr)
         {
-            sceneLayoutBindingMap[sceneLayoutBinding.sceneID] = sceneLayoutBinding.layoutID;
-        }
-    }
-
-    private void LoadLayoutMap(Dictionary<string, LayoutData> layoutDataMap)
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Layout);
-        LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
-        if (layoutPathArr == null)
-        {
-            Logger.LogWarning("LayoutPathArr not found");
-            return;
-        }
-        LayoutData layoutData;
-        foreach (LayoutPath layoutPath in layoutPathArr)
-        {
-            path = Path.Combine(Application.streamingAssetsPath, layoutPath.path);
-            layoutData = resourceManager.GetResource<LayoutData>(path);
-            if (layoutData == null)
+            path = Path.Combine(Application.streamingAssetsPath, scenePath.path);
+            sceneData = resourceManager.GetResource<SceneData>(path);
+            if (sceneData == null)
             {
-                Logger.LogWarning($"LayoutData not found : {layoutData.id}");
-                continue;
+                Logger.LogWarning("SceneDataArr not found");
+                return;
             }
-            layoutDataMap[layoutData.id] = layoutData;
+            sceneDataMap[sceneData.id] = sceneData;
         }
     }
 
@@ -170,11 +152,10 @@ public class GameContextInitializer
             entityData = resourceManager.GetResource<EntityData>(path);
             if (entityData == null)
             {
-                Logger.LogWarning($"EntityData not found : {entityPath.id}");
+                Logger.LogWarning($"EntityData not found : {entityData.id}");
                 continue;
             }
-            entityDataMap[entityPath.id] = entityData;
-            Logger.Log(entityData.statArr[0].value.ToString());
+            entityDataMap[entityData.id] = entityData;
         }
     }
 }   

@@ -1,0 +1,24 @@
+{
+    "id": "Main",
+    "entityTransformDataArr": [
+        {
+            "id": "MainScene",
+            "offsetPosition": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetRotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetScale": {
+                "x": 0.9,
+                "y": 0.9,
+                "z": 0.9
+            },
+            "offsetSortingOrder": 0
+        }
+    ]
+}

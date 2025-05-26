@@ -7,21 +7,17 @@ public class GameContext
     public SaveData? saveData = new();
     public AScene? currentScene = null;
     public Queue<ISceneCommand> sceneCommandQueue = new();
-    public Dictionary<string, Dictionary<string, GameObject>> layoutElementMap = new();
-    public Dictionary<string, GameObject> layoutRootMap = new();
+    public Dictionary<string, Dictionary<string, GameObject>> entityComponentMap = new();
+    public Dictionary<string, GameObject> entityRootMap = new();
     public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
+    public Dictionary<string, AScene> sceneMap = new();
 
     //Resource
     public HashSet<string> layerNameSet = new();
     public HashSet<string> tagNameSet = new();
-    public Dictionary<string, string> animationPathMap = new();
-    public Dictionary<string, (Sprite[], AnimationData)> animationMap = new();
-    public Dictionary<string, string> entityPathMap = new();
+    public Dictionary<string, (Sprite[], AnimationPath)> animationDataMap = new();
     public Dictionary<string, EntityData> entityDataMap = new();
-    public Dictionary<string, string> layoutPathMap = new();
-    public Dictionary<string, LayoutData> layoutDataMap = new();
-    public Dictionary<string, string[]> sceneLayoutBindingMap = new();
-    public Dictionary<string, AScene> sceneMap = new();
+    public Dictionary<string, SceneData> sceneDataMap = new();
 
     // Handler
     public HashSet<IUpdatable> updateHandlers = new();
@@ -77,7 +73,7 @@ public class GameContext
     {
         ClearHandlers();
         ClearEventQueue();
-        layoutRootMap.Clear();
-        layoutElementMap.Clear();
+        entityRootMap.Clear();
+        entityComponentMap.Clear();
     }
 }

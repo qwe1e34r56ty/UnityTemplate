@@ -1,6 +1,10 @@
 [
     {
-        "id": "Player",
-        "path": "Json/Entity/Player.json"
+        "id": "StartScene",
+        "path": "Json/Entity/StartScene.json"
+    },
+    {
+        "id": "MainScene",
+        "path": "Json/Entity/MainScene.json"
     }
 ]

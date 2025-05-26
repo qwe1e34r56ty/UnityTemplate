@@ -1,27 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public static class Logger
 {
+    [Conditional("UNITY_EDITOR")]
     public static void Log(string log)
     {
-#if UNITY_EDITOR
        Debug.Log(log);
-#endif
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogWarning(string log)
     {
-#if UNITY_EDITOR
         Debug.LogWarning(log);
-#endif
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogError(string log)
     {
-#if UNITY_EDITOR
         Debug.LogError(log);
-#endif
     }
 }

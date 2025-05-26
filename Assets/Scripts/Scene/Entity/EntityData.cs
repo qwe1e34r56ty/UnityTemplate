@@ -5,8 +5,10 @@ using System.Collections.Generic;
 [Serializable]
 public class EntityData
 {
-    public string typeID;
+    public string id;
     public ComponentData[] componentDataArr;
-    public Stat[] statArr;
-    public ActionData[] actionDataArr;
+    public string layerName;
+    public string tagName;
+    public ActionEntry[] actionWithPriorityArr;
+    public StatEntry[] statKeyWithValueArr;
 }

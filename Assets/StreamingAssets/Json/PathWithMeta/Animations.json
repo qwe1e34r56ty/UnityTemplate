@@ -15,63 +15,63 @@
     },
     {
         "id": "Background",
-        "path": "Animation/Layout/Background_1800_1000",
+        "path": "Animation/Entity/Background_1800_1000",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "Bonobono",
-        "path": "Animation/Layout/Bonobono_1920_1200",
+        "path": "Animation/Entity/Bonobono_1920_1200",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "Dororong",
-        "path": "Animation/Layout/Dororong_400_400",
+        "path": "Animation/Entity/Dororong_400_400",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "Faker",
-        "path": "Animation/Layout/Faker_400_503",
+        "path": "Animation/Entity/Faker_400_503",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "StartButton",
-        "path": "Animation/Layout/StartButton_600_450",
+        "path": "Animation/Entity/StartButton_600_450",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "StartButtonHoverEnter",
-        "path": "Animation/Layout/StartButtonHoverEnter_600_450",
+        "path": "Animation/Entity/StartButtonHoverEnter_600_450",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "Title",
-        "path": "Animation/Layout/Title_1400_600",
+        "path": "Animation/Entity/Title_1400_600",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "ToTitleButton",
-        "path": "Animation/Layout/ToTitleButton_600_450",
+        "path": "Animation/Entity/ToTitleButton_600_450",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true
     },
     {
         "id": "ToTitleButtonHoverEnter",
-        "path": "Animation/Layout/ToTitleButtonHoverEnter_600_450",
+        "path": "Animation/Entity/ToTitleButtonHoverEnter_600_450",
         "pixelPerUnit": 100,
         "frameDuration": 0.01,
         "loop": true

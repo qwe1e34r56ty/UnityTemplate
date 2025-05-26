@@ -12,7 +12,7 @@ public class AnimationPlayer : IUpdatable
     private float timer = 0f;
 
     public void Play(GameObject target,
-        (Sprite[], AnimationData) animationData,
+        (Sprite[], AnimationPath) animationData,
         Vector3? offsetPosition = null,
         Vector3? offsetRotation = null,
         Vector3? offsetScale = null,
@@ -25,7 +25,7 @@ public class AnimationPlayer : IUpdatable
             return;
         }
 
-        AnimationData metaData = animationData.Item2;
+        AnimationPath metaData = animationData.Item2;
         this.frames = frames;
         this.frameDuration = metaData.frameDuration;
         this.loop = metaData.loop;
