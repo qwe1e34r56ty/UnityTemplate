@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -75,22 +75,4 @@ public class GameManager : MonoBehaviour
         gameContext.ClearEventQueue();
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "SampleScene" && gameContext.currentScene != null)
-        {
-            gameContext.sceneCommandQueue.Enqueue(
-                new ConvertSceneCommand(gameContext.currentScene.id, $"Returned to {gameContext.currentScene.id}"));
-        }
-    }
 }

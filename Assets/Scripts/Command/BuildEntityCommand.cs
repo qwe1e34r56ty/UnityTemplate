@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildEntityCommand : ISceneCommand
 {
@@ -7,14 +7,14 @@ public class BuildEntityCommand : ISceneCommand
     public readonly Vector3? position;
     public readonly Vector3? rotation;
     public readonly Vector3? scale;
-    public readonly int? sortingOrder;
+    public readonly int sortingOrder;
 
     public BuildEntityCommand(string entityID, 
         string message = "",
         Vector3? position = null,
         Vector3? rotation = null,
         Vector3? scale = null,
-        int? sortingOrder = null)
+        int sortingOrder = 0)
     {
         this.entityID = entityID;
         this.message = message;

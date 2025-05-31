@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Resources;
 using System;
@@ -42,29 +42,11 @@ public class GameContextInitializer
         gameContext.animationDataMap = new();
         LoadAnimationMap(gameContext.animationDataMap);
         gameContext.animationPlayerMap = new();
-
-        gameContext.sceneMap = new();
-        RegisterScenes(gameContext.sceneMap);
     }
 
     private void RegisterAction(Dictionary<string, IAction> actionMap)
     {
 
-    }
-
-    private void RegisterScenes(Dictionary<string, AScene> sceneMap)
-    {
-        RegisterScene<StartScene>(sceneMap, SceneID.Start);
-        RegisterScene<MainScene>(sceneMap, SceneID.Main);
-    }
-
-    private AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string id) where T : AScene
-    {
-        if (!sceneMap.ContainsKey(id))
-        {
-            sceneMap[id] = (AScene)Activator.CreateInstance(typeof(T), id);
-        }
-        return sceneMap[id];
     }
 
     private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationPath)> animationDataMap)

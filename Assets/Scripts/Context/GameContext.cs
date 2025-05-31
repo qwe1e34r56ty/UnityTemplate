@@ -1,16 +1,14 @@
-#nullable enable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 public class GameContext
 {
     public SaveData? saveData = new();
-    public AScene? currentScene = null;
+    public Scene scene = new();
     public Queue<ISceneCommand> sceneCommandQueue = new();
-    public Dictionary<string, Dictionary<string, GameObject>> entityComponentMap = new();
-    public Dictionary<string, GameObject> entityRootMap = new();
+    public Dictionary<GameObject, Entity> entities = new();
     public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
-    public Dictionary<string, AScene> sceneMap = new();
     public Dictionary<string, IAction> actionMap = new();
 
     //Resource
@@ -74,7 +72,7 @@ public class GameContext
     {
         ClearHandlers();
         ClearEventQueue();
-        entityRootMap.Clear();
-        entityComponentMap.Clear();
+        entities.Clear();
+        animationPlayerMap.Clear();
     }
 }

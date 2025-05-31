@@ -1,19 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestroyEntityCommand : ISceneCommand
 {
-    public readonly string entityID;
+    public readonly GameObject gameObject;
     public readonly string message;
-    public DestroyEntityCommand(string entityID, string message = "")
+    public DestroyEntityCommand(GameObject gameObject, string message = "")
     {
-        this.entityID = entityID;
+        this.gameObject = gameObject;
         this.message = message;
     }
     public void Execute(GameContext gameContext, 
         SceneDirector director)
 	{
         director.entityBuilder.EntityDestroy(gameContext,
-            entityID);
+            gameObject);
         if (message.Length > 0)
         {
             Logger.Log(message);
