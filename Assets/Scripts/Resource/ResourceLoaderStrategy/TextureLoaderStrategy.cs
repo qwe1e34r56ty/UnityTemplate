@@ -7,7 +7,7 @@ public class TextureLoaderStrategy : IResourceLoaderStrategy<Texture2D>
     {
         if (!File.Exists(path))
         {
-            Debug.LogError($"Texture file not found: {path}");
+            Logger.LogError($"Texture file not found: {path}");
             return null;
         }          
         byte[] bytes = File.ReadAllBytes(path);

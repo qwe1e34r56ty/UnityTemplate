@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 using UnityEngine;
 
 public class AnimationPlayer : IUpdatable
@@ -10,20 +11,34 @@ public class AnimationPlayer : IUpdatable
     private int currentFrame = 0;
     private float timer = 0f;
 
-    public void Play(GameObject target, Sprite[] frames, float frameDuration, bool loop)
+    public void Play(GameObject target,
+        (Sprite[], AnimationPath) animationData,
+        Vector3? offsetPosition = null,
+        Vector3? offsetRotation = null,
+        Vector3? offsetScale = null,
+        int? offsetSortingOrder = null)
     {
-        this.spriteRenderer = target.GetComponent<SpriteRenderer>();
+        Sprite[] frames = animationData.Item1;
+        if (frames == null)
+        {
+            Logger.LogWarning("[AnimationPlayer] frames not found");
+            return;
+        }
+
+        AnimationPath metaData = animationData.Item2;
         this.frames = frames;
-        this.frameDuration = frameDuration;
-        this.loop = loop;
+        this.frameDuration = metaData.frameDuration;
+        this.loop = metaData.loop;
         this.currentFrame = 0;
         this.timer = 0f;
 
-        if (frames == null)
-        {
-            Debug.LogWarning("frames not found");
-        }
-        spriteRenderer.sprite = frames[0];
+        this.spriteRenderer = target.GetComponent<SpriteRenderer>();
+        this.spriteRenderer.sortingOrder += offsetSortingOrder ?? 0;
+        Transform transform = target.transform;
+        transform.position += (offsetPosition ?? Vector3.zero);
+        transform.localScale = Vector3.Scale(transform.localScale, offsetScale ?? Vector3.one);
+        transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
+        spriteRenderer.sprite = this.frames[this.currentFrame];
     }
 
     public void Update(float deltaTime)

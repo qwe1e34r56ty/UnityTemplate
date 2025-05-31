@@ -13,160 +13,161 @@ public class GameContextInitializer
     }
     public void InitGameContext(GameContext gameContext)
     {
+<<<<<<< HEAD
         gameContext.camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         gameContext.sceneLayoutBindingMap = new();
         LoadSceneLayoutBindingMap(gameContext.sceneLayoutBindingMap);
+=======
+        gameContext.sceneDataMap = new();
+        LoadSceneMap(gameContext.sceneDataMap);
+>>>>>>> develop
 
-        gameContext.layoutPathMap = new();
-        LoadLayoutPathMap(gameContext.layoutPathMap);
-
-        gameContext.layoutDataMap = new();
-        LoadLayoutDataMap(gameContext.layoutDataMap,
-            gameContext.layoutPathMap);
-
-        gameContext.spriteMap = new();
-        LoadSpriteMap(gameContext.spriteMap);
-
-        gameContext.layerIDSet = new();
-        LoadLayerIDSet(gameContext.layerIDSet);
-        foreach(string layerID in gameContext.layerIDSet)
+        gameContext.layerNameSet = new();
+        LoadLayerNameSet(gameContext.layerNameSet);
+        foreach(string layerName in gameContext.layerNameSet)
         {
-            if(LayerMask.NameToLayer(layerID) == -1)
+            if (!LayerUtility.IsValidLayerName(layerName))
             {
-                Debug.LogError($"{layerID} Layer not found, please add Layer ");
+                Logger.LogError($"[GameContextInitializer] {layerName} Layer not found, please add Layer ");
             }
         }
 
-        gameContext.animationMap = new();
-        LoadAnimationMap(gameContext.animationMap);
+        gameContext.tagNameSet = new();
+        LoadTagNameSet(gameContext.tagNameSet);
+        foreach (string tagName in gameContext.tagNameSet)
+        {
+            if (!TagUtility.IsValidTagName(tagName))
+            {
+                Logger.LogError($"[GameContextInitializer] {tagName} Tag not found, please add Tag ");
+            }
+        }
+
+        gameContext.entityDataMap = new();
+        LoadEntityMap(gameContext.entityDataMap);
+
+        gameContext.animationDataMap = new();
+        LoadAnimationMap(gameContext.animationDataMap);
+        gameContext.animationPlayerMap = new();
 
         gameContext.sceneMap = new();
         RegisterScenes(gameContext.sceneMap);
     }
 
-    void RegisterScenes(Dictionary<string, AScene> sceneMap)
+    private void RegisterAction(Dictionary<string, IAction> actionMap)
+    {
+
+    }
+
+    private void RegisterScenes(Dictionary<string, AScene> sceneMap)
     {
         RegisterScene<StartScene>(sceneMap, SceneID.Start);
         RegisterScene<MainScene>(sceneMap, SceneID.Main);
-        RegisterScene<EndScene>(sceneMap, SceneID.End);
     }
 
-    AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string sceneID) where T : AScene
+    private AScene RegisterScene<T>(Dictionary<string, AScene> sceneMap, string id) where T : AScene
     {
-        if (!sceneMap.ContainsKey(sceneID))
+        if (!sceneMap.ContainsKey(id))
         {
-            sceneMap[sceneID] = (AScene)Activator.CreateInstance(typeof(T), sceneID);
+            sceneMap[id] = (AScene)Activator.CreateInstance(typeof(T), id);
         }
-        return sceneMap[sceneID];
+        return sceneMap[id];
     }
 
-    void LoadAnimationMap(Dictionary<string, Sprite[]> animationMap)
+    private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationPath)> animationDataMap)
     {
         string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Animation);
-        AnimationData[] animationDataArr = resourceManager.GetResource<AnimationData[]>(path);
+        AnimationPath[] animationDataArr = resourceManager.GetResource<AnimationPath[]>(path);
         if (animationDataArr == null)
         {
-            Debug.LogWarning("animationDataArr not found");
+            Logger.LogWarning("animationDataArr not found");
             return;
         }
-        foreach (AnimationData animationData in animationDataArr)
+        foreach (AnimationPath animationData in animationDataArr)
         {
             Sprite[] frames = resourceManager.GetResource<Sprite[]>(animationData.path, animationData.pixelPerUnit);
             if(frames == null)
             {
-                Debug.LogWarning($"frames not found : {animationData.path}");
+                Logger.LogWarning($"frames not found : {animationData.path}");
                 continue;
             }
-            animationMap[animationData.id] = frames;
+            animationDataMap[animationData.id] = (frames, animationData);
         }
     }
 
-    void LoadLayerIDSet(HashSet<string> layerIDSet)
+    private void LoadLayerNameSet(HashSet<string> layerNameSet)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerID);
-        string[] layerIDArr = resourceManager.GetResource<string[]>(path);
-        foreach(string layerID in layerIDArr)
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayerName);
+        string[] layerNameArr = resourceManager.GetResource<string[]>(path);
+        foreach(string layerName in layerNameArr)
         {
-            layerIDSet.Add(layerID);
+            layerNameSet.Add(layerName);
         }
-        if (layerIDSet == null)
+        if (layerNameSet == null)
         {
-            Debug.LogWarning("layerIDSet not found");
+            Logger.LogWarning("layerNameSet not found");
             return;
         }
     }
 
-    void LoadSpriteMap(Dictionary<string, Sprite> spriteMap)
+    private void LoadTagNameSet(HashSet<string> tagNameSet)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Sprite);
-        SpriteData[] spriteDataArr = resourceManager.GetResource<SpriteData[]>(path);
-        if(spriteDataArr == null)
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.TagName);
+        string[] tagNameArr = resourceManager.GetResource<string[]>(path);
+        foreach (string tagName in tagNameArr)
         {
-            Debug.LogWarning("SpritePathArr not found");
+            tagNameSet.Add(tagName);
+        }
+        if (tagNameSet == null)
+        {
+            Logger.LogWarning("TagNameSet not found");
             return;
         }
-        Texture2D texture2D;
-        foreach (SpriteData spriteData in spriteDataArr)
+    }
+
+    private void LoadSceneMap(Dictionary<string, SceneData> sceneDataMap)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Scene);
+        ScenePath[] scenePathArr = resourceManager.GetResource<ScenePath[]>(path);
+        if(scenePathArr == null)
         {
-            path = Path.Combine(Application.streamingAssetsPath, spriteData.path);
-            texture2D = resourceManager.GetResource<Texture2D>(path);
-            if(texture2D == null)
+            Logger.LogWarning("ScenePathArr not found");
+            return;
+        }
+        SceneData sceneData;
+        foreach (ScenePath scenePath in scenePathArr)
+        {
+            path = Path.Combine(Application.streamingAssetsPath, scenePath.path);
+            sceneData = resourceManager.GetResource<SceneData>(path);
+            if (sceneData == null)
             {
-                Debug.LogWarning($"Texture File not found : {path}");
-                continue;
+                Logger.LogWarning("SceneDataArr not found");
+                return;
             }
-            spriteMap[spriteData.id] = Sprite.Create(texture2D,
-            new Rect(0, 0, texture2D.width, texture2D.height),
-            Vector2.one * 0.5f,
-            spriteData.pixelPerUnit);
+            sceneDataMap[sceneData.id] = sceneData;
         }
     }
 
-    void LoadSceneLayoutBindingMap(Dictionary<string, string[]> sceneLayoutBindingMap)
+    private void LoadEntityMap(Dictionary<string, EntityData> entityDataMap)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.SceneLayoutBinding);
-        SceneLayoutBinding[] sceneLayoutBindingArr = resourceManager.GetResource<SceneLayoutBinding[]>(path);
-        if (sceneLayoutBindingArr == null)
+        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.Entity);
+        EntityPath[] entityPathArr = resourceManager.GetResource<EntityPath[]>(path);
+        if (entityPathArr == null)
         {
-            Debug.LogWarning("SceneLayoutBindingArr not found");
+            Logger.LogWarning("EntityPathArr not found");
             return;
         }
-        foreach (SceneLayoutBinding sceneLayoutBinding in sceneLayoutBindingArr)
+        EntityData entityData;
+        foreach (EntityPath entityPath in entityPathArr)
         {
-            sceneLayoutBindingMap[sceneLayoutBinding.sceneID] = sceneLayoutBinding.layoutID;
-        }
-    }
-
-    void LoadLayoutPathMap(Dictionary<string, string> layoutPathMap)
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, JsonPath.LayoutPath);
-        LayoutPath[] layoutPathArr = resourceManager.GetResource<LayoutPath[]>(path);
-        if (layoutPathArr == null)
-        {
-            Debug.LogWarning("LayoutPathArr not found");
-            return;
-        }
-        foreach (LayoutPath layoutPath in layoutPathArr)
-        {
-            layoutPathMap[layoutPath.id] = layoutPath.path;
-        }
-    }
-    void LoadLayoutDataMap(Dictionary<string, LayoutData> layoutDataMap,
-        Dictionary<string, string> layoutPathMap)
-    {
-        string path;
-        LayoutData layoutData;
-        foreach (var pair in layoutPathMap)
-        {
-            path = Path.Combine(Application.streamingAssetsPath, pair.Value);
-            layoutData = resourceManager.GetResource<LayoutData>(path);
-            if (layoutData == null)
+            path = Path.Combine(Application.streamingAssetsPath, entityPath.path);
+            entityData = resourceManager.GetResource<EntityData>(path);
+            if (entityData == null)
             {
-                Debug.LogWarning($"LayoutData not found : {pair.Key}");
+                Logger.LogWarning($"EntityData not found : {entityData.id}");
                 continue;
             }
-            layoutDataMap[pair.Key] = layoutData;
+            entityDataMap[entityData.id] = entityData;
         }
     }
-}
+}   

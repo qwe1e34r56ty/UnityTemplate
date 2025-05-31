@@ -1,0 +1,10 @@
+[
+    {
+        "id": "Start",
+        "path" : "Json/Scene/Start.json"
+    },
+    {
+        "id": "Main",
+        "path": "Json/Scene/Main.json"
+    }
+]

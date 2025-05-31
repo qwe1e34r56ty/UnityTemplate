@@ -4,22 +4,28 @@ using UnityEngine;
 
 public abstract class AScene : IUpdatable
 {
-    public readonly string sceneID;
-    public AScene(string sceneID)
+    public readonly string id;
+    public AScene(string id)
     {
-        this.sceneID = sceneID;
+        this.id = id;
     }
     public virtual void Build(GameContext gameContext)
     {
-        if(!gameContext.sceneLayoutBindingMap.TryGetValue(sceneID, out var layoutIDs)){
-            Debug.LogWarning($"Layout Binding not found for scene {sceneID}");
+        if(!gameContext.sceneDataMap.TryGetValue(id, out var sceneData)){
+            Logger.LogWarning($"SceneData not found for scene {id}");
             return;
         }
         Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
-        foreach(string layoutID in layoutIDs)
+        foreach(EntityTransformData entityTransform in sceneData.entityTransformDataArr)
         {
-            sceneCommandQueue.Enqueue(new BuildLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout build request"));
-            sceneCommandQueue.Enqueue(new InjectLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout inject request"));
+            sceneCommandQueue.Enqueue(
+                new BuildEntityCommand(entityTransform.id, 
+                $"{id} Scene {entityTransform.id} entity build request", 
+                entityTransform.offsetPosition,
+                entityTransform.offsetRotation,
+                entityTransform.offsetScale,
+                entityTransform.offsetSortingOrder)
+                );
         }
     }
     public virtual void Update(float deltaTime)
@@ -29,16 +35,15 @@ public abstract class AScene : IUpdatable
 
     public virtual void Destroy(GameContext gameContext)
     {
-        if (!gameContext.sceneLayoutBindingMap.TryGetValue(sceneID, out var layoutIDs))
+        if (!gameContext.sceneDataMap.TryGetValue(id, out var sceneData))
         {
-            Debug.LogWarning($"Layout Binding not found for scene {sceneID}");
+            Logger.LogWarning($"SceneData not found for scene {id}");
             return;
         }
         Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
-        foreach (string layoutID in layoutIDs)
+        foreach (EntityTransformData entityTransform in sceneData.entityTransformDataArr)
         {
-            sceneCommandQueue.Enqueue(new EjectLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout Eject request"));
-            sceneCommandQueue.Enqueue(new DestroyLayoutCommand(layoutID, $"{sceneID} Scene {layoutID} layout destroy request"));
+            sceneCommandQueue.Enqueue(new DestroyEntityCommand(entityTransform.id, $"{id} Scene {entityTransform.id} entity destroy request"));
         }
     }
 }

@@ -1,0 +1,79 @@
+[
+    {
+        "id": "Normalization",
+        "path": "Animation/Normalization_498_282",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.05,
+        "loop": true
+    },
+    {
+        "id": "Normalization2",
+        "path": "Animation/Normalization_746_420",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "Background",
+        "path": "Animation/Entity/Background_1800_1000",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "Bonobono",
+        "path": "Animation/Entity/Bonobono_1920_1200",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "Dororong",
+        "path": "Animation/Entity/Dororong_400_400",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "Faker",
+        "path": "Animation/Entity/Faker_400_503",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "StartButton",
+        "path": "Animation/Entity/StartButton_600_450",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "StartButtonHoverEnter",
+        "path": "Animation/Entity/StartButtonHoverEnter_600_450",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "Title",
+        "path": "Animation/Entity/Title_1400_600",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "ToTitleButton",
+        "path": "Animation/Entity/ToTitleButton_600_450",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    },
+    {
+        "id": "ToTitleButtonHoverEnter",
+        "path": "Animation/Entity/ToTitleButtonHoverEnter_600_450",
+        "pixelPerUnit": 100,
+        "frameDuration": 0.01,
+        "loop": true
+    }
+]

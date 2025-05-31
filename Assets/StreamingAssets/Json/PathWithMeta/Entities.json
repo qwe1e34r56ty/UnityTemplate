@@ -1,0 +1,14 @@
+[
+    {
+        "id": "StartScene",
+        "path": "Json/Entity/StartScene/StartScene.json"
+    },
+    {
+        "id": "GoMainButton",
+        "path": "Json/Entity/StartScene/GoMainButton.json"
+    },
+    {
+        "id": "MainScene",
+        "path": "Json/Entity/MainScene/MainScene.json"
+    }
+]

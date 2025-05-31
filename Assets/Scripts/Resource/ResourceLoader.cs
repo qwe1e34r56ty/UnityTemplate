@@ -12,12 +12,15 @@ public class ResourceLoader
     {
         resourceLoaderStrategies[typeof(Texture2D)] = new TextureLoaderStrategy();
         resourceLoaderStrategies[typeof(string)] = new TextLoaderStrategy();
-        resourceLoaderStrategies[typeof(LayoutData)] = new JsonLoaderStrategy<LayoutData>();
-        resourceLoaderStrategies[typeof(LayoutPath[])] = new JsonArrayLoaderStrategy<LayoutPath>();
-        resourceLoaderStrategies[typeof(SceneLayoutBinding[])] = new JsonArrayLoaderStrategy<SceneLayoutBinding>();
-        resourceLoaderStrategies[typeof(SpriteData[])] = new JsonArrayLoaderStrategy<SpriteData>();
         resourceLoaderStrategies[typeof(string[])] = new JsonArrayLoaderStrategy<string>();
-        resourceLoaderStrategies[typeof(AnimationData[])] = new JsonArrayLoaderStrategy<AnimationData>();
+
+        resourceLoaderStrategies[typeof(EntityPath[])] = new JsonArrayLoaderStrategy<EntityPath>();
+        resourceLoaderStrategies[typeof(EntityData)] = new JsonLoaderStrategy<EntityData>();
+
+        resourceLoaderStrategies[typeof(ScenePath[])] = new JsonArrayLoaderStrategy<ScenePath>();
+        resourceLoaderStrategies[typeof(SceneData)] = new JsonLoaderStrategy<SceneData>();
+
+        resourceLoaderStrategies[typeof(AnimationPath[])] = new JsonArrayLoaderStrategy<AnimationPath>();
         resourceLoaderStrategies[typeof(Sprite[])] = new AnimationLoaderStrategy();
     }
 
@@ -32,13 +35,13 @@ public class ResourceLoader
             }
             else
             {
-                Debug.LogError($"Resource Load Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
+                Logger.LogError($"[ResoureLoader] Resource Load Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
                 return default(T);
             }
         }
         else
         {
-            Debug.LogError($"Resource Load Strategy not found : {typeof(T)}");
+            Logger.LogError($"[ResoureLoader] Resource Load Strategy not found : {typeof(T)}");
             return default(T);
         }
     }

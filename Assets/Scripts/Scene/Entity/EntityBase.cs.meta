@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/PunchGameSceneScript/BrickController.cs.meta
+guid: 6b17542edb427bd468ee899c919eede4
+========
+guid: c0a7878dcd3183c48a7f79f5b6e6aa22
+>>>>>>>> develop:Assets/Scripts/Scene/Entity/EntityBase.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
