@@ -1,0 +1,24 @@
+{
+    "id": "GoMainButton",
+    "componentDataArr": [
+        {
+            "id": "Start",
+            "animationID": "StartButton",
+            "layerName": "Layout",
+            "tagName": "Untagged",
+            "x": 0,
+            "y": 0,
+            "sortingOrder": 100
+        }
+    ],
+    "layerName": "Layout",
+    "tagName": "Untagged",
+    "actionWithPriorityArr": [
+        {
+            "id": "Reaction",
+            "priority": 0
+        }
+    ],
+    "statKeyWithValueArr": [
+    ]
+}

@@ -1,7 +1,6 @@
 public static class EntityID
 {
     public const string StartScene = "StartScene";
+    public const string GoMainButton = "GoMainButton";
     public const string MainScene = "MainScene";
-    public const string EndScene = "EndScene";
-    public const string PopUp = "PopUp";
 }

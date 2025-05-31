@@ -47,6 +47,11 @@ public class GameContextInitializer
         RegisterScenes(gameContext.sceneMap);
     }
 
+    private void RegisterAction(Dictionary<string, IAction> actionMap)
+    {
+
+    }
+
     private void RegisterScenes(Dictionary<string, AScene> sceneMap)
     {
         RegisterScene<StartScene>(sceneMap, SceneID.Start);

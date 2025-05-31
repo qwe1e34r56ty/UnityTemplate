@@ -11,6 +11,7 @@ public class GameContext
     public Dictionary<string, GameObject> entityRootMap = new();
     public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
     public Dictionary<string, AScene> sceneMap = new();
+    public Dictionary<string, IAction> actionMap = new();
 
     //Resource
     public HashSet<string> layerNameSet = new();

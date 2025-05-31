@@ -1,12 +1,12 @@
-
+﻿
 using System.Collections.Generic;
 
 public class StringParseStrategy : IStatParseStrategy<string>
 {
-    public bool TryGetStat(Dictionary<string, object> dictionary, string key, out string ret)
+    public bool TryGetStat(Dictionary<string, string> dictionary, string key, out string ret)
     {
         ret = default;
-        if (dictionary.TryGetValue(key, out var obj) && obj is string str)
+        if (dictionary.TryGetValue(key, out var str))
         {
             ret = str;
             return true;
@@ -14,7 +14,7 @@ public class StringParseStrategy : IStatParseStrategy<string>
         return false;
     }
 
-    public string GetStat(Dictionary<string, object> stats, string key)
+    public string GetStat(Dictionary<string, string> stats, string key)
     {
         if (TryGetStat(stats, key, out var result))
         {
@@ -23,7 +23,7 @@ public class StringParseStrategy : IStatParseStrategy<string>
         return default;
     }
 
-    public string SetStat(Dictionary<string, object> stats, string key, string value)
+    public string SetStat(Dictionary<string, string> stats, string key, string value)
     {
         stats[key] = value;
         return value;

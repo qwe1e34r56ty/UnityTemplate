@@ -1,18 +1,18 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 #nullable enable
 
 public class EntityBase
 {
-    private Dictionary<string, object> stats;
-    private Dictionary<Type, object> statParseStrategies;
+    private Dictionary<string, string> stats;
+    private Dictionary<Type, object> statParseStrategies; // ê¸°ì¡´ ì „ëµ ì €ì¥ì†Œ
+
     public EntityBase(EntityData entityData)
     {
         stats = new();
-        // todo stat type°ú id¸¦ ¸ÅÇÎÇØ¼­ °Ë»çÇØ¾ßÇÏÁö¸¸ ³ªÁß¿¡ ±¸ÇöÇÏ°í Áö±İÀº json³» string ÆÄÀÏ ±×´ë·Î ÀúÀå
-        foreach(var statEntry in entityData.statKeyWithValueArr)
+        // todo stat typeê³¼ idë¥¼ ë§¤í•‘í•´ì„œ ê²€ì‚¬í•´ì•¼í•˜ì§€ë§Œ ë‚˜ì¤‘ì— êµ¬í˜„í•˜ê³  ì§€ê¸ˆì€ jsonë‚´ string íŒŒì¼ ê·¸ëŒ€ë¡œ ì €ì¥
+        foreach (var statEntry in entityData.statKeyWithValueArr)
         {
             stats.Add(statEntry.key, statEntry.value);
         }
@@ -20,74 +20,69 @@ public class EntityBase
         statParseStrategies[typeof(float)] = new FloatParseStrategy();
         statParseStrategies[typeof(string)] = new StringParseStrategy();
     }
+
+    // ì œë„ˆë¦­ íƒ€ì…ë§ˆë‹¤ ìºì‹œëœ ì „ëµì„ staticìœ¼ë¡œ ìœ ì§€
+    private static class StatParseCache<T>
+    {
+        public static IStatParseStrategy<T>? cachedStrategy = null;
+    }
+
+    private IStatParseStrategy<T>? GetStatParseStrategy<T>()
+    {
+        if (StatParseCache<T>.cachedStrategy != null)
+        {
+            return StatParseCache<T>.cachedStrategy;
+        }
+        var type = typeof(T);
+        if (statParseStrategies.ContainsKey(type))
+        {
+            var strategy = statParseStrategies[type];
+            if (strategy is IStatParseStrategy<T> typedStrategy)
+            {
+                StatParseCache<T>.cachedStrategy = typedStrategy;
+                return typedStrategy;
+            }
+        }
+
+        Logger.LogError($"[EntityBase] Stat parse Strategy for {type} not found or does not match IStatParseStrategy<{type}>");
+        return null;
+    }
+
     public bool TryGetStat<T>(string key, out T? value)
     {
         value = default;
-        if (statParseStrategies.ContainsKey(typeof(T)))
+        var strategy = GetStatParseStrategy<T>();
+
+        if (strategy != null && strategy.TryGetStat(stats, key, out var ret))
         {
-            var strategy = statParseStrategies[typeof(T)];
-            if (strategy is IStatParseStrategy<T>)
-            {
-                if (((IStatParseStrategy<T>)strategy).TryGetStat(stats, key, out var ret))
-                {
-                    value = ret;
-                    return true;
-                }
-                return false;
-            }
-            else
-            {
-                Logger.LogError($"[EntityBase] Stat parse Strategy for {typeof(T)} not match for IStatParseStrategy<{typeof(T)}>");
-                return false;
-            }
+            value = ret;
+            return true;
         }
-        else
-        {
-            Logger.LogError($"[EntityBase] Stat parse Strategy not found : {typeof(T)}");
-            return false;
-        }
+
+        return false;
     }
+
     public T? GetStat<T>(string key)
     {
-        if (statParseStrategies.ContainsKey(typeof(T)))
+        var strategy = GetStatParseStrategy<T>();
+
+        if (strategy != null)
         {
-            var strategy = statParseStrategies[typeof(T)];
-            if (strategy is IStatParseStrategy<T>)
-            {
-                return ((IStatParseStrategy<T>)strategy).GetStat(stats, key);
-            }
-            else
-            {
-                Logger.LogError($"[EntityBase] Stat parse Strategy for {typeof(T)} not match for IStatParseStrategy<{typeof(T)}>");
-                return default(T);
-            }
+            return strategy.GetStat(stats, key);
         }
-        else
-        {
-            Logger.LogError($"[EntityBase] Stat parse Strategy not found : {typeof(T)}");
-            return default(T);
-        }
+
+        return default;
     }
 
     public T? SetStat<T>(string key, T value)
     {
-        if (statParseStrategies.ContainsKey(typeof(T)))
+        var strategy = GetStatParseStrategy<T>();
+
+        if (strategy != null)
         {
-            var strategy = statParseStrategies[typeof(T)];
-            if (strategy is IStatParseStrategy<T>)
-            {
-                return ((IStatParseStrategy<T>)strategy).SetStat(stats, key, value);
-            }
-            else
-            {
-                Logger.LogError($"[EntityBase] Stat parse Strategy for {typeof(T)} not match for IStatParseStrategy<{typeof(T)}>");
-                return default(T);
-            }
+            return strategy.SetStat(stats, key, value);
         }
-        else
-        {
-            Logger.LogError($"[EntityBase] Stat parse Strategy not found : {typeof(T)}");
-            return default(T);
-        }
+
+        return default;
     }
 }

@@ -21,7 +21,7 @@ public abstract class AScene : IUpdatable
             sceneCommandQueue.Enqueue(
                 new BuildEntityCommand(entityTransform.id, 
                 $"{id} Scene {entityTransform.id} entity build request", 
-                entityTransform.offsetRotation,
+                entityTransform.offsetPosition,
                 entityTransform.offsetRotation,
                 entityTransform.offsetScale,
                 entityTransform.offsetSortingOrder)

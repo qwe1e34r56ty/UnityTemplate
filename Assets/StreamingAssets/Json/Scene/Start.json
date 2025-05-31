@@ -19,6 +19,25 @@
                 "z": 1
             },
             "offsetSortingOrder": 0
+        },
+        {
+            "id": "GoMainButton",
+            "offsetPosition": {
+                "x": 4.5,
+                "y": -2.5,
+                "z": 0
+            },
+            "offsetRotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetScale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "offsetSortingOrder": 0
         }
     ]
 }
