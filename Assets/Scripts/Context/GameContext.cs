@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameContext
 {
-    public static GameContext instance;
     public SaveData? saveData = new();
     public AScene? currentScene = null;
     public Queue<ISceneCommand> sceneCommandQueue = new();
@@ -38,8 +37,6 @@ public class GameContext
     public Queue<(GameObject, KeyCode)> pendingKeyHoldEventQueue = new();
     public Queue<(GameObject, KeyCode)> pendingKeyUpEventQueue = new();
 
-    public Camera camera;
-
     public GameContext()
     {
     }
@@ -47,12 +44,6 @@ public class GameContext
     public GameContext(SaveData? saveData)
     {
         this.saveData = saveData;
-        instance = this;
-    }
-
-    public static GameContext getInstance()
-    {
-        return instance;
     }
 
     public void ClearEventQueue()

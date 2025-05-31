@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Animations.meta
-guid: 95ae60a17cdd552468dd0644c34596c6
-========
 guid: d4abdf42952aed54db7ac36c43b3d60c
->>>>>>>> develop:Assets/Scripts/Scene/Entity/StatParseStrategy.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -13,15 +13,8 @@ public class GameContextInitializer
     }
     public void InitGameContext(GameContext gameContext)
     {
-<<<<<<< HEAD
-        gameContext.camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-
-        gameContext.sceneLayoutBindingMap = new();
-        LoadSceneLayoutBindingMap(gameContext.sceneLayoutBindingMap);
-=======
         gameContext.sceneDataMap = new();
         LoadSceneMap(gameContext.sceneDataMap);
->>>>>>> develop
 
         gameContext.layerNameSet = new();
         LoadLayerNameSet(gameContext.layerNameSet);

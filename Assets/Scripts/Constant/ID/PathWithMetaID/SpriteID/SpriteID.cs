@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 
 public static class SpriteID
 {
