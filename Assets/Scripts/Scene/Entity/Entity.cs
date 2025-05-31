@@ -7,7 +7,7 @@ public class Entity : EntityBase
     public GameObject root;
     public Dictionary<string, GameObject> components;
     private SortedList<int, List<IAction>> sortedActionList;
-    public Entity(GameContext gameContext, EntityData entityData, ) : base(entityData)
+    public Entity(GameContext gameContext, EntityData entityData) : base(entityData)
     {
        
     }
