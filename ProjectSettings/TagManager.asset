@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dialog
+  - DeathDialog
+  - SpeedDown
+  - SpeedUp
+  - RideZone
+  - AppearanceChangeZone
+  - RideOn
+  - AppearanceChangeOn
+  - Ground
+  - Brick
+  - PunchGameZone
+  - StackGameZone
   layers:
   - Default
   - TransparentFX
@@ -13,7 +25,7 @@ TagManager:
   - UI
   - BackgroundLayer
   - ButtonLayer
-  - 
+  - Brick
   - 
   - 
   - 
