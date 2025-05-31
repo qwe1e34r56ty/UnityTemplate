@@ -1,20 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SceneConverter
 {
-    public void ConvertScene(GameContext gameContext, string SceneID)
+    public void ConvertScene(GameContext gameContext, string nextSceneID)
     {
-        AScene currentScene = gameContext.currentScene;
-        if (!gameContext.sceneMap.TryGetValue(SceneID, out var nextScene))
+        Scene scene = gameContext.scene;
+        if (!gameContext.sceneDataMap.ContainsKey(nextSceneID))
         {
-            Logger.Log($"Next Scene not found : {SceneID}");
+            Logger.Log($"Next Scene not found : {nextSceneID}");
             return;
         }
-        if (currentScene != null)
+        if (scene != null)
         {
-            currentScene.Destroy(gameContext);
+            scene.Clear(gameContext);
         }
-        nextScene.Build(gameContext);
-        gameContext.currentScene = nextScene;
+        scene.Build(gameContext, nextSceneID);
     }
 }

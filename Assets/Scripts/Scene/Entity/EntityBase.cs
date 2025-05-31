@@ -6,7 +6,7 @@ using UnityEditor;
 public class EntityBase
 {
     private Dictionary<string, string> stats;
-    private Dictionary<Type, object> statParseStrategies; // 기존 전략 저장소
+    private Dictionary<Type, object> statParseStrategies;
 
     public EntityBase(EntityData entityData)
     {

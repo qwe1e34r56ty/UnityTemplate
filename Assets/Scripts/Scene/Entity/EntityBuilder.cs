@@ -6,11 +6,9 @@ using UnityEngine;
 
 public class EntityBuilder
 {
-    private ComponentBuilder componentBuilder;
     private ResourceManager resourceManager;
     public EntityBuilder(ResourceManager resourceManager)
     {
-        this.componentBuilder = new(resourceManager);
         this.resourceManager = resourceManager;
     }
 
@@ -19,42 +17,21 @@ public class EntityBuilder
         Vector3? offsetPosition = null, 
         Vector3? offsetRotation = null, 
         Vector3? offsetScale = null,
-        int? offsetSortingOrder = null)
+        int offsetSortingOrder = 0)
     {
-        if (gameContext.entityComponentMap.ContainsKey(entityID))
-        {
+        if (!gameContext.entityDataMap.TryGetValue(entityID, out EntityData entityData)){
+            Logger.Log($"[EntityBuilder] EntityData not found : [id : {entityID}]");
             return null;
         }
-        GameObject entityRoot = new GameObject(entityID);
-        entityRoot.transform.position = offsetPosition ?? Vector3.zero;
-        entityRoot.transform.localScale = offsetScale ?? Vector3.one;
-        entityRoot.transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
-        gameContext.entityRootMap.Add(entityID, entityRoot);
-
-        Dictionary<string, GameObject> entity = new();
-        gameContext.entityComponentMap.Add(entityID, entity);
-        foreach (ComponentData componentData in gameContext.entityDataMap[entityID].componentDataArr)
-        {
-            GameObject component = componentBuilder.ComponentBuild(gameContext, entityID, componentData, offsetSortingOrder: offsetSortingOrder);
-            if(component != null)
-            {
-                component.transform.SetParent(entityRoot.transform, false);
-            }
-        }
-        return entityRoot;
+        Entity entity = new Entity(gameContext, resourceManager, entityData, offsetPosition, offsetRotation, offsetScale, offsetSortingOrder);
+        return entity.root;
     }
 
-    public void EntityDestroy(GameContext gameContext,
-        string entityID)
+    public void EntityDestroy(GameContext gameContext, GameObject gameObject)
     {
-        if (gameContext.entityComponentMap.ContainsKey(entityID))
+        if (gameContext.entities.TryGetValue(gameObject, out Entity entity))
         {
-            foreach (var pair in gameContext.entityComponentMap[entityID].ToList())
-            {
-                componentBuilder.ComponentDestroy(gameContext, entityID, pair.Key);
-            }
-            gameContext.entityComponentMap.Remove(entityID);
+            entity.Destroy(gameContext);
         }
-        gameContext.entityRootMap.Remove(entityID);
     }
 }

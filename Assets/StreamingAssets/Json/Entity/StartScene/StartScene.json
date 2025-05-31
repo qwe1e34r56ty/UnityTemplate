@@ -1,4 +1,4 @@
-{
+﻿{
     "id": "StartScene",
     "componentDataArr": [
         {
@@ -6,8 +6,21 @@
             "animationID": "Background",
             "layerName": "Layout",
             "tagName": "Untagged",
-            "x": 0,
-            "y": 0,
+            "offsetPosition": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetRotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetScale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
             "sortingOrder": 0
         },
         {
@@ -15,18 +28,44 @@
             "animationID": "Title",
             "layerName": "Layout",
             "tagName": "Untagged",
-            "x": -0.5,
-            "y": 2,
-            "sortingOrder": 50
+            "offsetPosition": {
+                "x": -0.5,
+                "y": 2,
+                "z": 0
+            },
+            "offsetRotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetScale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "offsetSortingOrder": 50
         },
         {
             "id": "Normalization",
             "animationID": "Normalization",
             "layerName": "Layout",
             "tagName": "Untagged",
-            "x": -5,
-            "y": -1.0,
-            "sortingOrder": 70
+            "offsetPosition": {
+                "x": -5,
+                "y": -1,
+                "z": 0
+            },
+            "offsetRotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetScale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "offsetSortingOrder": 70
         }
     ],
     "layerName": "Layout",
