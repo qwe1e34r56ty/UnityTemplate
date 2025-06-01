@@ -8,6 +8,7 @@ public class GameContext
     public Scene scene = new();
     public Queue<ISceneCommand> sceneCommandQueue = new();
     public Dictionary<GameObject, Entity> entities = new();
+    public Dictionary<GameObject, Entity> entityRoots = new();
     public Dictionary<GameObject, AnimationPlayer> animationPlayerMap = new();
     public Dictionary<string, IAction> actionMap = new();
 
@@ -19,7 +20,7 @@ public class GameContext
     public Dictionary<string, SceneData> sceneDataMap = new();
 
     // Handler
-    public HashSet<IUpdatable> updateHandlers = new();
+    public HashSet<IUpdateable> updateHandlers = new();
     public Dictionary<GameObject, Action> onHoverEnterHandlers = new();
     public Dictionary<GameObject, Action> onHoverExitHandlers = new();
     public Dictionary<GameObject, Action> onLeftClickHandlers = new();
