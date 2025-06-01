@@ -19,11 +19,10 @@ public class UpdateableAction : IAction
 
     public bool CanExecute(GameContext gameContext, Entity entity, float deltaTIme)
     {
-        return true;
+        return false;
     }
 
     public void Execute(GameContext gameContext, Entity entity, float deltaTIme)
     {
-        Logger.Log("abc");
     }
 }
