@@ -1,71 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 #nullable enable
 
 public class EntityBase
 {
     private Dictionary<string, string> stats;
-    private Dictionary<Type, object> statParseStrategies;
 
     public EntityBase(EntityData entityData)
     {
         stats = new();
-        // todo stat type과 id를 매핑해서 검사해야하지만 나중에 구현하고 지금은 json내 string 파일 그대로 저장
         foreach (var statEntry in entityData.statKeyWithValueArr)
         {
             stats.Add(statEntry.key, statEntry.value);
         }
-        statParseStrategies = new();
-        statParseStrategies[typeof(float)] = new FloatParseStrategy();
-        statParseStrategies[typeof(string)] = new StringParseStrategy();
     }
-
-    // 제너릭 타입마다 캐시된 전략을 static으로 유지
-    private static class StatParseCache<T>
+    private static class StatParser
     {
-        public static IStatParseStrategy<T>? cachedStrategy = null;
-    }
+        private static readonly Dictionary<Type, object> strategies = new()
+        {
+            { typeof(float), new FloatParseStrategy() },
+            { typeof(string), new StringParseStrategy() }
+        };
 
-    private IStatParseStrategy<T>? GetStatParseStrategy<T>()
-    {
-        if (StatParseCache<T>.cachedStrategy != null)
+        private static class StrategyCache<T>
         {
-            return StatParseCache<T>.cachedStrategy;
-        }
-        var type = typeof(T);
-        if (statParseStrategies.ContainsKey(type))
-        {
-            var strategy = statParseStrategies[type];
-            if (strategy is IStatParseStrategy<T> typedStrategy)
+            public static readonly IStatParseStrategy<T>? cachedStrategy = null;
+
+            static StrategyCache()
             {
-                StatParseCache<T>.cachedStrategy = typedStrategy;
-                return typedStrategy;
+                Type type = typeof(T);
+                if (strategies.TryGetValue(type, out var strategy))
+                {
+                    if (strategy is IStatParseStrategy<T> _strategy)
+                    {
+                        cachedStrategy = _strategy;
+                    }
+                    else
+                    {
+                        Logger.LogError($"[StatParser] Stat Parse Strategy for {type} mismatched for IStatParseStrategy<{type}>");
+                        cachedStrategy = null;
+                    }
+                }
+                else
+                {
+                    Logger.LogError($"[StatParser] Stat Parse Strategy not found {type}");
+                }
             }
         }
 
-        Logger.LogError($"[EntityBase] Stat parse Strategy for {type} not found or does not match IStatParseStrategy<{type}>");
-        return null;
+        public static IStatParseStrategy<T>? GetStrategy<T>()
+        {
+            return StrategyCache<T>.cachedStrategy;
+        }
     }
 
     public bool TryGetStat<T>(string key, out T? value)
     {
         value = default;
-        var strategy = GetStatParseStrategy<T>();
-
+        var strategy = StatParser.GetStrategy<T>();
         if (strategy != null && strategy.TryGetStat(stats, key, out var ret))
         {
             value = ret;
             return true;
         }
-
         return false;
     }
 
     public T? GetStat<T>(string key)
     {
-        var strategy = GetStatParseStrategy<T>();
-
+        var strategy = StatParser.GetStrategy<T>();
         if (strategy != null)
         {
             return strategy.GetStat(stats, key);
@@ -76,8 +79,7 @@ public class EntityBase
 
     public T? SetStat<T>(string key, T value)
     {
-        var strategy = GetStatParseStrategy<T>();
-
+        var strategy = StatParser.GetStrategy<T>();
         if (strategy != null)
         {
             return strategy.SetStat(stats, key, value);
