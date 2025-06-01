@@ -19,7 +19,8 @@ public class EntityBase
         private static readonly Dictionary<Type, object> strategies = new()
         {
             { typeof(float), new FloatParseStrategy() },
-            { typeof(string), new StringParseStrategy() }
+            { typeof(string), new StringParseStrategy() },
+            {typeof(int), new IntParseStrategy() }
         };
 
         private static class StrategyCache<T>
