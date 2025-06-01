@@ -48,10 +48,9 @@ Assets/
 │   └── SampleScene.unity        # GameManager와 MainCamera, EventSystem만 존재
 ├── StreamingAssets/
 │   ├── Json/                    # SceneData, EntityData, Layout 정의
-│   ├── Sprites/                 # 리소스 이미지
-│   ├── Animations/              # 스프라이트 애니메이션 프레임
-│   ├── Entities/                # Entity 정의용 JSON
-│   └── TextMeshPro/             # 폰트 리소스
+│   ├── Sprite/                 # 리소스 이미지
+│   ├── Animation/              # 스프라이트 애니메이션 프레임
+│   └── Entity/                # Entity 정의용 JSON
 └── Scripts/
     ├── Command/                 # BuildEntityCommand, ConvertSceneCommand 등
     ├── Input/                   # 입력 감지 및 디스패처
