@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -24,25 +24,33 @@ public class ResourceLoader
         resourceLoaderStrategies[typeof(Sprite[])] = new AnimationLoaderStrategy();
     }
 
+    private static class StrategyCache<T>
+    {
+        public static IResourceLoaderStrategy<T>? cachedStrategy = null;
+    }
+
     public T Load<T>(string path, int pixelPerUnit = 100)
     {
-        if(resourceLoaderStrategies.ContainsKey(typeof(T)))
+        if (StrategyCache<T>.cachedStrategy != null)
         {
-            var strategy = resourceLoaderStrategies[typeof(T)];
-            if (strategy is IResourceLoaderStrategy<T>)
+            return StrategyCache<T>.cachedStrategy.Load(path, pixelPerUnit);
+        }
+        Type type = typeof(T);
+        if (resourceLoaderStrategies.TryGetValue(type, out var strategy))
+        {
+            if (strategy is IResourceLoaderStrategy<T> _strategy)
             {
-                return ((IResourceLoaderStrategy<T>)strategy).Load(path, pixelPerUnit);
+                StrategyCache<T>.cachedStrategy = _strategy;
+                return _strategy.Load(path, pixelPerUnit);
             }
             else
             {
-                Logger.LogError($"[ResoureLoader] Resource Load Strategy for {typeof(T)} not match for IResourceLoaderStrategy<{typeof(T)}>");
-                return default(T);
+                Logger.LogError($"[ResourceLoader] Resource Load Strategy for {type} mismatched for IResourceLoaderStrategy<{type}>");
+                return default;
             }
         }
-        else
-        {
-            Logger.LogError($"[ResoureLoader] Resource Load Strategy not found : {typeof(T)}");
-            return default(T);
-        }
+
+        Logger.LogError($"[ResourceLoader] Resource Load Strategy not found: {type}");
+        return default;
     }
 }
