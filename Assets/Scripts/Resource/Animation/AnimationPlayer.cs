@@ -1,7 +1,7 @@
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using UnityEngine;
 
-public class AnimationPlayer : IUpdatable
+public class AnimationPlayer : IUpdateable
 {
     private SpriteRenderer spriteRenderer;
     private Sprite[] frames;
@@ -12,11 +12,7 @@ public class AnimationPlayer : IUpdatable
     private float timer = 0f;
 
     public void Play(GameObject target,
-        (Sprite[], AnimationPath) animationData,
-        Vector3? offsetPosition = null,
-        Vector3? offsetRotation = null,
-        Vector3? offsetScale = null,
-        int? offsetSortingOrder = null)
+        (Sprite[], AnimationPath) animationData)
     {
         Sprite[] frames = animationData.Item1;
         if (frames == null)
@@ -33,15 +29,10 @@ public class AnimationPlayer : IUpdatable
         this.timer = 0f;
 
         this.spriteRenderer = target.GetComponent<SpriteRenderer>();
-        this.spriteRenderer.sortingOrder += offsetSortingOrder ?? 0;
-        Transform transform = target.transform;
-        transform.position += (offsetPosition ?? Vector3.zero);
-        transform.localScale = Vector3.Scale(transform.localScale, offsetScale ?? Vector3.one);
-        transform.rotation = offsetRotation.HasValue ? Quaternion.Euler(offsetRotation.Value) : Quaternion.identity;
         spriteRenderer.sprite = this.frames[this.currentFrame];
     }
 
-    public void Update(float deltaTime)
+    public void Update(GameContext gameContext, float deltaTime)
     {
         if (spriteRenderer == null || frames == null || frames.Length == 0) return;
 
