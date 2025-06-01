@@ -7,7 +7,6 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Entity : EntityBase, IUpdateable
 {
     public GameObject root { get; private set; }
-    private AnimationPlayer animationPlayer;
     private HashSet<GameObject> childs;
     private SortedList<int, List<IAction>> sortedActionList;
     public Entity(GameContext gameContext,
@@ -20,7 +19,6 @@ public class Entity : EntityBase, IUpdateable
         int offsetSortOrder = 0) : base(entityData)
     {
         root = null;
-        animationPlayer = null;
         childs = new();
         sortedActionList = new();
         if(entityRoot == null)
@@ -44,16 +42,6 @@ public class Entity : EntityBase, IUpdateable
 
             rootTransform.localScale = Vector3.Scale(rootTransform.localScale, offsetScale ?? Vector3.one);
             rootTransform.localScale = Vector3.Scale(rootTransform.localScale, entityData.offsetScale);
-
-            spriteRenderer.sortingOrder += offsetSortOrder + entityData.offsetSortingOrder;
-        }
-
-        if (gameContext.animationDataMap.TryGetValue(entityData.animationID, out (Sprite[], AnimationPath)animationData))
-        {
-            animationPlayer = new AnimationPlayer();
-            animationPlayer.Play(root, animationData);
-            gameContext.updateHandlers.Add(animationPlayer);
-            gameContext.animationPlayerMap.Add(root, animationPlayer);
         }
 
         foreach (EntityData _entityData in entityData.entityDataArr)
@@ -96,13 +84,6 @@ public class Entity : EntityBase, IUpdateable
                 entity.Destroy(gameContext);
             }
         }
-
-        if (gameContext.animationPlayerMap.TryGetValue(root, out AnimationPlayer animationPlayer))
-        {
-            gameContext.updateHandlers.Remove(animationPlayer);
-            gameContext.animationPlayerMap.Remove(root);
-        }
-
         GameObject.Destroy(root);
     }
 

@@ -6,14 +6,12 @@ using System.Collections.Generic;
 public class EntityData
 {
     public string id;
-    public string animationID;
     public EntityData[] entityDataArr;
     public string layerName;
     public string tagName;
     public Vector3 offsetPosition;
     public Vector3 offsetRotation;
     public Vector3 offsetScale;
-    public int offsetSortingOrder;
     public ActionEntry[] actionWithPriorityArr;
     public StatEntry[] statKeyWithValueArr;
 }
