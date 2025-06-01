@@ -36,6 +36,8 @@ public class GameContextInitializer
             }
         }
 
+        RegisterAction(gameContext.actionMap);
+
         gameContext.entityDataMap = new();
         LoadEntityMap(gameContext.entityDataMap);
 
@@ -46,7 +48,11 @@ public class GameContextInitializer
 
     private void RegisterAction(Dictionary<string, IAction> actionMap)
     {
-
+        actionMap.Add(ActionID.Updateable, new UpdateableAction());
+        actionMap.Add(ActionID.Hover, new HoverAction());
+        actionMap.Add(ActionID.HavePolygonCollider, new HavePolygonColliderActionAction());
+        actionMap.Add(ActionID.GoMainButton, new GoMainButtonAction());
+        actionMap.Add(ActionID.GoTitleButton, new GoTitleButtonAction());
     }
 
     private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationPath)> animationDataMap)
