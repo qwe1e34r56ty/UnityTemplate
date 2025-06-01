@@ -1,6 +1,5 @@
 ﻿{
     "id": "Normalization",
-    "animationID": "Normalization",
     "entityDataArr": [
     ],
     "layerName": "Layout",
@@ -20,29 +19,44 @@
         "y": 1,
         "z": 1
     },
-    "offsetSortingOrder": 100,
     "actionWithPriorityArr": [
         {
             "id": "Updateable",
             "priority": 0
         },
         {
-            "id": "Hover",
+            "id": "MouseHover",
             "priority": 0
         },
         {
             "id": "HavePolygonCollider",
             "priority": 0
+        },
+        {
+            "id": "HaveSpriteRenderer",
+            "priority": 0
+        },
+        {
+            "id": "IdleAnimation",
+            "priority": 0
         }
     ],
     "statKeyWithValueArr": [
         {
-            "key": "HoverEnterAnimationID",
+            "key": "HoverEnterAnimation",
             "value": "Normalization2"
         },
         {
-            "key": "HoverExitAnimationID",
+            "key": "OffsetSortingOrder",
+            "value": 100
+        },
+        {
+            "key": "IdleAnimation",
             "value": "Normalization"
+        },
+        {
+            "key": "PolygonColliderUpdateInterval",
+            "value": 0.05
         }
     ]
 }

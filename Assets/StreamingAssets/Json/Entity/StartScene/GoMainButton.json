@@ -1,6 +1,5 @@
 ﻿{
     "id": "GoMainButton",
-    "animationID": "StartButton",
     "entityDataArr": [
     ],
     "layerName": "Layout",
@@ -23,7 +22,11 @@
     "offsetSortingOrder": 100,
     "actionWithPriorityArr": [
         {
-            "id": "Hover",
+            "id": "Updateable",
+            "priority": 0
+        },
+        {
+            "id": "MouseHover",
             "priority": 0
         },
         {
@@ -31,18 +34,38 @@
             "priority": 0
         },
         {
-            "id": "GoMainButton",
+            "id": "HaveSpriteRenderer",
             "priority": 0
+        },
+        {
+            "id": "IdleAnimation",
+            "priority": 0
+        },
+        {
+            "id": "LoadSceneButton",
+            "priority": 50
         }
     ],
     "statKeyWithValueArr": [
         {
-            "key": "HoverEnterAnimationID",
+            "key": "HoverEnterAnimation",
             "value": "StartButtonHoverEnter"
         },
         {
-            "key": "HoverExitAnimationID",
+            "key": "OffsetSortingOrder",
+            "value": 70
+        },
+        {
+            "key": "IdleAnimation",
             "value": "StartButton"
+        },
+        {
+            "key": "PolygonColliderUpdateInterval",
+            "value": 0.05
+        },
+        {
+            "key": "LoadScene",
+            "value": "Main"
         }
     ]
 }

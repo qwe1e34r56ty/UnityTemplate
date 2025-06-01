@@ -1,6 +1,5 @@
 ﻿{
     "id": "Title",
-    "animationID": "Title",
     "entityDataArr": [
     ],
     "layerName": "Layout",
@@ -22,7 +21,23 @@
     },
     "offsetSortingOrder": 50,
     "actionWithPriorityArr": [
+        {
+            "id": "HaveSpriteRenderer",
+            "priority": 0
+        },
+        {
+            "id": "IdleAnimation",
+            "priority": 0
+        }
     ],
     "statKeyWithValueArr": [
+        {
+            "key": "OffsetSortingOrder",
+            "value": 50
+        },
+        {
+            "key": "IdleAnimation",
+            "value": "Title"
+        }
     ]
 }

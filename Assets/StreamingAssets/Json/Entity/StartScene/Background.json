@@ -1,6 +1,5 @@
 ﻿{
     "id": "StartScene",
-    "animationID": "Background",
     "entityDataArr": [
     ],
     "layerName": "Layout",
@@ -25,8 +24,24 @@
         {
             "id": "Updateable",
             "priority": 0
+        },
+        {
+            "id": "HaveSpriteRenderer",
+            "priority": 0
+        },
+        {
+            "id": "IdleAnimation",
+            "priority": 0
         }
     ],
     "statKeyWithValueArr": [
+        {
+            "key": "OffsetSortingOrder",
+            "value": 0
+        },
+        {
+            "key": "IdleAnimation",
+            "value": "Background"
+        }
     ]
 }

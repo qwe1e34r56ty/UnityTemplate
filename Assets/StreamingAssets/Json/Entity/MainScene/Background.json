@@ -1,10 +1,8 @@
 ﻿{
     "id": "Background",
-    "animationID": "Bonobono",
     "entityDataArr": [
         {
             "id": "ToTitle",
-            "animationID": "ToTitleButton",
             "entityDataArr": [
             ],
             "layerName": "Layout",
@@ -24,10 +22,13 @@
                 "y": 0.7,
                 "z": 0.7
             },
-            "offsetSortingOrder": 100,
             "actionWithPriorityArr": [
                 {
-                    "id": "Hover",
+                    "id": "Updateable",
+                    "priority": 0
+                },
+                {
+                    "id": "MouseHover",
                     "priority": 0
                 },
                 {
@@ -35,18 +36,38 @@
                     "priority": 0
                 },
                 {
-                    "id": "GoTitleButton",
+                    "id": "HaveSpriteRenderer",
                     "priority": 0
+                },
+                {
+                    "id": "IdleAnimation",
+                    "priority": 0
+                },
+                {
+                    "id": "LoadSceneButton",
+                    "priority": 50
                 }
             ],
             "statKeyWithValueArr": [
                 {
-                    "key": "HoverEnterAnimationID",
+                    "key": "HoverEnterAnimation",
                     "value": "ToTitleButtonHoverEnter"
                 },
                 {
-                    "key": "HoverExitAnimationID",
+                    "key": "OffsetSortingOrder",
+                    "value": 100
+                },
+                {
+                    "key": "IdleAnimation",
                     "value": "ToTitleButton"
+                },
+                {
+                    "key": "PolygonColliderUpdateInterval",
+                    "value": 0.05
+                },
+                {
+                    "key": "LoadScene",
+                    "value": "Start"
                 }
             ]
         }
@@ -68,9 +89,24 @@
         "y": 1,
         "z": 1
     },
-    "offsetSortingOrder": 0,
     "actionWithPriorityArr": [
+            {
+                "id": "HaveSpriteRenderer",
+                "priority": 0
+            },
+        {
+            "id": "IdleAnimation",
+            "priority": 0
+        }
     ],
     "statKeyWithValueArr": [
+        {
+            "key": "OffsetSortingOrder",
+            "value": 0
+        },
+        {
+            "key": "IdleAnimation",
+            "value": "Background"
+        }
     ]
 }
