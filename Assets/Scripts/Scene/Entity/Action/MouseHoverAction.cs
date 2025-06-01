@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using UnityEngine;
 
-public class HoverAction: IAction
+public class MouseHoverAction: IAction
 {
-    public HoverAction()
+    public MouseHoverAction()
     {
 
     }
@@ -13,14 +13,14 @@ public class HoverAction: IAction
         gameContext.onHoverEnterHandlers.Add(entity.root, () =>
         {
             if (gameContext.animationPlayerMap.TryGetValue(entity.root, out AnimationPlayer animationPlayer)){
-                animationPlayer.Play(entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.HoverEnterAnimationID)]);
+                animationPlayer.Play(entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.HoverEnterAnimation)]);
             }
         });
         gameContext.onHoverExitHandlers.Add(entity.root, () =>
         {
             if (gameContext.animationPlayerMap.TryGetValue(entity.root, out AnimationPlayer animationPlayer))
             {
-                animationPlayer.Play(entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.HoverExitAnimationID)]);
+                animationPlayer.Play(entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.IdleAnimation)]);
             }
         });
     }
