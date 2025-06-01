@@ -23,7 +23,7 @@ public class EntityBuilder
             Logger.Log($"[EntityBuilder] EntityData not found : [id : {entityID}]");
             return null;
         }
-        Entity entity = new Entity(gameContext, resourceManager, entityData, offsetPosition, offsetRotation, offsetScale, offsetSortingOrder);
+        Entity entity = new Entity(gameContext, resourceManager, entityData, null, offsetPosition, offsetRotation, offsetScale, offsetSortingOrder);
         return entity.root;
     }
 
