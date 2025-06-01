@@ -1,6 +1,4 @@
-using UnityEditorInternal;
-
-public static class AnimationID
+﻿public static class AnimationID
 {
     public static string Normalization = "Normalization";
     public static string Background = "Background";

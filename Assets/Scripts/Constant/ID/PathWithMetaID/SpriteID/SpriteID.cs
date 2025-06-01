@@ -1,6 +1,4 @@
-using UnityEditorInternal;
-
-public static class SpriteID
+﻿public static class SpriteID
 {
     public static string Title = "TitleImage";
     public static string Background = "Background";
