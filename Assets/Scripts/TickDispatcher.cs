@@ -1,12 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TickDispatcher
 {
     public void Dispatch(GameContext gameContext)
     {
-        foreach (IUpdatable updatable in gameContext.updateHandlers)
+        foreach (IUpdateable updatable in gameContext.updateHandlers)
         {
-            updatable.Update(Time.deltaTime);
+            updatable.Update(gameContext, Time.deltaTime);
         }
     }
 }
