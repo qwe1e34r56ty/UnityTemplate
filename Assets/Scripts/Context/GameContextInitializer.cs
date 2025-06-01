@@ -49,10 +49,13 @@ public class GameContextInitializer
     private void RegisterAction(Dictionary<string, IAction> actionMap)
     {
         actionMap.Add(ActionID.Updateable, new UpdateableAction());
-        actionMap.Add(ActionID.Hover, new HoverAction());
-        actionMap.Add(ActionID.HavePolygonCollider, new HavePolygonColliderActionAction());
+        actionMap.Add(ActionID.MouseHover, new MouseHoverAction());
+        actionMap.Add(ActionID.IdleAnimation, new IdleAnimationAction());
+        actionMap.Add(ActionID.HavePolygonCollider, new HavePolygonColliderAction());
+        actionMap.Add(ActionID.HaveSpriteRenderer, new HaveSpriteRendererAction());
         actionMap.Add(ActionID.GoMainButton, new GoMainButtonAction());
         actionMap.Add(ActionID.GoTitleButton, new GoTitleButtonAction());
+        actionMap.Add(ActionID.LoadSceneButton, new LoadSceneButtonAction());
     }
 
     private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationPath)> animationDataMap)
