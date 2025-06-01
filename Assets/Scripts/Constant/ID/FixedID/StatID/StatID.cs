@@ -1,5 +1,11 @@
-﻿public static class StatID
+﻿using Unity.VisualScripting;
+
+public static class StatID
 {
-    public static string HoverEnterAnimationID = "HoverEnterAnimationID";
-    public static string HoverExitAnimationID = "HoverExitAnimationID";
+    public static string HoverEnterAnimation = "HoverEnterAnimation";
+    public static string HoverExitAnimation = "HoverExitAnimation";
+    public static string IdleAnimation = "IdleAnimation";
+    public static string OffsetSortingOrder = "OffsetSortingOrder";
+    public static string PolygonColliderUpdateInterval = "PolygonColliderUpdateInterval";
+    public static string LoadScene = "LoadScene";
 }
