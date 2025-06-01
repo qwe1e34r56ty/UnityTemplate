@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
+using Newtonsoft.Json;
 
 public class JsonArrayLoaderStrategy<T> : IResourceLoaderStrategy<T[]> where T : class
 {
@@ -10,7 +11,20 @@ public class JsonArrayLoaderStrategy<T> : IResourceLoaderStrategy<T[]> where T :
             Logger.LogError($"JSON file not found: {path}");
             return null;
         }
+
         string json = File.ReadAllText(path);
-        return JsonHelper.FromJson<T>(json);
+        if (string.IsNullOrWhiteSpace(json) || !json.TrimStart().StartsWith("["))
+        {
+            Logger.LogError($"Invalid or empty JSON array at: {path}");
+            return null;
+        }
+
+        T[] result = JsonConvert.DeserializeObject<T[]>(json);
+        if (result == null)
+        {
+            Logger.LogError($"Deserialization failed: {typeof(T).Name}[] is null. Path: {path}");
+        }
+
+        return result;
     }
 }
