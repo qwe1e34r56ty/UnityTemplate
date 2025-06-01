@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class HavePolygonColliderActionAction : IAction
+public class HavePolygonColliderAction : IAction
 {
-    private readonly float interval = 0.1f;
-    private Dictionary<Entity, float> lastUpdateTimeMap = new();
-    public HavePolygonColliderActionAction()
-    {
+    private Dictionary<Entity, (float LastUpdateTime, float Interval)> entityColliderData = new();
 
-    }
+    public HavePolygonColliderAction() { }
 
     public void Attach(GameContext gameContext, Entity entity, int priority)
     {
         entity.root.AddComponent<PolygonCollider2D>();
-        lastUpdateTimeMap.Add(entity, -999f);
+        if (entity.TryGetStat<float>(StatID.PolygonColliderUpdateInterval, out float interval))
+        {
+            entityColliderData.Add(entity, (-999f, interval));
+        }
     }
 
     public void Detach(GameContext gameContext, Entity entity)
@@ -24,26 +22,34 @@ public class HavePolygonColliderActionAction : IAction
         {
             var collider = entity.root.GetComponent<PolygonCollider2D>();
             if (collider != null)
+            {
                 GameObject.Destroy(collider);
+            }
         }
-        lastUpdateTimeMap.Remove(entity);
+        entityColliderData.Remove(entity);
     }
 
-    public bool CanExecute(GameContext gameContext, Entity entity, float deltaTIme)
+    public bool CanExecute(GameContext gameContext, Entity entity, float deltaTime)
     {
-        float lastTime = lastUpdateTimeMap[entity];
-        return Time.time - lastTime >= interval;
-    }
-
-    public void Execute(GameContext gameContext, Entity entity, float deltaTIme)
-    {
-        float now = Time.time;
-        var collider = entity.root.GetComponent<PolygonCollider2D>();
-        if (collider != null)
+        if (entityColliderData.TryGetValue(entity, out var data))
         {
-            GameObject.Destroy(collider);
-            entity.root.AddComponent<PolygonCollider2D>();
+            return Time.time - data.LastUpdateTime >= data.Interval;
         }
-        lastUpdateTimeMap[entity] = now;
+        return false;
+    }
+
+    public void Execute(GameContext gameContext, Entity entity, float deltaTime)
+    {
+        if (entityColliderData.TryGetValue(entity, out var data))
+        {
+            var now = Time.time;
+            var collider = entity.root.GetComponent<PolygonCollider2D>();
+            if (collider != null)
+            {
+                GameObject.Destroy(collider);
+                entity.root.AddComponent<PolygonCollider2D>();
+            }
+            entityColliderData[entity] = (now, data.Interval);
+        }
     }
 }
