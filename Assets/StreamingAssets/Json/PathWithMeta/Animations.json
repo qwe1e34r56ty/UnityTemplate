@@ -10,7 +10,7 @@
         "id": "Normalization2",
         "path": "Animation/Normalization_746_420",
         "pixelPerUnit": 100,
-        "frameDuration": 0.01,
+        "frameDuration": 0.005,
         "loop": true
     },
     {
@@ -45,7 +45,7 @@
         "id": "StartButton",
         "path": "Animation/StartButton_600_450",
         "pixelPerUnit": 100,
-        "frameDuration": 0.01,
+        "frameDuration": 0.1,
         "loop": true
     },
     {

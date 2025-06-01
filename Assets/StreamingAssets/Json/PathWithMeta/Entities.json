@@ -1,14 +1,22 @@
-[
+﻿[
     {
-        "id": "StartScene",
-        "path": "Json/Entity/StartScene/StartScene.json"
+        "id": "Background",
+        "path": "Json/Entity/StartScene/Background.json"
+    },
+    {
+        "id": "Title",
+        "path": "Json/Entity/StartScene/Title.json"
     },
     {
         "id": "GoMainButton",
         "path": "Json/Entity/StartScene/GoMainButton.json"
     },
     {
-        "id": "MainScene",
-        "path": "Json/Entity/MainScene/MainScene.json"
+        "id": "Normalization",
+        "path": "Json/Entity/StartScene/Normalization.json"
+    },
+    {
+        "id": "Background",
+        "path": "Json/Entity/MainScene/Background.json"
     }
 ]

@@ -1,27 +1,31 @@
 ﻿{
-    "id": "GoMainButton",
-    "animationID": "StartButton",
+    "id": "Normalization",
+    "animationID": "Normalization",
     "entityDataArr": [
     ],
     "layerName": "Layout",
     "tagName": "Untagged",
     "offsetPosition": {
-        "x": 4.5,
+        "x": -3.5,
         "y": -2.5,
         "z": 0
     },
     "offsetRotation": {
         "x": 0,
         "y": 0,
-        "z": 10
+        "z": 0
     },
     "offsetScale": {
         "x": 1,
         "y": 1,
-        "z": 1.5
+        "z": 1
     },
     "offsetSortingOrder": 100,
     "actionWithPriorityArr": [
+        {
+            "id": "Updateable",
+            "priority": 0
+        },
         {
             "id": "Hover",
             "priority": 0
@@ -29,20 +33,16 @@
         {
             "id": "HavePolygonCollider",
             "priority": 0
-        },
-        {
-            "id": "GoMainButton",
-            "priority": 0
         }
     ],
     "statKeyWithValueArr": [
         {
             "key": "HoverEnterAnimationID",
-            "value": "StartButtonHoverEnter"
+            "value": "Normalization2"
         },
         {
             "key": "HoverExitAnimationID",
-            "value": "StartButton"
+            "value": "Normalization"
         }
     ]
 }
