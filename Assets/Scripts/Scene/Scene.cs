@@ -29,7 +29,7 @@ public class Scene
     public void Clear(GameContext gameContext)
     {
         Queue<ISceneCommand> sceneCommandQueue = gameContext.sceneCommandQueue;
-        foreach (var pair in gameContext.entities)
+        foreach (KeyValuePair<GameObject, Entity> pair in gameContext.entities)
         {
             sceneCommandQueue.Enqueue(new DestroyEntityCommand(pair.Key, $"[{sceneID} Scene] {pair.Key.name} entity destroy request"));
         }

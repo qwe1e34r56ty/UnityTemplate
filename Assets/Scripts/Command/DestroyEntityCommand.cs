@@ -2,8 +2,8 @@
 
 public class DestroyEntityCommand : ISceneCommand
 {
-    public readonly GameObject gameObject;
-    public readonly string message;
+    private readonly GameObject gameObject;
+    private readonly string message;
     public DestroyEntityCommand(GameObject gameObject, string message = "")
     {
         this.gameObject = gameObject;

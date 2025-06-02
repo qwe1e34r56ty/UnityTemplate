@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 public class EntityBase
 {
-    private Dictionary<string, string> stats;
+    private Dictionary<string, string> stats = new();
 
     public EntityBase(EntityData entityData)
     {
-        stats = new();
-        foreach (var statEntry in entityData.statKeyWithValueArr)
+        foreach (StatEntry? statEntry in entityData.statKeyWithValueArr)
         {
             stats.Add(statEntry.key, statEntry.value);
         }
@@ -58,7 +57,7 @@ public class EntityBase
     public bool TryGetStat<T>(string key, out T? value)
     {
         value = default;
-        var strategy = StatParser.GetStrategy<T>();
+        IStatParseStrategy<T>? strategy = StatParser.GetStrategy<T>();
         if (strategy != null && strategy.TryGetStat(stats, key, out var ret))
         {
             value = ret;
@@ -69,7 +68,7 @@ public class EntityBase
 
     public T? GetStat<T>(string key)
     {
-        var strategy = StatParser.GetStrategy<T>();
+        IStatParseStrategy<T>? strategy = StatParser.GetStrategy<T>();
         if (strategy != null)
         {
             return strategy.GetStat(stats, key);
@@ -80,7 +79,7 @@ public class EntityBase
 
     public T? SetStat<T>(string key, T value)
     {
-        var strategy = StatParser.GetStrategy<T>();
+        IStatParseStrategy<T>? strategy = StatParser.GetStrategy<T>();
         if (strategy != null)
         {
             return strategy.SetStat(stats, key, value);

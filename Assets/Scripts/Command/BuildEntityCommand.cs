@@ -2,12 +2,12 @@
 
 public class BuildEntityCommand : ISceneCommand
 {
-    public readonly string entityID;
-    public readonly string message;
-    public readonly Vector3? position;
-    public readonly Vector3? rotation;
-    public readonly Vector3? scale;
-    public readonly int sortingOrder;
+    private readonly string entityID;
+    private readonly string message;
+    private readonly Vector3? position;
+    private readonly Vector3? rotation;
+    private readonly Vector3? scale;
+    private readonly int sortingOrder;
 
     public BuildEntityCommand(string entityID, 
         string message = "",

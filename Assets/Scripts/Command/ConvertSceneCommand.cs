@@ -2,8 +2,8 @@
 
 public class ConvertSceneCommand : ISceneCommand
 {
-    public readonly string id;
-    public readonly string message;
+    private readonly string id;
+    private readonly string message;
     public ConvertSceneCommand(string id, string message = "")
     {
         this.id = id;

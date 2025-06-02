@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EntityBuilder
 {
-    private ResourceManager resourceManager;
+    private readonly ResourceManager resourceManager;
     public EntityBuilder(ResourceManager resourceManager)
     {
         this.resourceManager = resourceManager;

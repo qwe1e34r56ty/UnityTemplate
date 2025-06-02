@@ -7,33 +7,33 @@ public class KeyboardInputDetector
     {
         foreach (var pair in context.onKeyDownHandlers)
         {
-            foreach (var keyAction in pair.Value)
+            foreach (KeyCode key in pair.Value.Keys)
             {
-                if (Input.GetKeyDown(keyAction.Key))
+                if (Input.GetKeyDown(key))
                 {
-                    context.pendingKeyDownEventQueue.Enqueue((pair.Key, keyAction.Key));
+                    context.pendingKeyDownEventQueue.Enqueue((pair.Key, key));
                 }
             }
         }
 
         foreach (var pair in context.onKeyHoldHandlers)
         {
-            foreach (var keyAction in pair.Value)
+            foreach (KeyCode key in pair.Value.Keys)
             {
-                if (Input.GetKey(keyAction.Key))
+                if (Input.GetKey(key))
                 {
-                    context.pendingKeyHoldEventQueue.Enqueue((pair.Key, keyAction.Key));
+                    context.pendingKeyHoldEventQueue.Enqueue((pair.Key, key));
                 }
             }
         }
 
         foreach (var pair in context.onKeyUpHandlers)
         {
-            foreach (var keyAction in pair.Value)
+            foreach (KeyCode key in pair.Value.Keys)
             {
-                if (Input.GetKeyUp(keyAction.Key))
+                if (Input.GetKeyUp(key))
                 {
-                    context.pendingKeyUpEventQueue.Enqueue((pair.Key, keyAction.Key));
+                    context.pendingKeyUpEventQueue.Enqueue((pair.Key, key));
                 }
             }
         }

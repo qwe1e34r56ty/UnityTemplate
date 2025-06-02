@@ -10,8 +10,8 @@ public class SceneDirector
     public SceneDirector(ResourceManager resourceManager)
     {
         this.resourceManager = resourceManager;
-        entityBuilder = new(this.resourceManager);
-        sceneConverter = new();
+        entityBuilder = new EntityBuilder(this.resourceManager);
+        sceneConverter = new SceneConverter();
     }
     public void ExecuteSceneCommand(GameContext gameContext)
     {

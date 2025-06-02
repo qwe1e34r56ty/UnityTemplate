@@ -6,12 +6,12 @@ public static class JsonHelper
     {
         string wrapped = $"{{ \"Items\": {json} }}";
         Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(wrapped);
-        return wrapper.Items;
+        return wrapper.items;
     }
 
     [System.Serializable]
     private class Wrapper<T>
     {
-        public T[] Items;
+        public T[] items;
     }
 }

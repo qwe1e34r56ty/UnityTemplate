@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HaveSpriteRendererAction : IAction
 {
-    private Dictionary<Entity, SpriteRenderer> spriteRenderers = new();
+    private readonly Dictionary<Entity, SpriteRenderer> spriteRenderers = new();
     public HaveSpriteRendererAction()
     {
 
@@ -16,6 +16,7 @@ public class HaveSpriteRendererAction : IAction
         if (!entity.root.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
         {
             spriteRenderer = entity.root.AddComponent<SpriteRenderer>();
+            spriteRenderers.Add(entity, spriteRenderer);
         }
         if (entity.TryGetStat<int>(StatID.OffsetSortingOrder, out int offsetSortingOrder))
         {

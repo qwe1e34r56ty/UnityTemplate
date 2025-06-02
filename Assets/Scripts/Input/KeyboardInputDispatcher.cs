@@ -6,7 +6,7 @@ public class KeyboardInputDispatcher
     {
         GameObject gameObject;
         KeyCode keyCode;
-        while (context.pendingKeyDownEventQueue.TryDequeue(out var gameObjectKey))
+        while (context.pendingKeyDownEventQueue.TryDequeue(out (GameObject, KeyCode) gameObjectKey))
         {
             gameObject = gameObjectKey.Item1;
             keyCode = gameObjectKey.Item2;
@@ -16,7 +16,7 @@ public class KeyboardInputDispatcher
                 context.onKeyDownHandlers[gameObject][keyCode].Invoke();
             }
         }
-        while (context.pendingKeyUpEventQueue.TryDequeue(out var gameObjectKey))
+        while (context.pendingKeyUpEventQueue.TryDequeue(out (GameObject, KeyCode) gameObjectKey))
         {
             if (context.onKeyUpHandlers.ContainsKey(gameObjectKey.Item1) &&
                 context.onKeyUpHandlers[gameObjectKey.Item1].ContainsKey(gameObjectKey.Item2))
@@ -24,7 +24,7 @@ public class KeyboardInputDispatcher
                 context.onKeyUpHandlers[gameObjectKey.Item1][gameObjectKey.Item2].Invoke();
             }
         }
-        while (context.pendingKeyHoldEventQueue.TryDequeue(out var gameObjectKey))
+        while (context.pendingKeyHoldEventQueue.TryDequeue(out (GameObject, KeyCode) gameObjectKey))
         {
             if (context.onKeyHoldHandlers.ContainsKey(gameObjectKey.Item1) &&
                 context.onKeyHoldHandlers[gameObjectKey.Item1].ContainsKey(gameObjectKey.Item2))

@@ -7,8 +7,8 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Entity : EntityBase, IUpdateable
 {
     public GameObject root { get; private set; }
-    private HashSet<GameObject> childs;
-    private SortedList<int, List<IAction>> sortedActionList;
+    private readonly HashSet<GameObject> childs;
+    private readonly SortedList<int, List<IAction>> sortedActionList;
     public Entity(GameContext gameContext,
         ResourceManager resourceManager,
         EntityData entityData, 
@@ -19,14 +19,11 @@ public class Entity : EntityBase, IUpdateable
         int offsetSortOrder = 0) : base(entityData)
     {
         root = null;
-        childs = new();
-        sortedActionList = new();
-        if(entityRoot == null)
-        {
-            entityRoot = this;
-        }
+        childs = new HashSet<GameObject>();
+        sortedActionList = new SortedList<int, List<IAction>>();
+        entityRoot = entityRoot ?? this;
 
-        root = new(entityData.id);
+        root = new GameObject(entityData.id);
         {
             SpriteRenderer spriteRenderer = root.AddComponent<SpriteRenderer>();
             root.layer = LayerMask.NameToLayer(entityData.layerName);
@@ -50,7 +47,7 @@ public class Entity : EntityBase, IUpdateable
             childs.Add(entity.root);
         }
 
-        foreach (var entry in entityData.actionWithPriorityArr)
+        foreach (ActionEntry entry in entityData.actionWithPriorityArr)
         {
             int priority = entry.priority;
             if (gameContext.actionMap.TryGetValue(entry.id, out var action))
@@ -68,9 +65,9 @@ public class Entity : EntityBase, IUpdateable
         gameContext.entityRoots.Remove(root);
         gameContext.entities.Remove(root);
 
-        foreach (var pair in sortedActionList.ToList())
+        foreach (KeyValuePair<int, List<IAction>> pair in sortedActionList.ToList())
         {
-            foreach (var action in pair.Value.ToList())
+            foreach (IAction action in pair.Value.ToList())
             {
                 DetachAction(gameContext, action);
             }
@@ -89,9 +86,9 @@ public class Entity : EntityBase, IUpdateable
 
     public void Update(GameContext gameContext, float deltaTime)
     {
-        foreach (var pair in sortedActionList)
+        foreach (KeyValuePair<int, List<IAction>> pair in sortedActionList)
         {
-            foreach (var action in pair.Value)
+            foreach (IAction action in pair.Value)
             {
                 if (action.CanExecute(gameContext, this, deltaTime))
                 {
@@ -101,7 +98,7 @@ public class Entity : EntityBase, IUpdateable
         }
     }
 
-    public void AttachAction(GameContext gameContext, IAction action, int priority)
+    private void AttachAction(GameContext gameContext, IAction action, int priority)
     {
         if (!sortedActionList.TryGetValue(priority, out var list))
         {
@@ -112,17 +109,17 @@ public class Entity : EntityBase, IUpdateable
         list.Add(action);
     }
 
-    public void DetachAction(GameContext gameContext, IAction actionToRemove)
+    private void DetachAction(GameContext gameContext, IAction actionToRemove)
     {
-        var oldActionList = new List<(int, List<IAction>)>();
-        foreach (var pair in sortedActionList)
+        List<(int, List<IAction>)> oldActionList = new List<(int, List<IAction>)>();
+        foreach (KeyValuePair<int, List<IAction>> pair in sortedActionList)
         {
             oldActionList.Add((pair.Key, pair.Value));
         }
 
-        foreach (var pair in oldActionList)
+        foreach ((int, List<IAction>) pair in oldActionList)
         {
-            foreach (var action in pair.Item2)
+            foreach (IAction action in pair.Item2)
             {
                 action.Detach(gameContext, this);
             }
@@ -130,10 +127,9 @@ public class Entity : EntityBase, IUpdateable
 
         ClearAction();
 
-        foreach (var pair in oldActionList)
+        foreach ((int priority, List<IAction> actions) in oldActionList)
         {
-            int priority = pair.Item1;
-            foreach (var action in pair.Item2)
+            foreach (IAction action in actions)
             {
                 if (action == actionToRemove)
                     continue;
@@ -143,7 +139,7 @@ public class Entity : EntityBase, IUpdateable
         }
     }
 
-    public void ClearAction()
+    private void ClearAction()
     {
         sortedActionList.Clear();
     }

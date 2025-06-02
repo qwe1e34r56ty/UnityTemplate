@@ -35,11 +35,11 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        saveManager = new();
+        saveManager = new SaveManager();
         saveData = saveManager.Load();
 
-        resourceManager = new();
-        sceneDirector = new(resourceManager);
+        resourceManager = new ResourceManager();
+        sceneDirector = new SceneDirector(resourceManager);
 
         instance = this;
         gameContext = new GameContext(saveData);
@@ -47,23 +47,19 @@ public class GameManager : MonoBehaviour
         gameContextInitializer = new GameContextInitializer(resourceManager);
         gameContextInitializer.InitGameContext(gameContext);
 
-        mouseInputDetector = new();
-        mouseInputDispatcher = new();
+        mouseInputDetector = new MouseInputDetector();
+        mouseInputDispatcher = new MouseInputDispatcher();
 
-        keyboardInputDetector = new();
-        keyboardInputDispatcher = new();
+        keyboardInputDetector = new KeyboardInputDetector();
+        keyboardInputDispatcher = new KeyboardInputDispatcher();
 
-        tickDispatcher = new();
+        tickDispatcher = new TickDispatcher();
 
         DontDestroyOnLoad(gameObject);
         gameContext.sceneCommandQueue.Enqueue(new ConvertSceneCommand(SceneID.Start, $"Convert to {SceneID.Start} Scene request"));
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
 
-    void Update()
+    private void Update()
     {
         mouseInputDetector.Detect(gameContext);
         mouseInputDispatcher.Dispatch(gameContext);

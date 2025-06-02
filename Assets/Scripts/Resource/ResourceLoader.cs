@@ -36,7 +36,7 @@ public class ResourceLoader
             return StrategyCache<T>.cachedStrategy.Load(path, pixelPerUnit);
         }
         Type type = typeof(T);
-        if (resourceLoaderStrategies.TryGetValue(type, out var strategy))
+        if (resourceLoaderStrategies.TryGetValue(type, out object strategy))
         {
             if (strategy is IResourceLoaderStrategy<T> _strategy)
             {

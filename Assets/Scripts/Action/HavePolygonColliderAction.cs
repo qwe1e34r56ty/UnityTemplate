@@ -20,7 +20,7 @@ public class HavePolygonColliderAction : IAction
     {
         if (entity.root != null)
         {
-            var collider = entity.root.GetComponent<PolygonCollider2D>();
+            PolygonCollider2D collider = entity.root.GetComponent<PolygonCollider2D>();
             if (collider != null)
             {
                 GameObject.Destroy(collider);
