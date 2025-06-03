@@ -8,7 +8,6 @@ public class HaveSpriteRendererAction : IAction
     private readonly Dictionary<Entity, SpriteRenderer> spriteRenderers = new();
     public HaveSpriteRendererAction()
     {
-
     }
 
     public void Attach(GameContext gameContext, Entity entity, int priority)
