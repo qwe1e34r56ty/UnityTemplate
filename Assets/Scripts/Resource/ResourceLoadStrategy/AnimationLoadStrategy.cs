@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class AnimationLoaderStrategy : IResourceLoaderStrategy<Sprite[]>
+public class AnimationLoadStrategy : IResourceLoadStrategy<Sprite[]>
 {
     public Sprite[] Load(string path, int pixelPerUnit = 100)
     {

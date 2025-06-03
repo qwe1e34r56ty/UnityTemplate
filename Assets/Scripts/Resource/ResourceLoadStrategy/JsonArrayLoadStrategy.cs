@@ -2,7 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-public class JsonArrayLoaderStrategy<T> : IResourceLoaderStrategy<T[]> where T : class
+public class JsonArrayLoadStrategy<T> : IResourceLoadStrategy<T[]> where T : class
 {
     public T[] Load(string path, int pixelPerUnit = 100)
     {

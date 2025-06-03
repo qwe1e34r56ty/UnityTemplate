@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 
-public class TextLoaderStrategy : IResourceLoaderStrategy<string>
+public class TextLoadStrategy : IResourceLoadStrategy<string>
 {
     public string Load(string path, int pixelPerUnit = 100)
     {

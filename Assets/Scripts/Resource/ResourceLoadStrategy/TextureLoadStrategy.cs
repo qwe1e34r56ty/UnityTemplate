@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 
-public class TextureLoaderStrategy : IResourceLoaderStrategy<Texture2D>
+public class TextureLoadStrategy : IResourceLoadStrategy<Texture2D>
 {
     public Texture2D Load(string path, int pixelPerUnit = 100)
     {
