@@ -37,6 +37,7 @@ public class GameContextInitializer
         }
 
         RegisterAction(gameContext.actionMap);
+        RegisterObjectPoolStrategy(gameContext, gameContext.objectPool);
 
         gameContext.entityDataMap = new();
         LoadEntityMap(gameContext.entityDataMap);
@@ -56,6 +57,11 @@ public class GameContextInitializer
         actionMap.Add(ActionID.GoMainButton, new GoMainButtonAction());
         actionMap.Add(ActionID.GoTitleButton, new GoTitleButtonAction());
         actionMap.Add(ActionID.LoadSceneButton, new LoadSceneButtonAction());
+    }
+
+    private void RegisterObjectPoolStrategy(GameContext gameContext, ObjectPool objectPool)
+    {
+        objectPool.RegisterStrategy<GameObject>(new GameObjectPoolStrategy(gameContext, 8));
     }
 
     private void LoadAnimationMap(Dictionary<string, (Sprite[], AnimationPath)> animationDataMap)
