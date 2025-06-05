@@ -21,9 +21,11 @@ public class HavePolygonColliderAction : IAction
     public void Attach(GameContext gameContext, Entity entity, int priority)
     {
         PolygonCollider2D polygonCollider = entity.root.AddComponent<PolygonCollider2D>();
-        SpriteRenderer spriteRenderer = entity.root.GetComponent<SpriteRenderer>();
         polygonColliders.Add(entity, polygonCollider);
-        spriteRenderers.Add(entity, spriteRenderer);
+        if (entity.root.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
+        {
+            spriteRenderers.Add(entity, spriteRenderer);
+        }
         previousHulls.Add(entity, null);
         if (entity.TryGetStat<float>(StatID.PolygonColliderUpdateInterval, out float interval))
         {
@@ -33,17 +35,17 @@ public class HavePolygonColliderAction : IAction
 
     public void Detach(GameContext gameContext, Entity entity)
     {
-        if (entity.root != null)
+        entityColliderDatas.Remove(entity);
+        previousHulls.Remove(entity);
+        spriteRenderers.Remove(entity);
+        if (polygonColliders.TryGetValue(entity, out PolygonCollider2D polygonCollider2D))
         {
-            PolygonCollider2D collider = polygonColliders[entity];
-            if (collider != null)
+            polygonColliders.Remove(entity);
+            if (polygonCollider2D != null)
             {
-                GameObject.Destroy(collider);
+                GameObject.DestroyImmediate(polygonCollider2D);
             }
         }
-        entityColliderDatas.Remove(entity);
-        spriteRenderers.Remove(entity);
-        polygonColliders.Remove(entity);
     }
 
     public bool CanExecute(GameContext gameContext, Entity entity, float deltaTime)
@@ -52,13 +54,14 @@ public class HavePolygonColliderAction : IAction
         {
             return false;
         }
-        if (!spriteRenderers.ContainsKey(entity))
+        if (!spriteRenderers.ContainsKey(entity) || spriteRenderers[entity] == null)
         {
             if (!entity.root.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
             {
                 return false;
             }
             spriteRenderers.Add(entity, spriteRenderer);
+            return false;
         }
         if (entityColliderDatas.TryGetValue(entity, out var data))
         {

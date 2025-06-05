@@ -1,4 +1,4 @@
-﻿{
+﻿    {
     "id": "Title",
     "entityDataArr": [
     ],
@@ -33,7 +33,7 @@
     "statKeyWithValueArr": [
         {
             "key": "OffsetSortingOrder",
-            "value": 50
+            "value": 100
         },
         {
             "key": "IdleAnimation",

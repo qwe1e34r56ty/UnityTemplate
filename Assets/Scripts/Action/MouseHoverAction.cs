@@ -13,14 +13,14 @@ public class MouseHoverAction: IAction
         gameContext.onHoverEnterHandlers.Add(entity.root, () =>
         {
             if (gameContext.animationPlayerMap.TryGetValue(entity.root, out AnimationPlayer animationPlayer)){
-                animationPlayer.Play(entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.HoverEnterAnimation)]);
+                animationPlayer.Play(gameContext, entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.HoverEnterAnimation)]);
             }
         });
         gameContext.onHoverExitHandlers.Add(entity.root, () =>
         {
             if (gameContext.animationPlayerMap.TryGetValue(entity.root, out AnimationPlayer animationPlayer))
             {
-                animationPlayer.Play(entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.IdleAnimation)]);
+                animationPlayer.Play(gameContext, entity.root, gameContext.animationDataMap[entity.GetStat<string>(StatID.IdleAnimation)]);
             }
         });
     }

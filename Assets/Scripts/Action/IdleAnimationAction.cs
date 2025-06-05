@@ -18,9 +18,8 @@ public class IdleAnimationAction : IAction
             {
                 AnimationPlayer animationPlayer = new AnimationPlayer();
                 animationPlayers.Add(entity, animationPlayer);
-                animationPlayer.Play(entity.root, animationData);
+                animationPlayer.Play(gameContext, entity.root, animationData);
                 gameContext.animationPlayerMap.Add(entity.root, animationPlayer);
-                gameContext.updateHandlers.Add(animationPlayer);
             }
         }
     }
@@ -29,8 +28,8 @@ public class IdleAnimationAction : IAction
     {
         if(animationPlayers.TryGetValue(entity, out AnimationPlayer animationPlayer))
         {
-            gameContext.updateHandlers.Remove(animationPlayer);
             gameContext.animationPlayerMap.Remove(entity.root);
+            animationPlayers[entity].Pause(gameContext, entity.root);
             animationPlayers.Remove(entity);
         }
     }

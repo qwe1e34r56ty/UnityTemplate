@@ -11,8 +11,8 @@ public class Entity : EntityBase, IUpdateable
     private readonly SortedList<int, List<IAction>> sortedActionList;
     public Entity(GameContext gameContext,
         ResourceManager resourceManager,
-        EntityData entityData, 
-        Entity? entityRoot = null,
+        EntityData entityData,
+        Entity entityRoot = null,
         Vector3? offsetPosition = null, 
         Vector3? offsetRotation = null, 
         Vector3? offsetScale = null, 
@@ -23,22 +23,26 @@ public class Entity : EntityBase, IUpdateable
         sortedActionList = new SortedList<int, List<IAction>>();
         entityRoot = entityRoot ?? this;
 
-        root = new GameObject(entityData.id);
+        root = gameContext.objectPool.Get<GameObject>();
+        root.name = entityData.id;
         {
-            SpriteRenderer spriteRenderer = root.AddComponent<SpriteRenderer>();
             root.layer = LayerMask.NameToLayer(entityData.layerName);
             root.tag = entityData.tagName;
 
             Transform rootTransform = root.transform;
 
-            rootTransform.position += offsetPosition ?? Vector3.zero;
+            rootTransform.position = offsetPosition ?? Vector3.zero;
             rootTransform.position += entityData.offsetPosition;
 
-            rootTransform.rotation *= Quaternion.Euler(offsetRotation ?? Vector3.zero);
-            rootTransform.rotation = Quaternion.Euler(entityData.offsetRotation);
+            rootTransform.rotation = Quaternion.Euler(offsetRotation ?? Vector3.zero);
+            rootTransform.rotation *= Quaternion.Euler(entityData.offsetRotation);
 
-            rootTransform.localScale = Vector3.Scale(rootTransform.localScale, offsetScale ?? Vector3.one);
+            rootTransform.localScale = Vector3.Scale(Vector3.one, offsetScale ?? Vector3.one);
             rootTransform.localScale = Vector3.Scale(rootTransform.localScale, entityData.offsetScale);
+            if (entityRoot != null)
+            {
+                rootTransform.SetParent(entityRoot.root.transform);
+            }
         }
 
         foreach (EntityData _entityData in entityData.entityDataArr)
@@ -81,7 +85,7 @@ public class Entity : EntityBase, IUpdateable
                 entity.Destroy(gameContext);
             }
         }
-        GameObject.Destroy(root);
+        gameContext.objectPool.Return<GameObject>(root);
     }
 
     public void Update(GameContext gameContext, float deltaTime)
@@ -111,36 +115,22 @@ public class Entity : EntityBase, IUpdateable
 
     private void DetachAction(GameContext gameContext, IAction actionToRemove)
     {
-        List<(int, List<IAction>)> oldActionList = new List<(int, List<IAction>)>();
-        foreach (KeyValuePair<int, List<IAction>> pair in sortedActionList)
+        foreach (var pair in sortedActionList.ToList())
         {
-            oldActionList.Add((pair.Key, pair.Value));
-        }
+            List<IAction> actionList = pair.Value;
 
-        foreach ((int, List<IAction>) pair in oldActionList)
-        {
-            foreach (IAction action in pair.Item2)
+            if (actionList.Contains(actionToRemove))
             {
-                action.Detach(gameContext, this);
+                actionToRemove.Detach(gameContext, this);
+                actionList.Remove(actionToRemove);
+
+                if (actionList.Count == 0)
+                {
+                    sortedActionList.Remove(pair.Key);
+                }
+
+                break;
             }
         }
-
-        ClearAction();
-
-        foreach ((int priority, List<IAction> actions) in oldActionList)
-        {
-            foreach (IAction action in actions)
-            {
-                if (action == actionToRemove)
-                    continue;
-
-                AttachAction(gameContext, action, priority);
-            }
-        }
-    }
-
-    private void ClearAction()
-    {
-        sortedActionList.Clear();
     }
 }

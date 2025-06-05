@@ -70,6 +70,68 @@
                     "value": "Start"
                 }
             ]
+        },
+        {
+            "id": "Normalization",
+            "entityDataArr": [
+            ],
+            "layerName": "Layout",
+            "tagName": "Untagged",
+            "offsetPosition": {
+                "x": 0.5,
+                "y": -2.5,
+                "z": 0
+            },
+            "offsetRotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "offsetScale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "actionWithPriorityArr": [
+                {
+                    "id": "Updateable",
+                    "priority": 0
+                },
+                {
+                    "id": "MouseHover",
+                    "priority": 0
+                },
+                {
+                    "id": "HavePolygonCollider",
+                    "priority": 0
+                },
+                {
+                    "id": "HaveSpriteRenderer",
+                    "priority": 0
+                },
+                {
+                    "id": "IdleAnimation",
+                    "priority": 0
+                }
+            ],
+            "statKeyWithValueArr": [
+                {
+                    "key": "HoverEnterAnimation",
+                    "value": "Normalization2"
+                },
+                {
+                    "key": "OffsetSortingOrder",
+                    "value": 100
+                },
+                {
+                    "key": "IdleAnimation",
+                    "value": "Normalization"
+                },
+                {
+                    "key": "PolygonColliderUpdateInterval",
+                    "value": 0.05
+                }
+            ]
         }
     ],
     "layerName": "Layout",
@@ -90,10 +152,10 @@
         "z": 1
     },
     "actionWithPriorityArr": [
-            {
-                "id": "HaveSpriteRenderer",
-                "priority": 0
-            },
+        {
+            "id": "HaveSpriteRenderer",
+            "priority": 0
+        },
         {
             "id": "IdleAnimation",
             "priority": 0

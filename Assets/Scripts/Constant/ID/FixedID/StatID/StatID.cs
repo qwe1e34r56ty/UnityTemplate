@@ -3,7 +3,6 @@
 public static class StatID
 {
     public static string HoverEnterAnimation = "HoverEnterAnimation";
-    public static string HoverExitAnimation = "HoverExitAnimation";
     public static string IdleAnimation = "IdleAnimation";
     public static string OffsetSortingOrder = "OffsetSortingOrder";
     public static string PolygonColliderUpdateInterval = "PolygonColliderUpdateInterval";

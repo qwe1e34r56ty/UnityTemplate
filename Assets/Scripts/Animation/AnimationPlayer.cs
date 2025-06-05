@@ -4,6 +4,7 @@ using UnityEngine;
 public class AnimationPlayer : IUpdateable
 {
     private SpriteRenderer spriteRenderer;
+    private GameObject gameObject;
     private Sprite[] frames;
     private float frameDuration;
     private bool loop;
@@ -11,9 +12,10 @@ public class AnimationPlayer : IUpdateable
     private int currentFrame = 0;
     private float timer = 0f;
 
-    public void Play(GameObject target,
+    public void Play(GameContext gameContext, GameObject target,
         (Sprite[], AnimationPath) animationData)
     {
+        gameObject = target;
         Sprite[] frames = animationData.Item1;
         if (frames == null)
         {
@@ -30,6 +32,18 @@ public class AnimationPlayer : IUpdateable
 
         this.spriteRenderer = target.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = this.frames[this.currentFrame];
+        if (!gameContext.updateHandlers.Contains(this))
+        {
+            gameContext.updateHandlers.Add(this);
+        }
+    }
+
+    public void Pause(GameContext gameContext, GameObject target)
+    {
+        if (gameContext.updateHandlers.Contains(this))
+        {
+            gameContext.updateHandlers.Remove(this);
+        }
     }
 
     public void Update(GameContext gameContext, float deltaTime)

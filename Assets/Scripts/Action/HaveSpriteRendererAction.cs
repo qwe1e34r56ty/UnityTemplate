@@ -12,11 +12,8 @@ public class HaveSpriteRendererAction : IAction
 
     public void Attach(GameContext gameContext, Entity entity, int priority)
     {
-        if (!entity.root.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
-        {
-            spriteRenderer = entity.root.AddComponent<SpriteRenderer>();
-            spriteRenderers.Add(entity, spriteRenderer);
-        }
+        SpriteRenderer spriteRenderer = entity.root.AddComponent<SpriteRenderer>();
+        spriteRenderers.Add(entity, spriteRenderer);
         if (entity.TryGetStat<int>(StatID.OffsetSortingOrder, out int offsetSortingOrder))
         {
             spriteRenderer.sortingOrder += offsetSortingOrder;
@@ -25,9 +22,13 @@ public class HaveSpriteRendererAction : IAction
 
     public void Detach(GameContext gameContext, Entity entity)
     {
-        if(spriteRenderers.TryGetValue(entity, out SpriteRenderer spriteRenderer))
+        if (spriteRenderers.TryGetValue(entity, out SpriteRenderer spriteRenderer))
         {
-            GameObject.Destroy(spriteRenderer);
+            spriteRenderers.Remove(entity);
+            if (spriteRenderer != null)
+            {
+                GameObject.Destroy(spriteRenderer);
+            }
         }
     }
 

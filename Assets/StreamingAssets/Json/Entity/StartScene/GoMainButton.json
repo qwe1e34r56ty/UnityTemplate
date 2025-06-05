@@ -22,24 +22,24 @@
     "offsetSortingOrder": 100,
     "actionWithPriorityArr": [
         {
-            "id": "Updateable",
-            "priority": 0
-        },
-        {
-            "id": "MouseHover",
-            "priority": 0
-        },
-        {
-            "id": "HavePolygonCollider",
-            "priority": 0
-        },
-        {
             "id": "HaveSpriteRenderer",
             "priority": 0
         },
         {
+            "id": "Updateable",
+            "priority": 1
+        },
+        {
+            "id": "MouseHover",
+            "priority": 2
+        },
+        {
+            "id": "HavePolygonCollider",
+            "priority": 3
+        },
+        {
             "id": "IdleAnimation",
-            "priority": 0
+            "priority": 4
         },
         {
             "id": "LoadSceneButton",
