@@ -1,5 +1,12 @@
 ﻿[
     {
+        "id": "Tile0",
+        "path": "Animation/Tile0_100_100",
+        "pixelPerUnit": 100,
+        "frameDuration": 1,
+        "loop": true
+    },
+    {
         "id": "Normalization",
         "path": "Animation/Normalization_498_282",
         "pixelPerUnit": 100,

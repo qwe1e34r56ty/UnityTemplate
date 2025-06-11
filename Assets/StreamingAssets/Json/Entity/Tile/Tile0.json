@@ -1,0 +1,43 @@
+﻿    {
+    "id": "Tile",
+    "entityDataArr": [
+    ],
+    "layerName": "Tile",
+    "tagName": "Untagged",
+    "offsetPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "offsetRotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "offsetScale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+    },
+    "offsetSortingOrder": 50,
+    "actionWithPriorityArr": [
+        {
+            "id": "HaveSpriteRenderer",
+            "priority": 0
+        },
+        {
+            "id": "IdleAnimation",
+            "priority": 0
+        }
+    ],
+    "statKeyWithValueArr": [
+        {
+            "key": "OffsetSortingOrder",
+            "value": 100
+        },
+        {
+            "key": "IdleAnimation",
+            "value": "Tile"
+        }
+    ]
+}

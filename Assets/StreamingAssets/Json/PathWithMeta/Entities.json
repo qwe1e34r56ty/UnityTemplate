@@ -18,5 +18,9 @@
     {
         "id": "Background",
         "path": "Json/Entity/MainScene/Background.json"
+    },
+    {
+        "id": "Tile0",
+        "path": "Json/Entity/Tile/Tile0.json"
     }
 ]
